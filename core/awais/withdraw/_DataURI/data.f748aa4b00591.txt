@@ -1,1 +1,0 @@
-chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/requests.js
