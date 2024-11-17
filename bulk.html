@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Orders via WhatsApp</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('https://i.postimg.cc/jSSwVkfR/OIP-9.jpg') no-repeat center center/cover;
+            background-size: cover;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            background: -webkit-linear-gradient(45deg, #25D366, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        header {
+            text-align: center;
+            padding: 1.5rem;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.548);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.705);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        main {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            margin-top: 100px; /* Offset for fixed header */
+            max-width: 800px;
+            background: rgba(26, 2, 2, 0.363);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .whatsapp-button {
+            background: linear-gradient(45deg, #25D366, #0044cc);
+            color: #fff;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            display: inline-block;
+        }
+
+        .whatsapp-button:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(45deg, #0044cc, #25D366);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .download-link {
+            font-weight: bold;
+            color: #0044cc;
+            background-color: #fff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+            display: inline-block;
+        }
+
+        .download-link:hover {
+            background-color: #0044cc;
+            color: #fff;
+        }
+
+        .note {
+            font-size: 0.9rem;
+            color: rgb(0, 238, 255);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bulk Order Request</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Download Template</h2>
+            <p>
+                <a 
+                    href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSfc6BXmRjnNIlvuRDMHP0vkO_ZArd8YcqYLVk9frnLbwVh2YPBMxvlFur1n7T71TfAQxL9bGROUfxM/pub?output=xlsx" 
+                    class="download-link" 
+                    download
+                >
+                    Download Excel Template
+                </a>
+            </p>
+        </section>
+        <section class="upload-section">
+            <h2>Upload Your Orders</h2>
+            <p class="note">Note: Only Excel files are allowed, and the orders must exceed 20.</p>
+        </section>
+        <p>Please send your order file via WhatsApp to <strong>0545454000</strong>.</p>
+        <p>Click the button below to open WhatsApp and send your bulk file:</p>
+        <a 
+            class="whatsapp-button" 
+            href="https://wa.me/233545454000?text=Hi!%20I%20would%20like%20to%20send%20my%20order%20file%20for%20processing."
+            target="_blank"
+        >
+            Send via WhatsApp
+        </a>
+    </main>
+</body>
+</html>
