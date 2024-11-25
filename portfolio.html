@@ -1,544 +1,1165 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safo Oppong Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://i.postimg.cc/W49DwtD2/kye.jpg">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>-- Personal Portfolio --</title>
 
-    
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-image: url('https://i.postimg.cc/yYwHqKR7/R1.jpg');
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./assets/images/me.jpg" type="image/x-icon">
 
-            color: #f0f0f0;
-        }
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
 
-        header {
-            background-color: rgba(0, 0, 0, 0.76);
-            padding: 15px 20px;
-            text-align: center;
-            position: fi;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        /* Navigation */
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: right;
-        }
-
-        nav ul li {
-            margin: 0 10px;
-        }
-
-        nav ul li a {
-            color: #fff;
-            text-decoration: overline;
-            font-size: 12pxx;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: #fafbfc;
-            background-color: red;
-            border-radius: 5px;
-        }
-        /* Profile Image in Header (for mobile) */
-        .header-profile-image {
-            display: none;
-            margin-bottom: 10px;
-        }
-
-        .header-profile-image img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid #ff1100;
-            padding: 10px;
-        }
-
-        /* Profile Section */
-        .profile-section {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 100px 20px 50px;
-            background: linear-gradient(145deg, #01002e98, #0a0a0ab2);
-            flex-wrap: wrap;
-        }
-
-        .profile-image img {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            border: 5px solid #00ffff;
-            padding: 10px;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .profile-image img:hover {
-            transform: scale(1.1);
-        }
-
-        .profile-content {
-            max-width: 600px;
-        }
-
-        .profile-content h1 {
-            font-size: 36px;
-        }
-
-        .profile-content h2 {
-            font-size: 24px;
-            color: #00ffff;
-        }
-
-        .profile-content p {
-            margin: 20px 0;
-        }
-
-        .cv-button {
-            padding: 12px 25px;
-            background-color: #00ffff;
-            color: #1a1a1a;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .cv-button:hover {
-            background-color: #01000a;
-            color: white;
-        }
-
-        /* Grid Sections */
-        section {
-            padding: 50px 20px;
-        }
-
-        h2 {
-            font-size: 30px;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .grid-item {
-            background: linear-gradient(145deg, #121435d3, #0a0a0aef);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(235, 7, 7, 0.89);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .grid-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 6px 12px rgba(224, 4, 4, 0.856);
-        }
-
-        .grid-item h3 {
-            color: #f34122;
-        }
-        .grid-item img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.grid-item img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 12px rgba(247, 202, 2, 0.822);
-}
-
-.grid-item a {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #00ffff;
-    color: #1a1a1a;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.grid-item a:hover {
-    background-color: #01000a;
-    color: white;
-}
-@media (max-width: 768px) {
-    .grid-item img {
-        width: 100%;
-    }
-
-    .grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-
-        /* Contact Section */
-        form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        form input, form textarea {
-            padding: 15px;
-            background-color: #131212;
-            border: 2px solid;
-            border-color: white;
-            color: #f50505;
-            border-radius: 5px;
-            width: 100%;
-        }
-
-        form button {
-            grid-column: span 2;
-            padding: 15px;
-            background-color: #0004ff;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        form button:hover {
-            background-color: #008080;
-        }
-        .counters-section-type-2 {
-  background-color: #0c0c0c94; /* Light gray background */
-  padding: 0px 0;
-}
-
-.counter-box {
-  padding: 10px;
-  margin: 10px 0;
-  border: 4px solid #f6fafa;
-  border-radius: 20px;
-  background-color: transparent;
-  display: ruby;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition: transform 0.3s ease;
-  text-align: center; /* Ensures everything inside the box is centered */
-  max-width: 60%;
-}
-
-.counter-box:hover {
-  transform: scale(1.05);
-}
-
-.title-counter {
-  font-size: 18px;
-  color: #f7f3f3;
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-align: center; /* Center text */
-}
-
-.prop-obj {
-  font-size: 28px;
-  color: rgb(0, 247, 255);
-  font-weight: 600;
-  text-align: center; /* Center number */
-}
-
-.border-bottom-simple {
-  border-bottom: 2px solid #080000;
-}
-
-.border-top-simple {
-  border-top: 2px solid #dedede;
-}
-.social-icons {
-    display: flex; /* Align icons in a row */
-    justify-content: center; /* Center the icons */
-    align-items: center; /* Center vertically */
-    margin: 20px 0; /* Space above and below */
-}
-
-.social-icons a {
-    margin: 0 10px; /* Space between icons */
-    text-decoration: none; /* Remove underline */
-    transition: transform 0.3s, color 0.3s; /* Smooth transition effects */
-}
-
-.social-icons :hover {
-    transform: scale(1.2); /* Scale up on hover */
-    color: rgb(0, 47, 255); /* Change color on hover */
-}
-
-.social-icons i {
-    font-size: 26px; /* Keep font size consistent */
-    color: rgb(255, 17, 0); /* Default color */
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .counter-box {
-    margin: 10px 0;
-  }
-  nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-        }
-        nav ul li {
-            margin: 0 5px;
-        }
-}
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            /* Show profile image in header for mobile */
-            .header-profile-image {
-                display: block;
-            }
-
-            .profile-section .profile-image {
-                display: none; /* Hide profile image from the profile section */
-            }
-
-            .profile-section {
-                flex-direction: column;
-                text-align: center;
-                padding-top: 120px; /* Adjust padding to fit header */
-            }
-
-            .profile-content {
-                margin-top: 20px;
-            }
-
-            form {
-                grid-template-columns: 1fr;
-            }
-        }
-        footer {
-    background-color: #070202b7;
-    color: white;
-    padding: 40px 20px;
-    margin-top: 50px;
-    text-align: center;
-}
-    </style>
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="header-profile-image">
-            <img src="https://i.postimg.cc/W49DwtD2/kye.jpg" alt="Safo Oppong">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#skills"><i class="fa fa-cog"></i>Skills</a></li>
-                <li><a href="#experience"><i class="fa fa-check"></i>Experience</a></li>
-                <li><a href="#projects"><i class="fa fa-project-diagram"></i>Project</a></li>
-                <li><a href="#contact"><i class="fa fa-envelope"></i>info</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!--
+    - #MAIN
+  -->
 
-    <section class="counters-section-type-2 border-bottom-simple border-top-simple">
-        <div class="container-fluid py-5">
-          <div class="row counters-wrapper justify-content-center text-center">
-            <div class="col-sm-4 col-6 counter-box first-side d-flex flex-column align-items-center">
-              <p class="title-counter">#No of Project</p>
-              <span class="prop-obj prop-obj1" data-count="98">0</span>
-            </div>
-            <div class="col-sm-4 col-6 counter-box second-side d-flex flex-column align-items-center">
-              <p class="title-counter">Users Loved</p>
-              <span class="prop-obj prop-obj2" data-count="556">0</span>
-            </div>
-            <div class="col-sm-4 col-6 counter-box third-side d-flex flex-column align-items-center">
-              <p class="title-counter">Active Project</p>
-              <span class="prop-obj prop-obj3" data-count="24">0</span>
-            </div>
-          </div>
+  <main>
+
+    <!--
+      - #SIDEBAR
+    -->
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="./assets/images/my-avatar.png" alt="Kyekyeku-tech" width="80">
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name" title="Kyekyeku-tech">Kyekyeku-tech</h1>
+
+          <p class="title">Front-end Developer</p>
         </div>
-      </section>
-    <section id="home" class="profile-section">
-        <div class="profile-image">
-            <img src="https://i.postimg.cc/W49DwtD2/kye.jpg" alt="Safo Oppong">
-        </div>
-        <div class="social-icons">
-            <a href="#"><i class='fa fa-facebook'></i></a>
-            <a href="#"><i class='fa fa-whatsapp'></i></a>
-            <a href="#"><i class='fa fa-instagram'></i></a>
-            <a href="#"><i class='fa fa-laptop'></i></a>
-            <a href="#"><i class='fa fa-github'></i></a>
-            <a href="https://github.com/sponsors/Kyekyeku-Tech"><i class='fa fa-briefcase'></i></a>
-        </div>
-        <div class="profile-content">
-            <h1>Hello, I'm Safo Oppong</h1>
-            <h2>Frontend Developer & Software Engineer</h2>
-            <p>A highly motivated and detail-oriented professional with a passion for technology and problem-solving. Dedicated to delivering exceptional results by meeting deadlines and enhancing skills in dynamic environments.</p>
-            <a href="https://github.com/kyekyeku-tech" download>
-                <button class="cv-button">Github Profile</button>
+
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+
+              <a href="mailto:ceo@kyekyeku-tech.site" class="contact-link">ceo@kyekyeku-tech.site</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Phone</p>
+
+              <a href="tel:+233545454000" class="contact-link">+233545454000</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="calendar-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Birthday</p>
+
+              <time datetime="1982-06-23">24 September</time>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+
+              <address>Takoradi,Ghana</address>
+            </div>
+
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+
+          <li class="social-item">
+            <a href="#" class="social-link">
+              <ion-icon name="logo-facebook"></ion-icon>
             </a>
+          </li>
+
+          <li class="social-item">
+            <a href="#" class="social-link">
+              <ion-icon name="logo-twitter"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="#" class="social-link">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
+
+
+
+
+
+    <!--
+      - #main-content
+    -->
+
+    <div class="main-content">
+
+      <!--
+        - #NAVBAR
+      -->
+
+      <nav class="navbar">
+
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <button class="navbar-link  active" data-nav-link>About</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Resume</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Portfolio</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Blog</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Contact</button>
+          </li>
+
+        </ul>
+
+      </nav>
+
+
+
+
+
+      <!--
+        - #ABOUT
+      -->
+
+      <article class="about  active" data-page="about">
+
+        <header>
+          <h2 class="h2 article-title">About me</h2>
+        </header>
+
+        <section class="about-text">
+          <p>
+            I’m a Website Developer with expertise in creating user-friendly websites and Android apps, proficient in the Microsoft Suite, and experienced in marketing. I specialize in crafting functional, visually appealing, and intuitive digital solutions that solve complex problems with simplicity and elegance.
+          </p>
+
+          <p>
+            My role is to develop websites and Android applications that are not only attractive but also seamlessly functional and easy to navigate. Additionally, I bring a personal touch to every project, ensuring that your brand’s message and identity are conveyed in a creative and impactful way. With experience working on diverse projects, I strive to deliver designs and applications that captivate and engage users effectively.
+          </p>
+        </section>
+
+
+        <!--
+          - service
+        -->
+
+        <section class="service">
+
+          <h3 class="h3 service-title">What i'm doing</h3>
+
+          <ul class="service-list">
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-design.svg
+                " alt="design icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Web design</h4>
+
+                <p class="service-item-text">
+                  The most modern and high-quality design made at a professional level.
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Web development</h4>
+
+                <p class="service-item-text">
+                  High-quality development of sites at the professional level.
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-app.svg" alt="mobile app icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Mobile apps</h4>
+
+                <p class="service-item-text">
+                  Professional development of applications for Android.
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-photo.svg" alt="camera icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Microsoft Suite</h4>
+
+                <p class="service-item-text">
+                efficient data management, document creation, and project coordination.
+                </p>
+              </div>
+
+            </li>
+
+          </ul>
+
+        </section>
+
+
+        <!--
+          - testimonials
+        -->
+
+        <section class="testimonials">
+
+          <h3 class="h3 testimonials-title">Testimonials</h3>
+
+          <ul class="testimonials-list has-scrollbar">
+
+            <li class="testimonials-item">
+              <div class="content-card" data-testimonials-item>
+
+                <figure class="testimonials-avatar-box">
+                  <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="60" data-testimonials-avatar>
+                </figure>
+
+                <h4 class="h4 testimonials-item-title" data-testimonials-title>Isaac Nelson</h4>
+
+                <div class="testimonials-text" data-testimonials-text>
+                  <p>
+                    Safo was hired to create a website, and we were extremely pleased with the work he delivered. He has extensive experience and is genuinely concerned about meeting the client's needs. He completed the project ahead of schedule, charged a fair amount, and delivered high-quality, genuine work. His professionalism and attention to detail made the process smooth and efficient.
+                  </p>
+                </div>
+
+              </div>
+            </li>
+
+            <li class="testimonials-item">
+              <div class="content-card" data-testimonials-item>
+
+                <figure class="testimonials-avatar-box">
+                  <img src="./assets/images/avatar-2.png" alt="Jessica miller" width="60" data-testimonials-avatar>
+                </figure>
+
+                <h4 class="h4 testimonials-item-title" data-testimonials-title>Theodora Nyarkoh</h4>
+
+                <div class="testimonials-text" data-testimonials-text>
+                  <p>
+                    We hired Safo for data enrollment, creating Excel templates, and handling various Microsoft Office tasks. He demonstrated strong expertise in each area and successfully completed all the work. His professionalism and skill ensured that the entire team was satisfied with the results.
+                  </p>
+                </div>
+
+              </div>
+            </li>
+
+            <li class="testimonials-item">
+              <div class="content-card" data-testimonials-item>
+
+                <figure class="testimonials-avatar-box">
+                  <img src="./assets/images/avatar-3.png" alt="Emily evans" width="60" data-testimonials-avatar>
+                </figure>
+
+                <h4 class="h4 testimonials-item-title" data-testimonials-title>Bernice Apodie</h4>
+
+                <div class="testimonials-text" data-testimonials-text>
+                  <p>
+                    Safo managed our branch with exceptional skill and dedication. He demonstrated great leadership, effectively overseeing operations and ensuring everything ran smoothly. His ability to communicate clearly and manage tasks without supervision made him an invaluable asset to the team. Safo’s integrity, punctuality, and commitment to excellence consistently exceeded our expectations.
+                  </p>
+                </div>
+
+              </div>
+            </li>
+
+            <li class="testimonials-item">
+              <div class="content-card" data-testimonials-item>
+
+                <figure class="testimonials-avatar-box">
+                  <img src="./assets/images/avatar-4.png" alt="Henry william" width="60" data-testimonials-avatar>
+                </figure>
+
+                <h4 class="h4 testimonials-item-title" data-testimonials-title>Richard Acquah</h4>
+
+                <div class="testimonials-text" data-testimonials-text>
+                  <p>
+                    We hired Safo for creating custom Excel templates and other Microsoft Office tasks. His communication was clear, 
+                    and he kept us updated throughout. Safo worked efficiently with little supervision,
+                     always meeting deadlines. His integrity and high-quality work made him a valuable asset to the team.
+                  </p>
+                </div>
+
+              </div>
+            </li>
+
+          </ul>
+
+        </section>
+
+
+        <!--
+          - testimonials modal
+        -->
+
+        <div class="modal-container" data-modal-container>
+
+          <div class="overlay" data-overlay></div>
+
+          <section class="testimonials-modal">
+
+            <button class="modal-close-btn" data-modal-close-btn>
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+
+            <div class="modal-img-wrapper">
+              <figure class="modal-avatar-box">
+                <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="80" data-modal-img>
+              </figure>
+
+              <img src="./assets/images/icon-quote.svg" alt="quote icon">
+            </div>
+
+            <div class="modal-content">
+
+              <h4 class="h3 modal-title" data-modal-title>Daniel lewis</h4>
+
+              <time datetime="2021-06-14">14 August, 2024</time>
+
+              <div data-modal-text>
+                <p>
+                  Safo worked with us on a project requiring detailed planning and execution. His leadership skills were evident as he guided the team and ensured smooth communication. He was punctual, reliable, and always worked independently when needed. His dedication and honesty made him a pleasure to work with.
+                </p>
+              </div>
+
+            </div>
+
+          </section>
+
         </div>
-    </section>
 
-    <!-- Skills Section -->
-    <section id="skills">
-        <h2>Skills</h2>
-        <div class="grid">
-            <div class="grid-item">
-                <h3>Punctuality</h3>
-                <p>Consistently meets deadlines and delivers tasks on time.</p>
-            </div>
-            <div class="grid-item">
-                <h3>Multitasking</h3>
-                <p>Efficiently manages multiple tasks and projects simultaneously.</p>
-            </div>
-            <div class="grid-item">
-                <h3>Pressure Management</h3>
-                <p>Performs well under pressure while maintaining high-quality standards.</p>
-            </div>
-            <div class="grid-item">
-                <h3>Technical Skills</h3>
-                <p>Data Entry, Microsoft Office Suite (Word, Excel, PowerPoint), Basic Software Development.</p>
-            </div>
-        </div>
-    </section>
 
-    <!-- Experience Section -->
-    <section id="experience">
-        <h2>Work Experience</h2>
-        <div class="grid">
-            <div class="grid-item">
-                <h3>Mobile Agent - MTN Ghana (2018-2020)</h3>
-                <p>Managed mobile money transactions and provided excellent customer service ensuring accuracy in financial operations.</p>
-            </div>
-            <div class="grid-item">
-                <h3>Sales Executive - MTN AYO (2020-2022)</h3>
-                <p>Exceeded sales targets, built strong client relationships, and utilized data entry and Microsoft Office to maintain records.</p>
-            </div>
-            <div class="grid-item">
-                <h3>DSR & Acting Branch Head -Embalinks (2024)</h3>
-                <p>Led sales and distribution operations, managed a team, and utilized advanced Microsoft Office skills for data analysis and reporting.</p>
-            </div>
-        </div>
-    </section>
+        <!--
+          - clients
+        -->
 
-    <!-- Projects Section -->
-    <section id="projects">
-        <h2>Projects</h2>
-        <div class="grid">
-            <div class="grid-item">
-                <h3>The Nelson Foundation Website</h3>
-                <img src="https://i.postimg.cc/g2vqscDQ/Screenshot-2024-10-12-004629.png" alt="The Nelson Foundation Project">
-                <p>This website was developed for The Nelson Foundation to support females with disabilities.</p>
-                <a href="https://thenelsonfoundation.online">View Project</a>
+        <section class="clients">
+
+          <h3 class="h3 clients-title">Clients</h3>
+
+          <ul class="clients-list has-scrollbar">
+
+            <li class="clients-item">
+              <a href="https://thenelsonfoundation.online">
+                <img src="./assets/images/logo-9-color.png" alt="client logo">
+              </a>
+            </li>
+
+            <li class="clients-item">
+              <a href="https://celebritygraphixstudios.site/">
+                <img src="./assets/images/logo-2-color.png" alt="client logo">
+              </a>
+            </li>
+
+            <li class="clients-item">
+              <a href="https://kyekyeku-tech.site">
+                <img src="./assets/images/logo-3-color.png" alt="client logo">
+              </a>
+            </li>
+
+            <li class="clients-item">
+              <a href="https://thenelsonfoundation.online">
+                <img src="./assets/images/logo-9-color.png" alt="client logo">
+              </a>
+            </li>
+
+            <li class="clients-item">
+              <a href="https://www.kyekyeku-tech.site">
+                <img src="./assets/images/logo-3-color.png" alt="client logo">
+              </a>
+            </li>
+
+            <li class="clients-item">
+              <a href="https://celebritygraphixstudios.site/">
+                <img src="./assets/images/logo-2-color.png" alt="client logo">
+              </a>
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #RESUME
+      -->
+
+      <article class="resume" data-page="resume">
+
+        <header>
+          <h2 class="h2 article-title">Resume</h2>
+        </header>
+
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
             </div>
-            
-            <div class="grid-item">
-                <h3>Kyekyeku Tech Website</h3>
-                <img src="https://i.postimg.cc/mgG7Pfsw/Screenshot-2024-10-12-004956.png" alt="kyekyeku-tech Project">
-                <p>This website was developed purposely to sell internet bundle online.</p>
-                <a href="http://kyekyeku-tech.site">View Project</a>
+
+            <h3 class="h3">Education</h3>
+          </div>
+
+          <ol class="timeline-list">
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">Takoradi Technical University</h4>
+
+              <span>2024 — present</span>
+
+              <p class="timeline-text">
+              Exploring the intersection of technology and marketing strategies, including digital branding, market analysis, and technology-driven customer engagement.
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">St. Theresah's VOC/ICT. Inst.</h4>
+
+              <span>2022 — 2024</span>
+
+              <p class="timeline-text">
+                Proficient in Microsoft Excel for data management and analysis, Microsoft Word for document creation and formatting, and Database Management (DBM) concepts for organizing and retrieving data efficiently.
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">ALX AFRICA - Online</h4>
+
+              <span>2023 — 2024</span>
+
+              <p class="timeline-text">
+                Expertise in front-end development, designing user-friendly interfaces and crafting seamless user experiences with modern frameworks and tools.
+              </p>
+
+            </li>
+
+          </ol>
+
+        </section>
+
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
             </div>
-            <div class="grid-item">
-                <h3>Celebritygraphixstudios Website</h3>
-                <img src="https://i.postimg.cc/Gpmzq8pt/Screenshot-2024-10-12-005224.png" alt="Celebritygraphixstudios Project">
-                <p>This website was developed for Celebrity Graphix as their official Website</p>
-                <a href="https://celebritygraphixstudios.site/">View Project</a>
+
+            <h3 class="h3">Experience</h3>
+          </div>
+
+          <ol class="timeline-list">
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">Web Development</h4>
+
+              <span>2024 — Present</span>
+
+              <p class="timeline-text">
+                Developed responsive, accessible, and visually appealing websites, ensuring compatibility across multiple devices and browsers.
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">DSR & Acting Branch Head</h4>
+
+              <span>2023 — Present</span>
+
+              <p class="timeline-text">
+                Led sales and distribution operations, managed a team, and utilized advanced Microsoft Office skills for data analysis and reporting.
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">Sales Executive</h4>
+
+              <span>2018 — 2022</span>
+
+              <p class="timeline-text">
+                Exceeded sales targets by building strong client relationships and efficiently managing records using advanced data entry techniques and Microsoft Office tools.
+              </p>
+
+            </li>
+
+          </ol>
+
+        </section>
+
+        <section class="skill">
+
+          <h3 class="h3 skills-title">My skills</h3>
+
+          <ul class="skills-list content-card">
+
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5">Communication</h5>
+                <data value="80">80%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 80%;"></div>
+              </div>
+
+            </li>
+
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5">Web Development</h5>
+                <data value="70">70%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 70%;"></div>
+              </div>
+
+            </li>
+
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5">Microsoft Office</h5>
+                <data value="90">90%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 90%;"></div>
+              </div>
+
+            </li>
+
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5">Mobile Application</h5>
+                <data value="50">50%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 50%;"></div>
+              </div>
+
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #PORTFOLIO
+      -->
+
+      <article class="portfolio" data-page="portfolio">
+
+        <header>
+          <h2 class="h2 article-title">Portfolio</h2>
+        </header>
+
+        <section class="projects">
+
+          <ul class="filter-list">
+
+            <li class="filter-item">
+              <button class="active" data-filter-btn>All</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Web design</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Applications</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Web development</button>
+            </li>
+
+          </ul>
+
+          <div class="filter-select-box">
+
+            <button class="filter-select" data-select>
+
+              <div class="select-value" data-selecct-value>Select category</div>
+
+              <div class="select-icon">
+                <ion-icon name="chevron-down"></ion-icon>
+              </div>
+
+            </button>
+
+            <ul class="select-list">
+
+              <li class="select-item">
+                <button data-select-item>All</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Web design</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Applications</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Web development</button>
+              </li>
+
+            </ul>
+
+          </div>
+
+          <ul class="project-list">
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="https://www.kyekyeku-tech.site">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/webimage1.png" alt="finance" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Finance</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="http://thenelsonfoundation.online">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-2.png" alt="orizon" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Foundation</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web design">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-3.jpg" alt="fundo" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Fundo</h3>
+
+                <p class="project-category">Web design</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="applications">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-4.png" alt="brawlhalla" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">TNF Android</h3>
+
+                <p class="project-category">Applications</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web design">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-5.png" alt="Ecommerce" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Ecommerce</h3>
+
+                <p class="project-category">Web design</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web design">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-6.png" alt="metaspark" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">MetaSpark</h3>
+
+                <p class="project-category">Web design</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="https://kyekyeku-tech.site">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-7.png" alt="bundle" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Bundle Site</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="applications">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-8.jpg" alt="task manager" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Cash Count</h3>
+
+                <p class="project-category">Applications</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="https://celebritygraphixstudios.site/">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-9.png" alt="arrival" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Business</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #BLOG
+      -->
+
+      <article class="blog" data-page="blog">
+
+        <header>
+          <h2 class="h2 article-title">Blog</h2>
+        </header>
+
+        <section class="blog-posts">
+
+          <ul class="blog-posts-list">
+
+            <li class="blog-post-item">
+              <a href="#">
+
+                <figure class="blog-banner-box">
+                  <img src="./assets/images/blog-1.jpg" alt="Design conferences in 2022" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">Design</p>
+
+                    <span class="dot"></span>
+
+                    <time datetime="2022-02-23">Fab 23, 2022</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Design conferences in 2022</h3>
+
+                  <p class="blog-text">
+                    Veritatis et quasi architecto beatae vitae dicta sunt, explicabo.
+                  </p>
+
+                </div>
+
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+
+                <figure class="blog-banner-box">
+                  <img src="./assets/images/blog-2.jpg" alt="Best fonts every designer" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">Design</p>
+
+                    <span class="dot"></span>
+
+                    <time datetime="2022-02-23">Fab 23, 2022</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Best fonts every designer</h3>
+
+                  <p class="blog-text">
+                    Sed ut perspiciatis, nam libero tempore, cum soluta nobis est eligendi.
+                  </p>
+
+                </div>
+
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+
+                <figure class="blog-banner-box">
+                  <img src="./assets/images/blog-3.jpg" alt="Design digest #80" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">Design</p>
+
+                    <span class="dot"></span>
+
+                    <time datetime="2022-02-23">Fab 23, 2022</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Design digest #80</h3>
+
+                  <p class="blog-text">
+                    Excepteur sint occaecat cupidatat no proident, quis nostrum exercitationem ullam corporis suscipit.
+                  </p>
+
+                </div>
+
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+
+                <figure class="blog-banner-box">
+                  <img src="./assets/images/blog-4.jpg" alt="UI interactions of the week" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">Design</p>
+
+                    <span class="dot"></span>
+
+                    <time datetime="2022-02-23">Fab 23, 2022</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">UI interactions of the week</h3>
+
+                  <p class="blog-text">
+                    Enim ad minim veniam, consectetur adipiscing elit, quis nostrud exercitation ullamco laboris nisi.
+                  </p>
+
+                </div>
+
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+
+                <figure class="blog-banner-box">
+                  <img src="./assets/images/blog-5.jpg" alt="The forgotten art of spacing" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">Design</p>
+
+                    <span class="dot"></span>
+
+                    <time datetime="2022-02-23">Fab 23, 2022</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">The forgotten art of spacing</h3>
+
+                  <p class="blog-text">
+                    Maxime placeat, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </p>
+
+                </div>
+
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+
+                <figure class="blog-banner-box">
+                  <img src="./assets/images/blog-6.jpg" alt="Design digest #79" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">Design</p>
+
+                    <span class="dot"></span>
+
+                    <time datetime="2022-02-23">Fab 23, 2022</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Design digest #79</h3>
+
+                  <p class="blog-text">
+                    Optio cumque nihil impedit uo minus quod maxime placeat, velit esse cillum.
+                  </p>
+
+                </div>
+
+              </a>
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #CONTACT
+      -->
+
+      <article class="contact" data-page="contact">
+
+        <header>
+          <h2 class="h2 article-title">Contact</h2>
+        </header>
+
+        <section class="mapbox" data-mapbox>
+          <figure>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1017428.5852468186!2d-4.034729003906256!3d5.050077658635895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfe8276113c126bd%3A0xa8c760bb6bccbbbe!2sHalf%20Assini!5e0!3m2!1sen!2sgh!4v1732490568218!5m2!1sen!2sgh"
+              width="400" height="300" loading="lazy"></iframe>
+          </figure>
+        </section>
+
+        <section class="contact-form">
+
+          <h3 class="h3 form-title">Contact Form</h3>
+
+          <form action="#" class="form" data-form>
+
+            <div class="input-wrapper">
+              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
+
+              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
             </div>
-            <div class="grid-item">
-                <h3>Bijay Farms Website - coming soon....</h3>
-                <img src="" alt="BijayFarm Project">
-                <p>This website is developing for Animals Farming</p>
-                <a href="#">View Project</a>
-            </div>
-        </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2>Contact Me</h2>
-        <form>
-            <input type="text" placeholder="Full Name">
-            <input type="email" placeholder="Email Address">
-            <input type="text" placeholder="Subject">
-            <textarea placeholder="Message"></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
-    <footer>
-        <div class="container">
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="https://wa.me/+233545454000"><i class="fab fa-whatsapp"></i></a>
-                <a href="mailto:ceo@kyekyeku-tech.site"><i class="fas fa-envelope"></i></a>
-            </div>
-            <p>&copy;2024 Kyekyeku-Tech. All rights reserved.</p><a href="T&Cs.html" class="btm">Terms and Conditions</a></p>
-        </div>
-    </footer>
-<script>
-    function animateCounters() {
-    const counters = document.querySelectorAll('.prop-obj');
-    counters.forEach(counter => {
-      const updateCount = () => {
-        const target = +counter.getAttribute('data-count');
-        const count = +counter.innerText;
+            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
 
-        // Set increment value
-        const increment = target / 100;
+            <button class="form-btn" type="submit" disabled data-form-btn>
+              <ion-icon name="paper-plane"></ion-icon>
+              <span>Send Message</span>
+            </button>
 
-        // If the count is less than the target, keep incrementing
-        if (count < target) {
-          counter.innerText = Math.ceil(count + increment);
-          setTimeout(updateCount, 20); // Speed of the increment
-        } else {
-          counter.innerText = target; // When complete, set to the target value
-        }
-      };
+          </form>
 
-      // Initial call to start counting
-      updateCount();
-    });
-  }
+        </section>
 
-  // Trigger counters animation on page load
-  window.onload = function () {
-    animateCounters();
-  };
-document.querySelectorAll('nav ul li a').forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const section = document.querySelector(this.getAttribute('href'));
-        section.scrollIntoView({ behavior: 'smooth' });
-    });
-});
+      </article>
 
-</script>
+    </div>
+
+  </main>
+
+
+
+
+
+
+  <!--
+    - custom js link
+  -->
+  <script src="./assets/js/script.js"></script>
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 </body>
+
 </html>
