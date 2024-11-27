@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kyekyeku-tech.com</title>
+    <title>luxedigital</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.pixabay.com/photo/2016/07/12/06/21/grid-1511496_960_720.jpg">
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -15,17 +16,18 @@
             margin: 0;
             background-image: url('https://mymtnngnxtgen-shop-staging.mtnnigeria.net/media/auth0/autho-img.png');
             background-size: cover;
-            color: black;
+            color: rgb(243, 237, 237);
         }
 
         #paymentForm {
-            background: #fccf09;
+            background: #080700a4;
             border-radius: 10px;
-            box-shadow: 0 4px 8px black;
+            box-shadow: 0 4px 8px rgb(255, 209, 3);
             max-width: 400px;
             width: 100%;
             padding: 20px;
             text-align: center;
+            color: #ffc107;
         }
 
         h2#mtn-heading,
@@ -46,7 +48,7 @@
         }
 
         h3 {
-            color: #333;
+            color: #fcc308;
             margin-top: 10px;
         }
 
@@ -59,7 +61,7 @@
         label {
             display: block;
             margin: 15px 0 5px;
-            color: #555;
+            color: #fcc308;
             text-align: left;
         }
 
@@ -77,8 +79,8 @@
         }
 
         input[type="submit"] {
-            background-color: #0d0d0e;
-            color: yellow;
+            background-color: #fcc308;
+            color: black;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
@@ -87,7 +89,8 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: #00050a;
+            color: #fcc308;
         }
 
         .fa-handshake {
@@ -100,16 +103,16 @@
 <body>
     <form id="paymentForm">
         <input type="hidden" name="x-sheetmonkey-insert-worksheet" value="MTN NEW" />
-        <h2 id="mtn-heading">KYEKYEKU</h2>
-        <h2 class="form-text">-TECH</h2>
+        <h2 id="mtn-heading">KYEKYEKU -</h2>
+        <h2 class="form-text">TECH</h2>
         <h3>WELCOME TO AGENT PORTAL</h3>
-        <label for="agentId">YOUR USERNAME:</label>
+        <label for="agentId">Agent Username:</label>
         <input type="text" id="agentId" name="AGENT ID" required placeholder="e.g., OSARFO"><br>
 
-        <label for="phoneNumber">CUSTOMER PHONE #:</label>
+        <label for="phoneNumber">Customer Number:</label>
         <input type="tel" id="phoneNumber" name="PHONE NUMBER" required placeholder="e.g., 0234567890"><br>
 
-        <label for="bundle">SELECT PACKAGE:</label>
+        <label for="bundle">Select package:</label>
         <select id="bundle" name="BUNDLE">
             <option value="0">0GB - GHS0.0</option>
             <option value="1">1GB - GHS5.0</option>
@@ -156,12 +159,12 @@
             };
 
     const agents = {
-        "KSARFO": { email: "safooppong121@gmail.com", phone: "233540612264" },
-        "MORDECAI OBENG": { email: "mordecaiobeng941@gmail.com", phone: "233534672645" },
-        "DANQUAHDEE": { email: "Dannyatmarket@gmail.com", phone: "233244348440" },
-        "UNCLE AUGUSTINE": { email: "tanoeaugustine47@gmail.com", phone: "233541061780" },
-        "ABENA NYAMEKYE": { email: "etwumasi977@gmail.com", phone: "233243781794" },
-        "AUTHENTICC": { email: "wondernyabik237@gmail.com", phone: "233242921311" },
+        "KSARFO": { email: "safooppong121@gmail.com", phone: "233545454000" },
+        "CLIFTON14": { email: "cliftinaeva@gmail.com", phone: "233544469820" },
+        "EWUSI WISDOM": { email: "ewusiw125@gmail.com", phone: "233558575831" },
+        "NANA YAW": { email: "vhimbowoy98@gmail.com", phone: "233558385107" },
+        "SOLOMON": { email: "heisking4@gmail.com", phone: "233554015727" },
+        "ADWOA": { email: "safoadwoa121@gmail.com", phone: "233549298567" },
         "BEN8363": { email: "bnat90883@gmail.com", phone: "233249358363" },
         "BERNTOYEB": { email: "berntoyeb@icloud.com", phone: "233249456560" },
         "ENOOMIA1": { email: "enochpolley17@gmail.com", phone: "233550123456" },
@@ -191,7 +194,7 @@
         "OHEMAA": { email: "bassuman74@gmail.com", phone: "233544575363"},
         "BERNARDANNAN": { email: "bernardjuniorannan@gmail.com", phone: "233557067527" },
         "JUSTICESARKO": { email: "amgposty915@gmail.com", phone: "233207158514"},
-        "KEO": { email: "akwasismall6@gmail.com", phone: "233534960619" },
+        "BERTA1": { email: "bertareigns@gmail.com", phone: "233543631870" },
         "ASAREEMMANUEL": { email: "asarerichway200@gmail.com", phone: "233546424321" }
     };
 
@@ -313,18 +316,25 @@
         };
 
         const package = packageNames[selectedBundle];
-        const apiUrl = `https://apps.mnotify.net/smsapi?key=zwNY4rjo1XWnMXn8Om7Q8gk1U&to=${agentPhone}&msg=Your request to ${phoneNumber} has been on processing with ${package}&sender_id=KYE-TECH`;
+    const apiUrl = `https://apps.mnotify.net/smsapi?key=zwNY4rjo1XWnMXn8Om7Q8gk1U&to=${agentPhone}&msg=Your request to ${phoneNumber} has been on processing with ${package}&sender_id=LUXEDIGITAL`;
 
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                console.log("Agent SMS sent successfully:", data);
-            })
-            .catch(error => {
-                console.error("Error sending Agent SMS:", error);
-                Swal.fire('Error', `There was an error sending the SMS to the agent: ${error.message}`, 'error');
-            });
-    }
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(data => { 
+                    throw new Error(`SMS API Error: ${JSON.stringify(data)}`);
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Agent SMS sent successfully:", data);
+        })
+        .catch(error => {
+            console.error("Error sending Agent SMS:", error);
+            Swal.fire('Error', `There was an error sending the SMS to the agent: ${error.message}`, 'error');
+        });
+}
 </script>
     </form>
 </body>
