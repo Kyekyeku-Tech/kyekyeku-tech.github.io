@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send SMS to Customers</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #1e1e2f;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background: #292942;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        form textarea {
+            resize: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background: #6a11cb;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #2575fc;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: #fff;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Send SMS to Customers</h2>
+        <form id="smsForm">
+            <label for="phone">Recipient's Phone Number:</label>
+            <input type="text" id="phone" name="phone" placeholder="e.g., 0256350716" required>
+            
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="5">
+Greetings,
+Did you know you can work from home/campus & earn GH50-GH200 daily!
+
+Sign up: www.kyekyeku-tech.site/signup
+Text username to 0256350716 for approval
+            </textarea>
+
+            <button type="submit">Send SMS</button>
+        </form>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Message Sent Successfully!</div>
+
+    <script>
+        document.getElementById('smsForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const phone = document.getElementById('phone').value;
+            const message = encodeURIComponent(document.getElementById('message').value);
+            const apiKey = 'zwNY4rjo1XWnMXn8Om7Q8gk1U'; // Your API key
+            const senderId = 'KYE-TECH';
+            const apiUrl = `https://apps.mnotify.net/smsapi?key=${apiKey}&to=${phone}&msg=${message}&sender_id=${senderId}`;
+
+            try {
+                const response = await fetch(apiUrl);
+                if (response.ok) {
+                    showToast('Message Sent Successfully!');
+                } else {
+                    showToast('Failed to Send Message. Try Again!', true);
+                }
+            } catch (error) {
+                showToast(`Error: ${error.message}`, true);
+            }
+        });
+
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.background = isError ? '#f44336' : '#4caf50';
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
