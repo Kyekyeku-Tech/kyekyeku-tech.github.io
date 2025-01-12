@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>kyekyeku-tech Wi-Fi</title>
+    <title>kyekyeku-tech hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
        
@@ -48,43 +48,53 @@
     margin-bottom: 30px;
     color: white;
 }
+    .features {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        background: #000c0b34;
+        padding: 20px 0;
+    }
 
+    .feature-slider {
+        display: flex;
+        gap: 40px;
+        animation: slide-horizontal 20s infinite linear;
+        width: calc(4 * 100%); /* Width for 4 slides */
+    }
 
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 40px 20px;
+    .feature-slide {
+        flex: 0 0 25%; /* Each slide takes 25% width of the container */
+        text-align: center;
+    }
+
+    .feature-slide img {
+        width: 80px;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .feature-slide h3 {
+        font-size: 1.5rem;
+        color: #0c0000;
+        margin: 10px 0;
+    }
+
+    .feature-slide p {
+        font-size: 1rem;
+        color: #080000;
+    }
+
+    @keyframes slide-horizontal {
+        0% {
+            transform: translateX(0);
         }
-
-        .feature-item {
-            text-align: center;
-            padding: 20px;
-            background: #fa9703;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(1, 0, 5, 0.877);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        100% {
+            transform: translateX(-100%);
         }
+    }
 
-        .feature-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-        }
 
-        .feature-item img {
-            max-width: 100px;
-            margin-bottom: 15px;
-        }
-
-        .feature-item h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        .feature-item p {
-            font-size: 1rem;
-            color: #0a0000;
-        }
 
         .svg-slider {
             display: flex;
@@ -267,42 +277,37 @@
     </section>
 
     <section class="features">
-        <!-- Stream -->
-        <div class="feature-item">
-            <img src="https://mtn.com.gh/wp-content/uploads/2023/09/Home-and-Residential-Page-2022-1920-1.svg" alt="Stream Icon">
-            <h3>Stream</h3>
-            <p>Catch up on all your favorite shows without buffering.</p>
-        </div>
-
-        <!-- Office -->
-        <div class="feature-item">
-            <img src="https://mtn.com.gh/wp-content/uploads/2023/09/Home-and-Residential-Page-2022-1920.svg" alt="Office Icon">
-            <h3>Office</h3>
-            <p>Turn any room into a corner office and work from home.</p>
-        </div>
-
-        <!-- Chat -->
-        <div class="feature-item">
-            <img src="https://mtn.com.gh/wp-content/uploads/2023/09/icons-1.svg" alt="Chat Icon">
-            <h3>Chat</h3>
-            <p>Stay connected with your loved ones effortlessly.</p>
-        </div>
-
-        <!-- Create -->
-        <div class="feature-item">
-            <img src="https://mtn.com.gh/wp-content/uploads/2023/09/icons.svg" alt="Create Icon">
-            <h3>Create</h3>
-            <p>Unleash your creativity and make something incredible.</p>
+        <div class="feature-slider">
+            <div class="feature-slide">
+                <img src="https://mtn.com.gh/wp-content/uploads/2023/09/Home-and-Residential-Page-2022-1920-1.svg" alt="Stream Icon">
+                <h3>Stream</h3>
+                <p>Catch up on all your favorite shows without buffering.</p>
+            </div>
+            <div class="feature-slide">
+                <img src="https://mtn.com.gh/wp-content/uploads/2023/09/Home-and-Residential-Page-2022-1920.svg" alt="Office Icon">
+                <h3>Office</h3>
+                <p>Turn any room into a corner office and work from home.</p>
+            </div>
+            <div class="feature-slide">
+                <img src="https://mtn.com.gh/wp-content/uploads/2023/09/icons-1.svg" alt="Chat Icon">
+                <h3>Chat</h3>
+                <p>Stay connected with your loved ones effortlessly.</p>
+            </div>
+            <div class="feature-slide">
+                <img src="https://mtn.com.gh/wp-content/uploads/2023/09/icons.svg" alt="Create Icon">
+                <h3>Create</h3>
+                <p>Unleash your creativity and make something incredible.</p>
+            </div>
         </div>
     </section>
-
+    
     <div class="container">
         <div class="product">
             <div class="product-item">
                 <h2>MTN 4G BROADBAND MIFI-White</h2>
                 <img src="https://telegra.ph/file/5062f33e1fe3b5ab21042.jpg" alt="WiFi Router">
                 <div class="buy-price">
-                    <a href="https://take.app/kyekyekusite/form?draft=clxrpuaft001ts1t70b424yvj" class="buy"><i class="fas fa-shopping-cart"></i> Buy Now</a>
+                    <a href="https://take.app/kyekyekutechhub/form?draft=clxrpuaft001ts1t70b424yvj" class="buy"><i class="fas fa-shopping-cart"></i> Buy Now</a>
                     <div class="price">
                         <h3>GHS 415.00</h3>
                     </div>
@@ -312,9 +317,39 @@
                 <h2>MTN CAT4 S20 4G LTE WIFI-white</h2>
                 <img src="https://i.postimg.cc/gk7vcdYS/Whats-App-Image-2024-06-23-at-1-13-34-PM.jpg" alt="WiFi Extender">
                 <div class="buy-price">
-                    <a href="https://take.app/kyekyekusite/form?draft=clxrqlgdf000y9cf3hvx8gugt" class="buy"><i class="fas fa-shopping-cart"></i> BUY NOW</a>
+                    <a href="https://take.app/kyekyekutechhub/form?draft=clxrqlgdf000y9cf3hvx8gugt" class="buy"><i class="fas fa-shopping-cart"></i> BUY NOW</a>
                     <div class="price">
                         <h3>GHS 700.00</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="product-item">
+                <h2>Samsung A16 (256GB+8GB)</h2>
+                <img src="a16.jpg" alt="Samsung a16">
+                <div class="buy-price">
+                    <a href="https://take.app/kyekyekutechhub/p/cm5thc1880006gd1n51upgvzj" class="buy"><i class="fas fa-shopping-cart"></i> BUY NOW</a>
+                    <div class="price">
+                        <h3>GHS 3200.00</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="product-item">
+                <h2>Samsung A16 </h2>
+                <img src="a15.jpg" alt="WiFi Extender">
+                <div class="buy-price">
+                    <a href="https://take.app/kyekyekutechhub/form?cm5thc1880006gd1n51upgvzj" class="buy"><i class="fas fa-shopping-cart"></i> BUY NOW</a>
+                    <div class="price">
+                        <h3>GHS 2500.00</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="product-item">
+                <h2>TECNO POP 8 (64GB+4gb)</h2>
+                <img src="pop 8.jpg" alt="WiFi Extender">
+                <div class="buy-price">
+                    <a href="https://take.app/kyekyekutechhub/p/cm5thpims001dql2mvbn40vpc" class="buy"><i class="fas fa-shopping-cart"></i> BUY NOW</a>
+                    <div class="price">
+                        <h3>GHS 1300.00</h3>
                     </div>
                 </div>
             </div>
@@ -322,7 +357,7 @@
                 <h2>MTN 5G ZTE ROUTER</h2>
                 <img src="https://i.postimg.cc/0yJ7b3j8/5-G-ROUTER.jpg" alt="WiFi Range Booster">
                 <div class="buy-price">
-                    <a href="https://take.app/kyekyekusite/form?draft=clxs19bsq000gzahbejr59qg9" class="buy"><i class="fas fa-shopping-cart"></i> BUY NOW</a>
+                    <a href="https://take.app/kyekyekutechhub/form?draft=clxs19bsq000gzahbejr59qg9" class="buy"><i class="fas fa-shopping-cart"></i> BUY NOW</a>
                     <div class="price">
                         <h3>GHS 1,950.00</h3>
                     </div>
@@ -336,7 +371,7 @@
                 <h2>MTN CAT6 S50 4G ROUTER-white</h2>
                 <img src="https://telegra.ph/file/0ccdde3ee49ff9f4c7576.jpg" alt="WiFi Router">
                 <div class="buy-price">
-                    <a href="https://take.app/kyekyekusite/form?draft=clxs11zuw0008zahbrkmrlqzx" class="buy"><i class="fas fa-shopping-cart"></i> Buy Now</a>
+                    <a href="https://take.app/kyekyekutechhub/form?draft=clxs11zuw0008zahbrkmrlqzx" class="buy"><i class="fas fa-shopping-cart"></i> Buy Now</a>
                     <div class="price">
                         <h3>GHS 950.00</h3>
                     </div>
@@ -346,7 +381,7 @@
                 <h2>MTN 4G POCKET MIFI-White</h2>
                 <img src="https://i.postimg.cc/RhpR9BYm/R.png" alt="WiFi Range Booster">
                 <div class="buy-price">
-                    <a href="https://take.app/kyekyekusite/form?draft=clxs16ke9000ezahbo623oro2" class="buy"><i class="fas fa-shopping-cart"></i> BUY NOW</a>
+                    <a href="https://take.app/kyekyekutechhub/form?draft=clxs16ke9000ezahbo623oro2" class="buy"><i class="fas fa-shopping-cart"></i> BUY NOW</a>
                     <div class="price">
                         <h3>GHS 450.00</h3>
                     </div>
