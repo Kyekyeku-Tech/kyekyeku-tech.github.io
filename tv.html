@@ -1,0 +1,224 @@
+<div class="tv-screen"></div>
+<div class="tv-container">
+  <canvas id="canvas"></canvas>
+  <iframe id="ytplayer"
+    src="https://www.youtube.com/embed/HFY_Q6kl6II?autoplay=1&controls=0&mute=1"
+    
+    title="YouTube video player" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe>
+  <div class="glitch"></div>
+  <div class="scan-lines"></div>
+  <div class="snow-effect"></div>
+</div>
+
+<style>
+  body {
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+  }
+
+  .tv-screen {
+    position: absolute;
+    width: 90vw;
+    height: 50vw;
+    background-image: url(https://alexandrevacassin.fr/codepen/old-tv/base.webp);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 10;
+  }
+
+  .tv-container {
+    position: absolute;
+    margin-bottom: 3vw;
+    width: 60vw;
+    margin-right: 10vw;
+    height: 45vw;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  iframe, canvas {
+    width: 100%;
+    height: 100%;
+    filter: contrast(1.2) brightness(1.1);
+  }
+
+  .glitch {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("https://upload.wikimedia.org/wikipedia/commons/0/02/Television_static.gif");
+    mix-blend-mode: multiply;
+    opacity: 0.3;
+    animation: glitchMove 0.2s infinite linear;
+    z-index: 2;
+  }
+
+  @keyframes glitchMove {
+    0% { transform: translateX(0); }
+    33% { transform: translateX(-5px); }
+    66% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+  }
+
+  .scan-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0px,
+      rgba(0, 0, 0, 0.2) 1px,
+      rgba(0, 0, 0, 0) 2px
+    );
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .snow-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("https://upload.wikimedia.org/wikipedia/commons/0/02/Television_static.gif");
+    background-size: cover;
+    opacity: 0;
+    z-index: 3;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  canvas {
+    position: absolute;
+    left: 0;
+    mix-blend-mode: screen;
+    z-index: 9;
+  }
+</style>
+
+<script>
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  class VCREffect {
+    constructor(canvas, options = {}) {
+      this.canvas = canvas;
+      this.ctx = canvas.getContext("2d");
+      this.config = Object.assign({
+        fps: 60,
+        blur: 1,
+        opacity: 1,
+        miny: 220,
+        miny2: 220,
+        num: 70
+      }, options);
+
+      this.init();
+    }
+
+    init() {
+      this.resizeCanvas();
+      this.canvas.style.position = "absolute";
+      this.canvas.style.top = "0";
+      this.canvas.style.left = "0";
+      this.canvas.style.opacity = this.config.opacity;
+
+      this.generateVCRNoise();
+      window.addEventListener("resize", () => this.resizeCanvas());
+    }
+
+    resizeCanvas() {
+      this.canvas.width = window.innerWidth;
+      this.canvas.height = window.innerHeight;
+    }
+
+    generateVCRNoise() {
+      if (this.config.fps >= 60) {
+        const animate = () => {
+          this.renderTrackingNoise();
+          this.vcrInterval = requestAnimationFrame(animate);
+        };
+        animate();
+      } else {
+        this.vcrInterval = setInterval(() => {
+          this.renderTrackingNoise();
+        }, 1000 / this.config.fps);
+      }
+    }
+
+    renderTrackingNoise(radius = 2) {
+      const { canvas, ctx, config } = this;
+      canvas.style.filter = `blur(${config.blur}px)`;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = `#fff`;
+
+      for (let i = 0; i <= config.num; i++) {
+        let x = Math.random() * canvas.width;
+        let y1 = getRandomInt(config.miny += 3, canvas.height);
+        let y2 = getRandomInt(0, config.miny2 -= 3);
+        ctx.fillRect(x, y1, radius, radius);
+        ctx.fillRect(x, y2, radius, radius);
+
+        this.renderTail(ctx, x, y1, radius);
+        this.renderTail(ctx, x, y2, radius);
+      }
+    }
+
+    renderTail(ctx, x, y, radius) {
+      const n = getRandomInt(1, 50);
+      const dirs = [1, -1];
+      let dir = dirs[Math.floor(Math.random() * dirs.length)];
+
+      for (let i = 0; i < n; i++) {
+        let r = getRandomInt(radius - 0.01, radius);
+        let dx = getRandomInt(1, 4) * dir;
+        radius -= 0.1;
+        ctx.fillRect((x += dx), y, r, r);
+      }
+    }
+  }
+
+  const canvas = document.getElementById("canvas");
+  new VCREffect(canvas, {
+    opacity: 1,
+    miny: 220,
+    miny2: 220,
+    num: 70,
+    fps: 60,
+    blur: 1
+  });
+
+  const videoIds = ["c4CVKbVtTsc", "143aXLat70E", "J5SSsT1O9gE", "dAiomIGB3qo", "lk6iJNSv-vY", "7PgJLyeb6sM", "wz0A7m1euy0"];
+  let currentVideoIndex = 0;
+  const iframe = document.getElementById("ytplayer");
+  const snowEffect = document.querySelector(".snow-effect");
+
+  function switchToNextVideo() {
+    snowEffect.style.opacity = 1;
+    setTimeout(() => {
+      currentVideoIndex = (currentVideoIndex + 1) % videoIds.length;
+      const nextId = videoIds[currentVideoIndex];
+      iframe.src = `https://www.youtube.com/embed/${nextId}?autoplay=1&controls=0&loop=1&mute=1&playlist=${nextId}`;
+      snowEffect.style.opacity = 0;
+    }, 2000); // 2 seconds static before switch
+  }
+</script>
