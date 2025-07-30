@@ -185,46 +185,63 @@ const staffList = [
     name: "SAFO OPPONG",
     position: "FOUNDER & TECHNICAL DIRECTOR",
     duties: "Founder and Monitoring Services",
-    percentage: 30,
+    percentage: 0,
+    fixedSalary: 1200,
     account: "0545454000"
   },
   {
     name: "OHENE NANA YAMOAH",
     position: "FINANCIAL & MANAG. KYEKYEKUTECH",
     duties: "Managing the Business Site And Finacial Aspect",
-    percentage: 28,
+    percentage: 0,
+    fixedSalary: 980,
     account: "0548785316"
   },
   {
     name: "ANDY NIMOH",
     position: "SUPPORT & MANAG. KYEKYEKUHUB",
     duties: "Supporting Customers, and Training Customers on the Site",
-    percentage: 20,
+    percentage: 0,
+    fixedSalary: 520,
     account: "0256350716"
   },
   {
     name: "BUSINESS",
     position: "FUTURE PROCEEDS & INVESTMENT",
     duties: "For Future Reference",
-    percentage: 22,
+    percentage: 100, // Will be adjusted after subtracting fixed salaries
     account: "0544040839"
   }
 ];
 
-let currentPayroll = [];
-
 function generatePayroll() {
   const total = parseFloat(document.getElementById('totalAmount').value);
+  if (isNaN(total) || total <= 0) return;
+
   const tbody = document.querySelector('#payrollTable tbody');
   const staffSelect = document.getElementById('staffSelect');
   tbody.innerHTML = "";
   staffSelect.innerHTML = '<option value="">-- Select Staff --</option>';
   currentPayroll = [];
 
+  let totalFixed = 0;
+  staffList.forEach(staff => {
+    if (staff.fixedSalary) totalFixed += staff.fixedSalary;
+  });
+
+  const remainingAmount = total - totalFixed;
+
   let totalGross = 0, totalWelfare = 0, totalNet = 0;
 
   staffList.forEach((staff, index) => {
-    const gross = (total * staff.percentage) / 100;
+    let gross = 0;
+    if (staff.fixedSalary) {
+      gross = staff.fixedSalary;
+    } else {
+      // Recalculate percentage relative to remainingAmount
+      gross = (remainingAmount * staff.percentage) / 100;
+    }
+
     const welfare = gross * 0.05;
     const net = gross - welfare;
 
@@ -239,10 +256,10 @@ function generatePayroll() {
         <td>${staff.name}</td>
         <td>${staff.position}</td>
         <td>${staff.duties}</td>
-        <td>${staff.percentage}%</td>
+        <td>${staff.fixedSalary ? 'Fixed' : staff.percentage + '%'}</td>
         <td>${gross.toFixed(2)}</td>
-        <td>${welfare.toFixed(3)}</td>
-        <td>${net.toFixed(3)}</td>
+        <td>${welfare.toFixed(2)}</td>
+        <td>${net.toFixed(2)}</td>
         <td>${staff.account}</td>
       </tr>
     `;
