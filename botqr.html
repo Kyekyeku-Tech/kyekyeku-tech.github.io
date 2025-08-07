@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KYETECH-BOT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fafbfc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: #000102;
+    }
+    header {
+      background: #4400ff;
+      padding: 20px;
+      box-shadow: 0 4px 4px rgba(249, 249, 252, 0.966);
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: white;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo img {
+      width: 35px;
+      height: 35px;
+    }
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: white;
+      margin: 4px 0;
+      border-radius: 2px;
+    }
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #d1d5db;
+    }
+    #content {
+      flex: 1;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .button-container {
+      margin-top: 30px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .box-button {
+      background: #053ffd;
+      color: white;
+      padding: 25px 35px;
+      border: none;
+      border-radius: 15px;
+      font-size: 22px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      min-width: 220px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .box-button:hover {
+      background: #4dec2d;
+      transform: translateY(-3px);
+    }
+    .box-button .icon {
+      font-size: 50px;
+    }
+    footer {
+      background: #f1f5f9;
+      color: #555;
+      text-align: center;
+      padding: 12px;
+      font-size: 14px;
+      margin-top: 30px;
+    }
+    iframe {
+      border: none;
+      border-radius: 12px;
+    }
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+      nav {
+        display: none;
+        flex-direction: column;
+        background: #4f46e5;
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      }
+      nav.open {
+        display: flex;
+      }
+      nav a {
+        padding: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <div class="logo">
+        <img src="assets/images/avatar-1.png" alt="Logo">
+        KYETECH-BOT
+      </div>
+      <div class="menu-toggle" id="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav id="nav-links">
+       
+        <a href="#" onclick="loadContent('https://hanstz-sessions.onrender.com/pair')">Get Session ID</a>
+      </nav>
+    </div>
+  </header>
+
+  <div id="content">
+    <h2 style="color:#3700ff;">Welcome to KYETECH-BOTl!</h2>
+    <p style="margin-top:10px;">Manage your Auto services efficiently and effortlessly through a modern, smooth platform.</p>
+
+    <div class="button-container">
+
+      <button class="box-button" onclick="loadContent('https://hanstz-sessions.onrender.com/pair')">
+          <div class="icon">🔌</div>
+        GET SESSION ID
+      </button>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Kyekyeku-Tech. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    function loadContent(page) {
+      document.getElementById('content').innerHTML = `
+        <iframe src="${page}" style="width:100%; height:85vh;"></iframe>
+      `;
+    }
+  </script>
+
+</body>
+</html>
