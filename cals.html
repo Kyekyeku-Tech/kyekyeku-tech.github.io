@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cash Counter with Login</title>
+</head>
+<style>
+       body {
+  font-family: 'Poppins', sans-serif;
+  background: #f5f5f5; /* default light background for calculator */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Background image ONLY for signin */
+#authContainer {
+  background-image: url('ghana_Cedi.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 8px rgba(0, 0, 0, 0.993);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+#authContainer input {
+      margin-bottom: 15px;
+      padding: 12px;
+      font-size: 14px;
+      border: 1px solid #0e0101;
+      border-radius: 8px;
+      transition: 0.3s ease;
+    }
+    input:focus {
+      border-color: #6a11cb;
+      outline: none;
+      box-shadow: 0 0 8px rgba(106, 17, 203, 0.2);
+    }
+
+/* Calculator container stays default */
+#cashFormContainer {
+  background: #fff;  /* plain default */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  width: 90%;
+  max-width: 600px;
+}
+
+        h2 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input, select {
+            width: 100%;
+            padding: 3px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+  
+    input[name^="quantity_"], select[name^="quantity_"] {
+        width: 60px;
+    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 3px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        #grandTotal {
+            font-weight: bold;
+            color: green;
+        }
+        button {
+            padding: 15px;
+            background-color: #5c25f5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #5053ec;
+        }
+       a.call-office, a.send-sms, a.send-email, a.send-whatsapp {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #fff;
+        }
+  
+        a.call-office {
+            background-color: #00ff62;
+        }
+  
+        a.call-office:hover {
+            background-color: #4fa785;
+        }
+  
+        a.send-sms {
+            background-color: #00aeff;
+            color: #e77c7c;
+            margin-left: 10px;
+        }
+  
+        a.send-sms:hover {
+            background-color: #bee0d3;
+        }
+  
+        a.send-email {
+            background-color: #00eeff;
+            color: #080808;
+            margin-left: 10px;
+        }
+  
+        a.send-email:hover {
+            background-color: #00b36e;
+        }
+  
+        a.send-whatsapp {
+            background-color: #0df161;
+            margin-left: 10px;
+        }
+  
+        label[for="FinalTotal"] strong {
+              color: blue;
+          }
+        h2 {
+            color: blue;
+        }
+ /* Background color on hover */
+
+
+    
+    h1 {
+      font-weight: 600;
+      color: #fdfbfb;
+      margin-bottom: 20px;
+    }
+    
+   
+    button {
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    button:hover {
+      background: linear-gradient(90deg, #2575fc, #6a11cb);
+    }
+    .toggle-link {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #fceb01;
+      cursor: pointer;
+    }
+    .toggle-link a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .toggle-link a:hover {
+      text-decoration: underline;
+      color: #52f705;
+    }
+    .logo {
+      width: 30%;
+      height: auto;
+      margin-bottom: 1px;
+      background-color: #fff;
+    }
+
+    </style>
+<body>
+  <!-- 🔑 AUTH PORTAL -->
+  <div id="authContainer" class="container">
+    <img src="my-logo.png" alt="Emba Logo" class="logo">
+    <h2>🔑 Sign In / Sign Up</h2>
+    <input type="email" id="email" placeholder="Email"><br><br>
+    <input type="password" id="password" placeholder="Password"><br><br>
+    <button onclick="signUp()">📝 Sign Up</button>
+    <button onclick="signIn()">➡ Sign In</button>
+    <p id="authStatus"></p>
+  </div>
+
+  <!-- 📊 Calculator (hidden until login) -->
+  <div id="cashFormContainer" style="display:none;">
+    <button onclick="signOut()">🚪 Sign Out</button>
+    <h3>💵 Cash Counter</h3>
+    <table>
+      <tr>
+        <th>Cash Denomination</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+      <tr><td>GHC 200.00</td><td><input type="number" name="quantity_GHC200" oninput="calculateTotal('GHC200')"></td><td id="total_GHC200">0</td></tr>
+      <tr><td>GHC 100.00</td><td><input type="number" name="quantity_GHC100" oninput="calculateTotal('GHC100')"></td><td id="total_GHC100">0</td></tr>
+      <tr><td>GHC 50.00</td><td><input type="number" name="quantity_GHC50" oninput="calculateTotal('GHC50')"></td><td id="total_GHC50">0</td></tr>
+      <tr><td>GHC 20.00</td><td><input type="number" name="quantity_GHC20" oninput="calculateTotal('GHC20')"></td><td id="total_GHC20">0</td></tr>
+      <tr><td>GHC 10.00</td><td><input type="number" name="quantity_GHC10" oninput="calculateTotal('GHC10')"></td><td id="total_GHC10">0</td></tr>
+      <tr><td>GHC 5.00</td><td><input type="number" name="quantity_GHC5" oninput="calculateTotal('GHC5')"></td><td id="total_GHC5">0</td></tr>
+      <tr><td>GHC 2.00</td><td><input type="number" name="quantity_GHC2" oninput="calculateTotal('GHC2')"></td><td id="total_GHC2">0</td></tr>
+      <tr><td>GHC 1.00</td><td><input type="number" name="quantity_GHC1" oninput="calculateTotal('GHC1')"></td><td id="total_GHC1">0</td></tr>
+      <tr><td>GHC 0.50</td><td><input type="number" name="quantity_GHC0.5" oninput="calculateTotal('GHC0.5')"></td><td id="total_GHC0.5">0</td></tr>
+      <tr><td>GHC 0.20</td><td><input type="number" name="quantity_GHC0.2" oninput="calculateTotal('GHC0.2')"></td><td id="total_GHC0.2">0</td></tr>
+      <tr><td>GHC 0.10</td><td><input type="number" name="quantity_GHC0.1" oninput="calculateTotal('GHC0.1')"></td><td id="total_GHC0.1">0</td></tr>
+    </table><br>
+
+    <label for="E-cash"><strong>TOTAL E-CASH :</strong></label>
+   <input type="number" id="E-cash" name="E-CASH" oninput="calculateGrandTotal()">
+
+
+    <label for="FinalTotal"><strong>GRANDTOTAL:</strong></label>
+    <input type="text" id="FinalTotal" name="GRAND TOTAL" readonly><br><br>
+    <label><strong>IN WORDS:</strong></label>
+    <div id="grandTotalWords"></div><br>
+
+    <button onclick="saveData()">💾 Save</button>
+    <button onclick="viewAllRecords()">📂 View Records</button>
+  </div>
+
+  <!-- 📂 Records -->
+  <div id="recordsList" style="display:none">
+  <h3>📋 Saved Records</h3>
+  <table id="recordsTable" border="1" cellspacing="0" cellpadding="6" style="width:100%; border-collapse:collapse; text-align:left;">
+    <thead>
+      <tr style="background:#f0f0f0">
+        <th>Date Saved</th>
+        <th>Unique Name</th>
+        <th>Total Amount</th>
+        <th>In Words</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="recordsTableBody"></tbody>
+  </table>
+  <br>
+  <button onclick="backToCalculator()">⬅ Back</button>
+</div>
+
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+  import { getFirestore, collection, setDoc, getDocs, doc, getDoc, deleteDoc } 
+          from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut as firebaseSignOut, onAuthStateChanged } 
+          from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+
+  // 🔧 Firebase Config
+  const firebaseConfig = {
+    apiKey: "AIzaSyAi_d49wPWfG2CJNBXS1igAj3JRxXN-LgU",
+    authDomain: "kyekyeku-ca8e3.firebaseapp.com",
+    projectId: "kyekyeku-ca8e3",
+    storageBucket: "kyekyeku-ca8e3.firebasestorage.app",
+    messagingSenderId: "107861040313",
+    appId: "1:107861040313:web:0b3cb81ba00e89e79f4f68",
+    measurementId: "G-9BCSLV5F8T"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
+
+  let currentUser = null;
+
+  // === AUTH FUNCTIONS ===
+  window.signUp = async function() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      alert("✅ Account created & signed in!");
+    } catch (err) {
+      alert("❌ " + err.message);
+    }
+  };
+
+  window.signIn = async function() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("✅ Signed in!");
+    } catch (err) {
+      alert("❌ " + err.message);
+    }
+  };
+
+  window.signOut = async function() {
+    await firebaseSignOut(auth);
+    alert("🚪 Signed out");
+  };
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      currentUser = user;
+      document.getElementById("authContainer").style.display = "none";
+      document.getElementById("cashFormContainer").style.display = "block";
+    } else {
+      currentUser = null;
+      document.getElementById("authContainer").style.display = "block";
+      document.getElementById("cashFormContainer").style.display = "none";
+      document.getElementById("recordsList").style.display = "none";
+    }
+  });
+
+  // === CALCULATIONS ===
+  const denominations = {
+    "GHC200": 200, "GHC100": 100, "GHC50": 50, "GHC20": 20,
+    "GHC10": 10, "GHC5": 5, "GHC2": 2, "GHC1": 1,
+    "GHC0.5": 0.5, "GHC0.2": 0.2, "GHC0.1": 0.1
+  };
+
+  window.calculateTotal = function(denomination) {
+    const quantityInput = document.querySelector(`input[name="quantity_${denomination}"]`);
+    const quantity = parseFloat(quantityInput.value) || 0;
+    const total = quantity * denominations[denomination];
+    document.getElementById(`total_${denomination}`).textContent = total.toFixed(2);
+    calculateGrandTotal();
+  };
+
+  function convertAmountToWords(amount) {
+    const ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+    const teens = ['', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+    const tens = ['', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+
+    function convertGroup(num) {
+      const hundred = Math.floor(num / 100);
+      const remainder = num % 100;
+      let result = '';
+      if (hundred) result += `${ones[hundred]} hundred${remainder ? ' and ' : ''}`;
+      if (remainder < 10) result += ones[remainder];
+      else if (remainder < 20 && remainder > 10) result += teens[remainder - 10];
+      else if (remainder === 10) result += 'ten';
+      else {
+        const ten = Math.floor(remainder / 10);
+        const onesDigit = remainder % 10;
+        result += tens[ten] + (onesDigit ? `-${ones[onesDigit]}` : '');
+      }
+      return result;
+    }
+
+    function convertAmount(num) {
+      const million = Math.floor(num / 1000000);
+      const thousand = Math.floor((num % 1000000) / 1000);
+      const remainder = num % 1000;
+      let result = '';
+      if (million) result += `${convertGroup(million)} million `;
+      if (thousand) result += `${convertGroup(thousand)} thousand `;
+      if (remainder) result += convertGroup(remainder);
+      return result.trim();
+    }
+
+    const formattedAmount = convertAmount(Math.floor(amount));
+    const decimalPart = Math.round((amount - Math.floor(amount)) * 100);
+    const formattedDecimal = decimalPart > 0 ? ` and ${convertAmount(decimalPart)} pesewas` : '';
+    return `${formattedAmount.charAt(0).toUpperCase()}${formattedAmount.slice(1)} Ghana cedis${formattedDecimal} only`;
+  }
+
+  function calculateGrandTotal() {
+  let grandTotal = 0;
+
+  // Sum all denomination totals (even if they’re 0)
+  const itemTotals = document.querySelectorAll('[id^="total_"]');
+  itemTotals.forEach(itemTotal => {
+    grandTotal += parseFloat(itemTotal.textContent) || 0;
+  });
+
+  // Always include E-cash
+  const eCash = parseFloat(document.getElementById("E-cash").value) || 0;
+  grandTotal += eCash;
+
+  // Update fields
+  document.getElementById("FinalTotal").value = new Intl.NumberFormat("en-GH", {
+    style: "currency",
+    currency: "GHS"
+  }).format(grandTotal);
+
+  document.getElementById("grandTotalWords").textContent = convertAmountToWords(grandTotal);
+
+  // Save raw total in dataset (for Firestore save)
+  document.getElementById("FinalTotal").dataset.raw = grandTotal;
+}
+
+  // === SAVE TO FIRESTORE ===
+  window.saveData = async function saveData() {
+    try {
+        // 🔄 Recalculate before saving
+        calculateGrandTotal();
+
+        const data = {
+            quantities: {},
+            eCash: document.getElementById("E-cash").value,
+            grandTotal: document.getElementById("FinalTotal").dataset.raw, // raw numeric total
+            formattedTotal: document.getElementById("FinalTotal").value,   // formatted currency
+            inWords: document.getElementById("grandTotalWords").textContent,
+            timestamp: new Date()
+        };
+
+        // Capture quantities
+        Object.keys(denominations).forEach(denom => {
+            const input = document.querySelector(`input[name="quantity_${denom}"]`);
+            data.quantities[`quantity_${denom}`] = input.value || 0;
+        });
+
+        // Save to Firestore
+        const docRef = doc(db, "Users", currentUser.uid, "CashRecords", new Date().toISOString());
+        await setDoc(docRef, data);
+
+        alert("✅ Data saved successfully!");
+    } catch (error) {
+        console.error("Error saving data:", error);
+        alert("❌ Failed to save data");
+    }
+}
+
+  // === VIEW ALL RECORDS ===
+  // === VIEW ALL RECORDS (TABLE VERSION) ===
+window.viewAllRecords = async function() {
+  if (!currentUser) return alert("❌ Please log in first");
+  
+  const recordsTable = document.getElementById("recordsTable");
+  const tableBody = document.getElementById("recordsTableBody");
+  tableBody.innerHTML = ""; // clear old rows
+
+  try {
+    const querySnapshot = await getDocs(collection(db, "Users", currentUser.uid, "CashRecords"));
+
+    if (querySnapshot.empty) {
+      tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center">No records found.</td></tr>`;
+    } else {
+      querySnapshot.forEach(docSnap => {
+        const data = docSnap.data();
+        const tr = document.createElement("tr");
+
+        // format date
+        const dateSaved = data.timestamp?.toDate ? 
+          data.timestamp.toDate().toLocaleString() : 
+          new Date(data.timestamp).toLocaleString();
+
+        tr.innerHTML = `
+          <td>${dateSaved}</td>
+          <td>${docSnap.id}</td>
+          <td>${data.grandTotal}</td>
+          <td>${data.inWords}</td>
+          <td>
+            <button onclick="loadSpecificRecord('${docSnap.id}')">Load</button>
+            <button onclick="deleteRecord('${docSnap.id}')">Delete</button>
+          </td>
+        `;
+
+        tableBody.appendChild(tr);
+      });
+    }
+
+    document.getElementById("cashFormContainer").style.display = "none";
+    document.getElementById("recordsList").style.display = "block";
+  } catch (err) {
+    alert("❌ Failed to load records");
+  }
+};
+
+
+  // === LOAD SPECIFIC RECORD ===
+  window.loadSpecificRecord = async function(recordId) {
+    try {
+      const docRef = doc(db, "Users", currentUser.uid, "CashRecords", recordId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+
+        // Load denominations
+        for (const denom in data.quantities) {
+          const input = document.querySelector(`input[name="${denom}"]`);
+          if (input) input.value = data.quantities[denom];
+          const denomKey = denom.replace("quantity_", "");
+          if (denominations[denomKey]) {
+            document.getElementById(`total_${denomKey}`).textContent =
+              (parseFloat(data.quantities[denom]) * denominations[denomKey]).toFixed(2);
+          }
+        }
+
+        // Load E-cash
+        document.getElementById("E-cash").value = data.eCash || 0;
+
+        // Recalculate fresh (instead of using saved total)
+        calculateGrandTotal();
+
+        alert(`✅ Loaded record "${recordId}"`);
+        document.getElementById("recordsList").style.display = "none";
+        document.getElementById("cashFormContainer").style.display = "block";
+      } else {
+        alert("❌ Record not found");
+      }
+    } catch (err) {
+      alert("❌ Failed to load record");
+    }
+  };
+
+  // === DELETE RECORD ===
+  window.deleteRecord = async function(recordId) {
+    if (!confirm(`⚠ Delete record "${recordId}"?`)) return;
+    try {
+      await deleteDoc(doc(db, "Users", currentUser.uid, "CashRecords", recordId));
+      alert(`🗑 Deleted record "${recordId}"`);
+      viewAllRecords(); // refresh
+    } catch (err) {
+      alert("❌ Failed to delete record");
+    }
+  };
+
+  // === BACK TO CALCULATOR ===
+  window.backToCalculator = function() {
+    document.getElementById("recordsList").style.display = "none";
+    document.getElementById("cashFormContainer").style.display = "block";
+  };
+</script>
+</body>
+</html>

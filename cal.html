@@ -3,115 +3,484 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kyekyeku-Tech Calc</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/logo-3-color.png">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="CSS/kye.css">
+    <title>Kyekyeku-Tech Cal</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #fdfcfc;
-            color: #110101;
-            text-align: center;
-           padding-top: 0;
         }
+        h2 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input, select {
+            width: 100%;
+            padding: 3px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+  
+    input[name^="quantity_"], select[name^="quantity_"] {
+        width: 60px;
+    }
         table {
-            width: 80%;
-            margin: 20px auto;
+            width: 100%;
             border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
         }
         th, td {
-            border: 1px solid #04d3f8;
-            padding: 8px;
-            text-align: center;
+            padding: 3px;
+            text-align: left;
         }
         th {
-            background-color: #ec0e0e;
+            background-color: #f2f2f2;
         }
-        input {
-            width: 100px;
-            padding: 5px;
-            text-align: center;
-            color: #110101;
-        }
-        
         #grandTotal {
-            font-size: 1.5em;
-            color: #00e676;
+            font-weight: bold;
+            color: green;
         }
-        .container {
+        button {
+            padding: 15px;
+            background-color: #5c25f5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #5053ec;
+        }
+       a.call-office, a.send-sms, a.send-email, a.send-whatsapp {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
             margin-top: 20px;
+            text-decoration: none;
+            color: #fff;
         }
+  
+        a.call-office {
+            background-color: #00ff62;
+        }
+  
+        a.call-office:hover {
+            background-color: #4fa785;
+        }
+  
+        a.send-sms {
+            background-color: #00aeff;
+            color: #e77c7c;
+            margin-left: 10px;
+        }
+  
+        a.send-sms:hover {
+            background-color: #bee0d3;
+        }
+  
+        a.send-email {
+            background-color: #00eeff;
+            color: #080808;
+            margin-left: 10px;
+        }
+  
+        a.send-email:hover {
+            background-color: #00b36e;
+        }
+  
+        a.send-whatsapp {
+            background-color: #0df161;
+            margin-left: 10px;
+        }
+  
+        label[for="FinalTotal"] strong {
+              color: blue;
+          }
+        h2 {
+            color: blue;
+        }
+a[href^="go:"] {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #5c25f5; /* Background color */
+    border: none;
+    cursor: pointer;
+}
+
+a[href^="go:"]:hover {
+    background-color: #5053ec; /* Background color on hover */
+}
+
     </style>
 </head>
 <body>
-    <button class="menu-toggle" aria-label="Menu Toggle">
-        <span class="text">MENU</span>
-        <span class="icon"><i class="fas fa-bars"></i></span>
-    </button>
-        
-        <!-- Menu -->
-        <nav class="menu">
-            <ul>
-                <li><a href="index.html" class="home"><span class="icon"><i class="fas fa-home"></i></span><span class="text">Home</span></a></li>
-                <li><a href="about.html" class="about"><span class="icon"><i class="fas fa-info-circle"></i></span><span class="text">About</span></a></li>
-                <li><a href="service.html" class="service"><span class="icon"><i class="fas fa-cogs"></i></span><span class="text">Service</span></a></li>
-                <li><a href="mailto:info@kyekyeku.tech" class="contact"><span class="icon"><i class="fas fa-envelope"></i></span><span class="text">Contact</span></a></li>
-               
-            </ul>
-        </nav>
-    
-    <div class="container">
+
+    <!-- Cash Form -->
+    <div id="cashFormContainer">
+        <form id="cashForm" action="https:KYEKYEKU-TECH.STORE" method="post">
+
         <table>
             <tr>
-                <th>Denomination</th>
+                <th>Cash Denomination</th>
                 <th>Quantity</th>
                 <th>Total</th>
             </tr>
-            <tr><td>GHC 200.00</td><td><input type="number" id="GHC200" oninput="calculateTotal('GHC200', 200)"></td><td id="total_GHC200">0</td></tr>
-            <tr><td>GHC 100.00</td><td><input type="number" id="GHC100" oninput="calculateTotal('GHC100', 100)"></td><td id="total_GHC100">0</td></tr>
-            <tr><td>GHC 50.00</td><td><input type="number" id="GHC50" oninput="calculateTotal('GHC50', 50)"></td><td id="total_GHC50">0</td></tr>
-            <tr><td>GHC 20.00</td><td><input type="number" id="GHC20" oninput="calculateTotal('GHC20', 20)"></td><td id="total_GHC20">0</td></tr>
-            <tr><td>GHC 10.00</td><td><input type="number" id="GHC10" oninput="calculateTotal('GHC10', 10)"></td><td id="total_GHC10">0</td></tr>
-            <tr><td>GHC 5.00</td><td><input type="number" id="GHC5" oninput="calculateTotal('GHC5', 5)"></td><td id="total_GHC5">0</td></tr>
-            <tr><td>GHC 2.00</td><td><input type="number" id="GHC2" oninput="calculateTotal('GHC2', 2)"></td><td id="total_GHC2">0</td></tr>
-            <tr><td>GHC 1.00</td><td><input type="number" id="GHC1" oninput="calculateTotal('GHC1', 1)"></td><td id="total_GHC1">0</td></tr>
-            <tr><td>GHC 0.50</td><td><input type="number" id="GHC0.5" oninput="calculateTotal('GHC0.5', 0.5)"></td><td id="total_GHC0.5">.0</td></tr>
-            <tr><td>GHC 0.20</td><td><input type="number" id="GHC0.2" oninput="calculateTotal('GHC0.2', 0.2)"></td><td id="total_GHC0.2">.0</td></tr>
-            <tr><td>GHC 0.10</td><td><input type="number" id="GHC0.1" oninput="calculateTotal('GHC0.1', 0.1)"></td><td id="total_GHC0.1">.0</td></tr>
-        </table>
-        <label for="eCash">E-Cash Amount:</label>
-        <input type="number" id="eCash" oninput="calculateGrandTotal()"><br>
-        <h3>Grand Total: <span id="grandTotal">0</span></h3><br>
+            <tr>
+                <td>GHC 200.00</td>
+                <td><input type="number" name="quantity_GHC200" oninput="calculateTotal('GHC200')"></td>
+                <td id="total_GHC200">0</td>
+            </tr>
+            <tr>
+                <td>GHC 100.00</td>
+                <td><input type="number" name="quantity_GHC100" oninput="calculateTotal('GHC100')"></td>
+                <td id="total_GHC100">0</td>
+            </tr>
+            <tr>
+                <td>GHC 50.00</td>
+                <td><input type="number" name="quantity_GHC50" oninput="calculateTotal('GHC50')"></td>
+                <td id="total_GHC50">0</td>
+            </tr>
+            <tr>
+                <td>GHC 20.00</td>
+                <td><input type="number" name="quantity_GHC20" oninput="calculateTotal('GHC20')"></td>
+                <td id="total_GHC20">0</td>
+            </tr>
+            <tr>
+                <td>GHC 10.00</td>
+                <td><input type="number" name="quantity_GHC10" oninput="calculateTotal('GHC10')"></td>
+                <td id="total_GHC10">0</td>
+            </tr>
+            <tr>
+                <td>GHC 5.00</td>
+                <td><input type="number" name="quantity_GHC5" oninput="calculateTotal('GHC5')"></td>
+                <td id="total_GHC5">0</td>
+            </tr>
+            <tr>
+                <td>GHC 2.00</td>
+                <td><input type="number" name="quantity_GHC2" oninput="calculateTotal('GHC2')"></td>
+                <td id="total_GHC2">0</td>
+            </tr>
+            <tr>
+                <td>GHC 1.00</td>
+                <td><input type="number" name="quantity_GHC1" oninput="calculateTotal('GHC1')"></td>
+                <td id="total_GHC1">0</td>
+            </tr>
+            <tr>
+                <td>GHC 0.50</td>
+                <td><input type="number" name="quantity_GHC0.5" oninput="calculateTotal('GHC0.5')"></td>
+                <td id="total_GHC0.5">0</td>
+            </tr>
+            <tr>
+                <td>GHC 0.20</td>
+                <td><input type="number" name="quantity_GHC0.2" oninput="calculateTotal('GHC0.2')"></td>
+                <td id="total_GHC0.2">0</td>
+            </tr>
+            <tr>
+                <td>GHC 0.10</td>
+                <td><input type="number" name="quantity_GHC0.1" oninput="calculateTotal('GHC0.1')"></td>
+                <td id="total_GHC0.1">0</td>
+            </tr>
+        </table><br>
+            <label for="E-cash"><strong>TOTAL E-CASH :</strong></label>
+            <input type="number" id="E-cash" name="E-CASH" oninput="calculateGrandTotal()">
+            <label for="FinalTotal"><strong>GRANDTOTAL:</strong></label> 
+            <input type="text" id="FinalTotal" name="GRAND TOTAL" readonly><br><br>
+            <label for="FinalTotal"><strong>IN WORDS:</strong></label>
+            <div id="grandTotalWords"></div><br>
+            
+        </form>
+        <div style="margin-top: 20px;">
+            <button type="button" onclick="saveData()" style="margin-right: 10px;">💾 Save Record</button>
+            <button type="button" onclick="loadData()" style="margin-right: 10px;">📂 Load Record</button>
+            <button type="button" onclick="viewAllRecords()">📋 View All Records</button>
+        </div>
     </div>
-    
-    <script>
-        function calculateTotal(id, value) {
-            const quantity = document.getElementById(id).value || 0;
-            document.getElementById(`total_${id}`).innerText = (quantity * value).toFixed(2);
-            calculateGrandTotal();
-        }
+    <div id="recordsList" style="margin-top: 20px; padding: 10px; border: 1px solid #ddd; display: none;">
+        <h3>📋 Saved Records</h3>
+        <ul id="recordsUl"></ul>
+        <button onclick="backToCalculator()">⬅ Back to Calculator</button>
         
-        function calculateGrandTotal() {
-            let grandTotal = 0;
-            document.querySelectorAll("[id^='total_GHC']").forEach(item => {
-                grandTotal += parseFloat(item.innerText) || 0;
-            });
-            const eCash = parseFloat(document.getElementById('eCash').value) || 0;
-            grandTotal += eCash;
-            document.getElementById('grandTotal').innerText = grandTotal.toFixed(2);
+    </div>
+        
+
+    <script>
+    function calculateTotal(item) {
+        const quantity = document.getElementsByName(`quantity_${item}`)[0].value;
+        const unitPrice = getUnitPrice(item);
+        const total = (quantity * unitPrice).toFixed(2); // Round to two decimal places
+        document.getElementById(`total_${item}`).textContent = total;
+        calculateGrandTotal();
+    }
+
+    function convertAmountToWords(amount) {
+    const ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+    const teens = ['', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+    const tens = ['', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+
+    function convertGroup(num) {
+        const hundred = Math.floor(num / 100);
+        const remainder = num % 100;
+
+        let result = '';
+        if (hundred) {
+            result += `${ones[hundred]} hundred`;
+            if (remainder) {
+                result += ' and ';
+            }
         }
-        const menuToggle = document.querySelector('.menu-toggle');
-const menu = document.querySelector('.menu');
 
-menuToggle.addEventListener('click', () => {
-    menu.classList.toggle('open');
-});
+        if (remainder < 10) {
+            result += ones[remainder];
+        } else if (remainder < 20 && remainder > 10) {
+            result += teens[remainder - 10];
+        } else if (remainder === 10) {
+            result += 'ten';
+        } else {
+            const ten = Math.floor(remainder / 10);
+            const onesDigit = remainder % 10;
+            result += tens[ten] + (onesDigit ? `-${ones[onesDigit]}` : '');
+        }
 
-document.querySelector('.menu-toggle').addEventListener('click', function() {
-    this.classList.toggle('active');
-});
+        return result;
+    }
+
+    function convertAmount(num) {
+        const million = Math.floor(num / 1000000);
+        const thousand = Math.floor((num % 1000000) / 1000);
+        const remainder = num % 1000;
+
+        let result = '';
+
+        if (million) {
+            result += `${convertGroup(million)} million`;
+        }
+
+        if (thousand) {
+            if (result) result += ' ';
+            result += `${convertGroup(thousand)} thousand`;
+        }
+
+        if (remainder) {
+            if (result) result += ' ';
+            result += convertGroup(remainder);
+        }
+
+        return result.trim();
+    }
+
+    const formattedAmount = convertAmount(Math.floor(amount));
+    const decimalPart = Math.round((amount - Math.floor(amount)) * 100);
+    const formattedDecimal = decimalPart > 0 ? ` and ${convertAmount(decimalPart)} pesewas` : '';
+
+    return `${formattedAmount.charAt(0).toUpperCase()}${formattedAmount.slice(1)} Ghana cedis${formattedDecimal} only`;
+}
+
+
+    function calculateGrandTotal() {
+        const itemTotals = document.querySelectorAll('[id^="total_"]');
+        let grandTotal = 0;
+
+        itemTotals.forEach(itemTotal => {
+            grandTotal += parseFloat(itemTotal.textContent);
+        });
+
+        // Include E-cash value
+        const eCash = parseFloat(document.getElementById('E-cash').value) || 0;
+        grandTotal += eCash;
+
+        // Format grandTotal as GHC
+        const formattedGrandTotal = new Intl.NumberFormat('en-GH', { style: 'currency', currency: 'GHS' }).format(grandTotal);
+
+        // Update the FinalTotal field
+        document.getElementById('FinalTotal').value = formattedGrandTotal;
+
+        // Convert amount to words and display
+        const grandTotalWords = convertAmountToWords(grandTotal);
+        document.getElementById('grandTotalWords').textContent = grandTotalWords;
+    }
+
+    function getUnitPrice(item) {
+        const unitPrices = {
+            'GHC200': 200,
+            'GHC100': 100,
+            'GHC50': 50,
+            'GHC20': 20,
+            'GHC10': 10,
+            'GHC5': 5,
+            'GHC2': 2,
+            'GHC1': 1,
+            'GHC0.5': 0.5,
+            'GHC0.2': 0.2,
+            'GHC0.1': 0.1,
+        };
+        return unitPrices[item];
+    }
     </script>
-</body>
-</html>
+
+
+<script>
+    function saveData() {
+        const key = prompt("Enter a unique number or name to save this record:");
+        if (!key) {
+            alert("Saving cancelled. No key provided.");
+            return;
+        }
+
+        const data = {
+            quantities: {},
+            eCash: document.getElementById("E-cash").value,
+            grandTotal: document.getElementById("FinalTotal").value,
+            inWords: document.getElementById("grandTotalWords").textContent
+        };
+
+        // Collect quantities
+        const inputs = document.querySelectorAll('input[name^="quantity_"]');
+        inputs.forEach(input => {
+            data.quantities[input.name] = input.value;
+        });
+
+        // Save to local storage
+        localStorage.setItem(`EmbaCalc_${key}`, JSON.stringify(data));
+        alert(`✅ Saved successfully under key: "${key}"`);
+    }
+
+   function loadData() {
+    const key = prompt("Enter the key or name you used to save the record:");
+    if (!key) {
+        alert("Retrieval cancelled. No key provided.");
+        return;
+    }
+
+    const saved = localStorage.getItem(`EmbaCalc_${key}`);
+    if (!saved) {
+        alert(`❌ No record found under key: "${key}"`);
+        return;
+    }
+
+    const data = JSON.parse(saved);
+
+    // Restore quantities
+    for (const name in data.quantities) {
+        const input = document.getElementsByName(name)[0];
+        if (input) {
+            input.value = data.quantities[name];
+            const item = name.replace("quantity_", "");
+            calculateTotal(item);
+        }
+    }
+
+    // Restore e-cash and recalculate total
+    document.getElementById("E-cash").value = data.eCash;
+    calculateGrandTotal();
+
+    alert(`✅ Data successfully loaded for key: "${key}"`);
+}
+
+
+</script>
+<script>
+    function viewAllRecords() {
+        const cashFormContainer = document.getElementById("cashFormContainer");
+        const recordsList = document.getElementById("recordsList");
+        const recordsUl = document.getElementById("recordsUl");
+        recordsUl.innerHTML = ""; // Clear old list
+
+        let found = false;
+
+        // Loop through localStorage
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key.startsWith("EmbaCalc_")) {
+                found = true;
+                const data = JSON.parse(localStorage.getItem(key));
+
+                const li = document.createElement("li");
+                li.style.marginBottom = "10px";
+
+                li.innerHTML = `
+                    <strong>${key.replace("EmbaCalc_", "")}</strong> 
+                    → Total: ${data.grandTotal} <br>
+                    <small>${data.inWords}</small><br>
+                    <button onclick="loadSpecificRecord('${key}')">Load</button>
+                    <button onclick="deleteRecord('${key}')">Delete</button>
+                `;
+
+                recordsUl.appendChild(li);
+            }
+        }
+
+        if (!found) {
+            recordsUl.innerHTML = "<li>No saved records found.</li>";
+        }
+
+        // Hide form and show records
+        cashFormContainer.style.display = "none";
+        recordsList.style.display = "block";
+    }
+
+    function backToCalculator() {
+        document.getElementById("cashFormContainer").style.display = "block";
+        document.getElementById("recordsList").style.display = "none";
+    }
+
+    function loadSpecificRecord(key) {
+        const saved = localStorage.getItem(key);
+        if (!saved) {
+            alert("❌ Record not found.");
+            return;
+        }
+        const data = JSON.parse(saved);
+
+        // Restore quantities
+        for (const name in data.quantities) {
+            const input = document.getElementsByName(name)[0];
+            if (input) {
+                input.value = data.quantities[name];
+                const item = name.replace("quantity_", "");
+                calculateTotal(item);
+            }
+        }
+
+        // Restore e-cash and recalc
+        document.getElementById("E-cash").value = data.eCash;
+        calculateGrandTotal();
+
+        alert(`✅ Loaded record: "${key.replace("EmbaCalc_", "")}"`);
+
+        // Switch back to calculator after loading
+        backToCalculator();
+    }
+
+    function deleteRecord(key) {
+        if (confirm(`Are you sure you want to delete "${key.replace("EmbaCalc_", "")}"?`)) {
+            localStorage.removeItem(key);
+            viewAllRecords(); // Refresh list
+            alert("🗑️ Record deleted.");
+        }
+    }
+</script>
+
+
+</body> <!-- Add the closing body tag here -->
+</html> <!-- Add the opening html tag here -->

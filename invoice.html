@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Secure Invoice Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  
+  <!-- SweetAlert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Paystack -->
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:#0a0a0a;
+      --card:#111417;
+      --glass:rgba(255,255,255,0.04);
+      --gold:#d4a800;
+      --text:#f4f4f4;
+      --muted:#e8eaec;
+      --radius:14px;
+      font-family:"Inter",system-ui,Segoe UI,Roboto;
+    }
+    *{box-sizing:border-box}
+    body {
+      margin:0;
+      min-height:100vh;
+      background:
+        radial-gradient(900px 400px at 10% 10%, rgba(212,168,0,0.1), transparent),
+        linear-gradient(180deg,var(--bg),#020202);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      padding:0 14px;
+    }
+    /* Auth Card */
+    .card {
+      background:var(--card);
+      padding:2rem;
+      border-radius:1.5rem;
+      max-width:420px;
+      margin:100px auto;
+      text-align:center;
+      box-shadow:0 6px 10px rgb(252, 136, 4);
+    }
+    input, select {
+      width:100%;
+      padding:12px;
+      margin:8px 0;
+      border-radius:10px;
+      border:1px solid #ffc403;
+      background:#fbfcfd;
+      color:#0a0000;
+    }
+    button {
+      width:100%;
+      padding:12px;
+      margin-top:12px;
+      border:none;
+      border-radius:8px;
+      font-weight:bold;
+      cursor:pointer;
+      background:linear-gradient(135deg, #ffd700, #e6b800);
+      color:#111;
+    }
+    button:hover { background:linear-gradient(135deg, #080700, #080700); 
+     color: #ffd700; border: 1px solid #ffd700; }
+    a { text-decoration:none; }
+    
+
+    
+    #invoice { display: none; }
+#invoice.active { display: block; 
+  animation: fadeIn 0.5s ease-in-out; }
+
+/* 🔒 keep invoice hidden until login */
+#invoiceSection { display: none; }
+
+#invoiceTable input {
+  width: 95%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+  background: #fff;
+  color: #000;
+}
+
+#invoiceTable td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+
+  </style>
+</head>
+<body>
+
+  <!--  Auth Section -->
+  <div id="authSection" class="card">
+    <h2 id="formTitle">Sign In 🔑</h2>
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button id="authBtn">Sign In</button>
+    <p><a href="#" id="toggleMode" style="color:gold;">Don't have an account? Register</a></p>
+  </div>
+ 
+
+  <!--  Invoice Generator Section -->
+  <div id="invoiceSection">
+     <div class="header">
+  <h2>Invoice Generator📑</h2>
+  <span class="step">Step 1 of 2</span>
+  <button id="logoutBtn" style="
+    background:transparent;
+    border:1px solid var(--gold);
+    color:var(--gold);
+    padding:6px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:13px;
+  ">Logout</button>
+</div>
+     <div class="container">
+    <!-- Setup -->
+    <div id="setup" class="card form-section active">
+      <h3>Business Setup</h3>
+      <label>Business Name</label>
+      <input type="text" id="bizName" placeholder="e.g. Kyekyeku Tech Ltd.">
+
+      <label>Business Address</label>
+      <input type="text" id="bizAddress" placeholder="e.g. 123 Market Street, Accra">
+
+      <label>Phone</label>
+      <input type="text" id="bizPhone" placeholder="e.g. +233 50 123 4567">
+
+      <label>Email</label>
+      <input type="email" id="bizEmail" placeholder="e.g. info@kyekyekutech.com">
+
+      <label>Currency</label>
+      <input type="text" id="currency" placeholder="e.g. GHS">
+
+      <div style="text-align:right;margin-top:20px;">
+        <button id="nextBtn">Continue →</button>
+      </div>
+    </div>
+
+    <!-- Invoice -->
+    <div id="invoice" class="card form-section">
+      <h3>Create Invoice</h3>
+      <label>Customer Name</label>
+      <input type="text" id="customerName" placeholder="e.g. John Doe">
+
+      <table id="invoiceTable">
+        <thead>
+          <tr>
+            <th>Description</th><th>Quantity</th><th>UnitPrice</th><th>Total</th><th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <button id="addItem" style="margin-top:10px;">+ Add Item</button>
+
+      <div class="total-section">
+        <p>Subtotal: <span id="subtotal">0</span></p>
+        <p>Tax (%): <input type="number" id="tax" value="0" style="width:60px;"></p>
+        <p>Discount (%): <input type="number" id="discount" value="0" style="width:60px;"></p>
+        <p><strong>Grand Total: <span id="grandTotal">0</span></strong></p>
+      </div>
+
+      <!-- Buttons -->
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;">
+        <button id="previewBtn">Preview Invoice</button>
+        <button id="resetBtn" class="ghost">Reset</button>
+      </div>
+
+      <!-- Preview -->
+      <div id="preview" class="preview" style="display:none;"></div>
+
+      <!-- Hidden Print Controls (show after preview) -->
+      <div id="printControls" style="display:none;margin-top:20px;">
+        <label style="margin-top:10px;display:block;color:var(--muted);font-size:14px;">
+          Print Mode:
+        </label>
+        <select id="printMode" style="max-width:220px;margin-bottom:15px;">
+          <option value="single">Customer Only (A4 Portrait)</option>
+          <option value="double">Business + Customer (A4 Landscape)</option>
+        </select>
+        <button id="printBtn">Print Invoice</button>
+      </div>
+    </div>
+  </div>
+    </div>
+
+<script>
+  // ================== Firebase Setup ==================
+  const firebaseConfig = {
+    apiKey: "AIzaSyAi_d49wPWfG2CJNBXS1igAj3JRxXN-LgU",
+    authDomain: "kyekyeku-ca8e3.firebaseapp.com",
+    projectId: "kyekyeku-ca8e3",
+    storageBucket: "kyekyeku-ca8e3.firebasestorage.app",
+    messagingSenderId: "107861040313",
+    appId: "1:107861040313:web:0b3cb81ba00e89e79f4f68",
+    measurementId: "G-9BCSLV5F8T"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  const paystackPublicKey = "pk_live_fb405d2702a00868ba424f73b9148b7aad07b2b0";
+
+  let isLogin = true;
+  document.getElementById("toggleMode").addEventListener("click", () => {
+    isLogin = !isLogin;
+    document.getElementById("formTitle").innerText = isLogin ? "Sign In" : "Register";
+    document.getElementById("authBtn").innerText = isLogin ? "Sign In" : "Register";
+    document.getElementById("toggleMode").innerText = isLogin
+      ? "Don't have an account? Register"
+      : "Already registered? Sign In";
+  });
+
+  document.getElementById("authBtn").addEventListener("click", async () => {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    if (!email || !password) return Swal.fire("⚠️ Missing", "Enter email & password", "warning");
+    if (isLogin) {
+      handleLogin(email, password);
+    } else {
+      handleRegister(email, password);
+    }
+  });
+
+  async function handleRegister(email, password) {
+    try {
+      const userCred = await firebase.auth().createUserWithEmailAndPassword(email, password);
+      const user = userCred.user;
+      await db.collection("users").doc(user.uid).set({
+        email: email,
+        uid: user.uid,
+        createdAt: new Date().toISOString(),
+        subscriptionActive: false,
+        lastPayment: null,
+        trialStart: new Date().toISOString()
+      });
+      Swal.fire("🎉 Registered!", "You have a 3-day free trial!", "success");
+    } catch (err) {
+      Swal.fire("❌ Error", err.message, "error");
+    }
+  }
+
+  async function handleLogin(email, password) {
+    try {
+      const userCred = await firebase.auth().signInWithEmailAndPassword(email, password);
+      checkSubscription(userCred.user);
+    } catch {
+      Swal.fire("❌ Login Failed", "Invalid credentials", "error");
+    }
+  }
+
+  async function checkSubscription(user) {
+    const doc = await db.collection("users").doc(user.uid).get();
+    const data = doc.data();
+    const now = new Date();
+
+    if (data.subscriptionActive) {
+      const lastPaid = new Date(data.lastPayment);
+      const diffDays = Math.floor((now - lastPaid) / (1000*60*60*24));
+      if (diffDays >= 30) {
+        Swal.fire("⏳ Expired", "Please pay ₵5.00 to renew", "warning");
+        requestPayment(user);
+      } else {
+        showInvoice(user);
+      }
+    } else {
+      const trialStart = new Date(data.trialStart);
+      const trialDays = Math.floor((now - trialStart) / (1000*60*60*24));
+      if (trialDays <= 3) {
+        showInvoice(user);
+      } else {
+        Swal.fire("🔒 Trial Expired", "Please pay ₵5.00 to continue.", "info");
+        requestPayment(user);
+      }
+    }
+  }
+
+  function requestPayment(user) {
+    let handler = PaystackPop.setup({
+      key: paystackPublicKey,
+      email: user.email,
+      amount: 500,
+      currency: "GHS",
+      ref: "SUB_" + Math.floor(Math.random() * 1000000000 + 1),
+      callback: async function(response) {
+        Swal.fire("✅ Payment successful", "Ref: " + response.reference, "success");
+        await db.collection("users").doc(user.uid).update({
+          subscriptionActive: true,
+          lastPayment: new Date().toISOString()
+        });
+        showInvoice(user);
+      },
+      onClose: function() {
+        Swal.fire("❌ Payment Required", "You must pay ₵5.00 to use this app", "error");
+      }
+    });
+    handler.openIframe();
+  }
+
+  function showInvoice(user) {
+    document.getElementById("authSection").style.display = "none";
+    document.getElementById("invoiceSection").style.display = "block";
+  }
+
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) checkSubscription(user);
+  });
+</script>
+
+<script>
+const nextBtn=document.getElementById('nextBtn');
+const setupSection=document.getElementById('setup');
+const invoiceSection=document.getElementById('invoice');
+const headerStep=document.querySelector('.step');
+
+nextBtn.onclick=()=>{
+  setupSection.classList.remove('active');
+  setupSection.style.display="none";   // hide setup form
+  invoiceSection.classList.add('active');
+  invoiceSection.style.display="block"; // show invoice
+  headerStep.textContent='Step 2 of 2';
+};
+
+
+// Add item row
+document.getElementById('addItem').addEventListener('click',()=>{
+  const tbody=document.querySelector('#invoiceTable tbody');
+  const row=document.createElement('tr');
+  row.innerHTML=`
+    <td><input type="text" placeholder="Description"></td>
+    <td><input type="number" value="" min="1"></td>
+    <td><input type="number" value="" min="0"></td>
+    <td class="lineTotal">0</td>
+    <td><button class="remove">✖</button></td>`;
+  tbody.appendChild(row);
+  updateTotals();
+});
+
+// Remove row
+document.querySelector('#invoiceTable').addEventListener('click',e=>{
+  if(e.target.classList.contains('remove')){
+    e.target.closest('tr').remove();
+    updateTotals();
+  }
+});
+
+// Auto-update totals
+document.querySelector('#invoiceTable').addEventListener('input',updateTotals);
+document.getElementById('tax').addEventListener('input',updateTotals);
+document.getElementById('discount').addEventListener('input',updateTotals);
+
+function updateTotals(){
+  const rows=document.querySelectorAll('#invoiceTable tbody tr');
+  let subtotal=0;
+  rows.forEach(r=>{
+    const qty=parseFloat(r.children[1].querySelector('input').value)||0;
+    const price=parseFloat(r.children[2].querySelector('input').value)||0;
+    const total=qty*price;
+    r.querySelector('.lineTotal').textContent=total.toFixed(2);
+    subtotal+=total;
+  });
+  document.getElementById('subtotal').textContent=subtotal.toFixed(2);
+  const taxRate=parseFloat(document.getElementById('tax').value)||0;
+  const discountRate=parseFloat(document.getElementById('discount').value)||0;
+  const tax=subtotal*(taxRate/100);
+  const discount=subtotal*(discountRate/100);
+  const grand=subtotal+tax-discount;
+  document.getElementById('grandTotal').textContent=grand.toFixed(2);
+}
+
+// Preview invoice
+document.getElementById('previewBtn').addEventListener('click',()=>{
+  const preview=document.getElementById('preview');
+  const bizName=document.getElementById('bizName').value;
+  const bizAddress=document.getElementById('bizAddress').value;
+  const bizPhone=document.getElementById('bizPhone').value;
+  const bizEmail=document.getElementById('bizEmail').value;
+  const currency=document.getElementById('currency').value||'';
+  const customer=document.getElementById('customerName').value;
+  const date=new Date().toLocaleDateString();
+  const invoiceNo=Math.floor(Math.random()*9000+1000);
+
+  let itemsHTML='';
+  document.querySelectorAll('#invoiceTable tbody tr').forEach(r=>{
+    const desc=r.children[0].querySelector('input').value;
+    const qty=r.children[1].querySelector('input').value;
+    const price=r.children[2].querySelector('input').value;
+    const total=r.querySelector('.lineTotal').textContent;
+    itemsHTML += `
+  <tr>
+    <td style="padding:6px;border:1px solid #ccc;text-align:center;">${desc}</td>
+    <td style="padding:6px;border:1px solid #ccc;text-align:center;">${qty}</td>
+    <td style="padding:6px;border:1px solid #ccc;text-align:center;">${price}</td>
+    <td style="padding:6px;border:1px solid #ccc;text-align:center;">${total}</td>
+  </tr>
+`;
+
+  });
+
+  preview.innerHTML=`
+    <div id="invoiceContent" style="color:#000;background:#fff;padding:20px;border-radius:8px;">
+      <h2 style="color:#333;margin-bottom:6px;">${bizName}</h2>
+      <p style="margin:4px 0;font-size:13px;color:#444;">${bizAddress}<br>${bizPhone} | ${bizEmail}</p>
+      <hr style="margin:10px 0;border:0;border-top:1px solid #ccc;">
+      <p><strong>Invoice #:</strong> ${invoiceNo} &nbsp; | &nbsp; <strong>Date:</strong> ${date}</p>
+      <h4 style="margin:8px 0;">Invoice To: ${customer}</h4>
+      <table style="width:100%;border-collapse:collapse;margin-top:10px;">
+        <tr style="background:#f0f0f0;">
+          <th style="padding:8px;border:1px solid #534848;">Description</th>
+          <th style="padding:8px;border:1px solid #534848;">Qty</th>
+          <th style="padding:8px;border:1px solid #534848;">Price</th>
+          <th style="padding:8px;border:1px solid #534848;">Total</th>
+        </tr>
+        ${itemsHTML}
+      </table>
+      <hr style="margin:10px 0;border:0;border-top:1px solid #ccc;">
+      <p><strong>Subtotal:</strong> ${currency} ${document.getElementById('subtotal').textContent}</p>
+      <p><strong>Tax:</strong> ${document.getElementById('tax').value}%</p>
+      <p><strong>Discount:</strong> ${document.getElementById('discount').value}%</p>
+      <h3 style="color:#000;">Grand Total: ${currency} ${document.getElementById('grandTotal').textContent}</h3>
+    </div>
+  `;
+  
+  preview.style.display='block';
+  document.getElementById('printControls').style.display='block';
+});
+
+// Print Invoice
+document.getElementById('printBtn').addEventListener('click',()=>{
+  const mode=document.getElementById('printMode').value;
+  const invoice=document.getElementById('invoiceContent').outerHTML;
+  const win=window.open('','PRINT','height=800,width=1100');
+
+  if(mode==="single"){
+    win.document.write(`
+      <html>
+      <head><title>Invoice</title>
+      <style>
+        @page { size: A4 portrait; margin: 15mm; }
+        body { font-family: Arial, sans-serif; margin: 0; }
+        .footer { text-align:center;font-size:12px;margin-top:20px;color:#555; }
+      </style>
+      </head>
+      <body>
+        ${invoice}
+        <p class="footer">Powered by: <strong>Kyekyeku Tech Solutions</strong></p>
+      </body>
+      </html>
+    `);
+  } else {
+    win.document.write(`
+      <html>
+      <head><title>Invoice</title>
+      <style>
+        @page { size: A4 landscape; margin: 10mm; }
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          display: flex;
+          justify-content: space-between;
+        }
+        .a5 { width: 48%;box-sizing:border-box;border: 1px solid #ccc;padding: 10px; }
+        .copy-label { text-align:center;font-size:12px;margin-top:8px;color:#555; }
+        .footer { text-align:center;font-size:12px;margin-top:10px;color:#555; }
+      </style>
+      </head>
+      <body>
+        <div class="a5">
+          ${invoice}
+          <div class="copy-label">Business Copy</div>
+          <p class="footer">Powered by: <strong>Kyekyeku Tech Solutions</strong></p>
+        </div>
+        <div class="a5">
+          ${invoice}
+          <div class="copy-label">Customer Copy</div>
+          <p class="footer">Powered by: <strong>Kyekyeku Tech Solutions</strong></p>
+        </div>
+      </body>
+      </html>
+    `);
+  }
+
+  win.document.close();
+  win.focus();
+  win.print();
+  win.close();
+});
+
+// Reset
+document.getElementById('resetBtn').addEventListener('click',()=>{
+  document.querySelector('#invoiceTable tbody').innerHTML='';
+  updateTotals();
+  document.getElementById('preview').style.display='none';
+  document.getElementById('printControls').style.display='none';
+});
+// Logout
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  firebase.auth().signOut().then(() => {
+    Swal.fire("👋 Logged Out", "You have been signed out successfully.", "success")
+      .then(() => {
+        window.location.href = "index.html"; // back to login
+      });
+  }).catch((error) => {
+    Swal.fire("❌ Error", error.message, "error");
+  });
+});
+
+</script>
+
+</body>
+</html>
