@@ -17,6 +17,8 @@
   <script src="https://js.paystack.co/v1/inline.js"></script>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
 
   <style>
     :root {
@@ -195,6 +197,8 @@
           <option value="double">Business + Customer (A4 Landscape)</option>
         </select>
         <button id="printBtn">Print Invoice</button>
+        <button id="savePdfBtn">Save as PDF</button>
+
       </div>
     </div>
   </div>
@@ -517,6 +521,20 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
   }).catch((error) => {
     Swal.fire("❌ Error", error.message, "error");
   });
+});
+// Save as PDF
+document.getElementById('savePdfBtn').addEventListener('click', () => {
+  const invoiceElement = document.getElementById('invoiceContent');
+  
+  const opt = {
+    margin:       10,
+    filename:     'invoice.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2 },
+    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opt).from(invoiceElement).save();
 });
 
 </script>
