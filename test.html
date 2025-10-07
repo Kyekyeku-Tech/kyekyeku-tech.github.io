@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buy Airtime</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f6f7fb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      width: 360px;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    .container img {
+      width: 100px;
+      margin-bottom: 10px;
+    }
+    select, input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 12px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      outline: none;
+      font-size: 15px;
+    }
+    select:focus, input:focus {
+      border-color: #6a1b9a;
+    }
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background: #6a1b9a;
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #4a0072;
+    }
+    .output {
+      margin-top: 15px;
+      font-weight: 600;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Buy Airtime</h2>
+    <select id="network">
+      <option value="MTN">MTN</option>
+      <option value="Tigo">Tigo</option>
+      <option value="Telecel">Telecel</option>
+    </select>
+    <input type="text" id="phone" placeholder="Enter phone number">
+    <input type="number" id="amount" placeholder="Enter Amount (GHS)">
+    <div class="output" id="output"></div>
+    <button class="btn" onclick="buyAirtime()">Buy Airtime</button>
+  </div>
+
+  <script>
+    const rate = 0.97;
+
+    document.getElementById('amount').addEventListener('input', function() {
+      const amount = parseFloat(this.value);
+      if (!isNaN(amount)) {
+        const value = (amount * rate).toFixed(2);
+        document.getElementById('output').innerText = `You will receive airtime worth GHS ${value}`;
+      } else {
+        document.getElementById('output').innerText = '';
+      }
+    });
+
+    function buyAirtime() {
+      const network = document.getElementById('network').value;
+      const phone = document.getElementById('phone').value.trim();
+      const amount = document.getElementById('amount').value;
+      
+      if (phone === '' || amount === '') {
+        alert('Please fill all fields.');
+        return;
+      }
+      
+      const value = (amount * rate).toFixed(2);
+      alert(`Confirm Purchase:\nNetwork: ${network}\nPhone: ${phone}\nAmount: GHS ${amount}\nValue: GHS ${value}`);
+    }
+  </script>
+
+</body>
+</html>
