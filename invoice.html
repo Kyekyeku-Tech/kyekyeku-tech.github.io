@@ -217,7 +217,7 @@
   };
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
-  const paystackPublicKey = "pk_live_fb405d2702a00868ba424f73b9148b7aad07b2b0";
+  const paystackPublicKey = "pk_live_8545c70ef4fb392f45389ba119cb921c7911141d";
 
   let isLogin = true;
   document.getElementById("toggleMode").addEventListener("click", () => {
@@ -268,52 +268,79 @@
   }
 
   async function checkSubscription(user) {
-    const doc = await db.collection("users").doc(user.uid).get();
-    const data = doc.data();
-    const now = new Date();
+  const doc = await db.collection("users").doc(user.uid).get();
+  const data = doc.data();
+  const now = new Date();
 
-    if (data.subscriptionActive) {
-      const lastPaid = new Date(data.lastPayment);
-      const diffDays = Math.floor((now - lastPaid) / (1000*60*60*24));
-      if (diffDays >= 30) {
-        Swal.fire("⏳ Expired", "Please pay ₵5.00 to renew", "warning");
-        requestPayment(user);
-      } else {
-        showInvoice(user);
-      }
+  if (data.subscriptionActive) {
+    const lastPaid = new Date(data.lastPayment);
+    const diffDays = Math.floor((now - lastPaid) / (1000 * 60 * 60 * 24));
+    if (diffDays >= 30) {
+      Swal.fire({
+        icon: "warning",
+        title: "⏳ Subscription Expired",
+        text: "Please pay ₵5.00 to renew your access.",
+        confirmButtonText: "Renew Now",
+        showCancelButton: true,
+        cancelButtonText: "Later",
+        preConfirm: () => {
+          requestPayment(user); // ✅ runs directly on button click
+        }
+      });
     } else {
-      const trialStart = new Date(data.trialStart);
-      const trialDays = Math.floor((now - trialStart) / (1000*60*60*24));
-      if (trialDays <= 3) {
-        showInvoice(user);
-      } else {
-        Swal.fire("🔒 Trial Expired", "Please pay ₵5.00 to continue.", "info");
-        requestPayment(user);
-      }
+      showInvoice(user);
+    }
+  } else {
+    const trialStart = new Date(data.trialStart);
+    const trialDays = Math.floor((now - trialStart) / (1000 * 60 * 60 * 24));
+    if (trialDays <= 3) {
+      showInvoice(user);
+    } else {
+      Swal.fire({
+  icon: "info",
+  title: "🔒 Trial Expired",
+  text: "Please pay ₵5.00/month to continue.",
+  confirmButtonText: "Pay Now",
+  showCancelButton: true
+}).then((result) => {
+  if (result.isConfirmed) {
+    requestPayment(user);
+  }
+});
+
     }
   }
+}
 
-  function requestPayment(user) {
-    let handler = PaystackPop.setup({
-      key: paystackPublicKey,
-      email: user.email,
-      amount: 500,
-      currency: "GHS",
-      ref: "SUB_" + Math.floor(Math.random() * 1000000000 + 1),
-      callback: async function(response) {
-        Swal.fire("✅ Payment successful", "Ref: " + response.reference, "success");
-        await db.collection("users").doc(user.uid).update({
-          subscriptionActive: true,
-          lastPayment: new Date().toISOString()
-        });
-        showInvoice(user);
-      },
-      onClose: function() {
-        Swal.fire("❌ Payment Required", "You must pay ₵5.00 to use this app", "error");
-      }
-    });
-    handler.openIframe();
+  
+  // ✅ Paystack Payment Function (working version)
+function requestPayment(user) {
+  if (!user || !user.email) {
+    Swal.fire("⚠️ Error", "User email not found. Please log in again.", "error");
+    return;
   }
+
+  const handler = PaystackPop.setup({
+    key: paystackPublicKey,
+    email: user.email,
+    amount: 500 * 100, // ₵5.00
+    currency: "GHS",
+    ref: "SUB_" + Math.floor(Math.random() * 1000000000 + 1),
+    callback: async function (response) {
+      await db.collection("users").doc(user.uid).update({
+        subscriptionActive: true,
+        lastPayment: new Date().toISOString()
+      });
+      Swal.fire("✅ Payment successful", "Reference: " + response.reference, "success");
+      showInvoice(user);
+    },
+    onClose: function () {
+      Swal.fire("❌ Payment Required", "Payment was cancelled. ₵5.00/month is required.", "error");
+    }
+  });
+
+  handler.openIframe();
+}
 
   function showInvoice(user) {
     document.getElementById("authSection").style.display = "none";

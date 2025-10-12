@@ -1,0 +1,470 @@
+{
+  "variable": {
+    "meaning": "A variable is used to store data that can be changed or reused in a program.",
+    "usage": "Example: let name = 'Kyekyeku';"
+  },
+  "function": {
+    "meaning": "A function is a reusable block of code designed to perform a specific task.",
+    "usage": "Example: function greet() { console.log('Hello!'); }"
+  },
+  "array": {
+    "meaning": "An array stores multiple values in a single variable.",
+    "usage": "Example: const fruits = ['apple', 'banana', 'orange'];"
+  },
+  "object": {
+    "meaning": "An object holds data in key-value pairs.",
+    "usage": "Example: const user = { name: 'John', age: 30 };"
+  },
+  "loop": {
+    "meaning": "A loop allows a block of code to be executed repeatedly.",
+    "usage": "Example: for(let i=0; i<5; i++){ console.log(i); }"
+  },
+  "html": {
+    "meaning": "HTML (HyperText Markup Language) structures content on the web.",
+    "usage": "Example: <h1>Hello World</h1>"
+  },
+  "doctype": {
+    "meaning": "Defines the document type and HTML version being used.",
+    "usage": "Example: <!DOCTYPE html>"
+  },
+  "meta": {
+    "meaning": "The <meta> tag provides metadata like description, keywords, and viewport settings.",
+    "usage": "Example: <meta name='viewport' content='width=device-width, initial-scale=1.0'>"
+  },
+  "viewport": {
+    "meaning": "Viewport defines the visible area of a web page on different devices.",
+    "usage": "Example: <meta name='viewport' content='width=device-width, initial-scale=1.0'>"
+  },
+  "attribute": {
+    "meaning": "An attribute provides additional information about an HTML element.",
+    "usage": "Example: <img src='image.jpg' alt='description'>"
+  },
+  "element": {
+    "meaning": "An HTML element is a component of a web page marked by tags.",
+    "usage": "Example: <p>This is a paragraph</p>"
+  },
+  "tag": {
+    "meaning": "An HTML tag defines the start and end of an element.",
+    "usage": "Example: <div> ... </div>"
+  },
+  "marquee": {
+    "meaning": "The <marquee> tag scrolls text or images across a webpage. Deprecated in modern HTML.",
+    "usage": "Example: <marquee behavior='scroll' direction='left'>Welcome to Kyekyeku Tech!</marquee>"
+  },
+  "script": {
+    "meaning": "The <script> tag is used to embed or reference JavaScript in an HTML document.",
+    "usage": "Example: <script src='app.js'></script>"
+  },
+  "async": {
+    "meaning": "The async attribute allows scripts to load independently without blocking HTML parsing.",
+    "usage": "Example: <script src='file.js' async></script>"
+  },
+  "defer": {
+    "meaning": "The defer attribute delays the execution of a script until HTML parsing is complete.",
+    "usage": "Example: <script src='file.js' defer></script>"
+  },
+  "css": {
+    "meaning": "CSS (Cascading Style Sheets) is used to style and layout web pages.",
+    "usage": "Example: body { background-color: #f4f4f4; }"
+  },
+  "selector": {
+    "meaning": "A selector in CSS targets elements to apply styles.",
+    "usage": "Example: p { color: red; }"
+  },
+  "class": {
+    "meaning": "The class attribute defines a group of elements that share the same style.",
+    "usage": "Example: <p class='intro'>Welcome</p>"
+  },
+  "id": {
+    "meaning": "The id attribute uniquely identifies an HTML element.",
+    "usage": "Example: <div id='header'></div>"
+  },
+  "comment": {
+    "meaning": "A comment is text ignored by browsers, used to describe code.",
+    "usage": "Example: <!-- This is a comment -->"
+  },
+  "link": {
+    "meaning": "The <link> tag connects external resources like CSS files.",
+    "usage": "Example: <link rel='stylesheet' href='style.css'>"
+  },
+  "nav": {
+    "meaning": "Defines a section that contains navigation links.",
+    "usage": "Example: <nav><a href='#home'>Home</a></nav>"
+  },
+  "header": {
+    "meaning": "The <header> tag defines the top section of a webpage, usually containing the logo or navigation.",
+    "usage": "Example: <header><h1>Site Title</h1></header>"
+  },
+  "footer": {
+    "meaning": "The <footer> tag defines the bottom section of a webpage.",
+    "usage": "Example: <footer>© 2025 Kyekyeku Tech</footer>"
+  },
+  "section": {
+    "meaning": "The <section> tag defines a thematic grouping of content.",
+    "usage": "Example: <section><h2>About Us</h2></section>"
+  },
+  "div": {
+    "meaning": "The <div> tag is a container for grouping HTML elements for styling or layout purposes.",
+    "usage": "Example: <div class='container'></div>"
+  },
+  "span": {
+    "meaning": "The <span> tag is an inline container used to style specific text or content.",
+    "usage": "Example: <span style='color:red;'>important</span>"
+  },
+  "fetch": {
+    "meaning": "The fetch() function is used to get data from a server asynchronously.",
+    "usage": "Example: fetch('data.json').then(res => res.json()).then(data => console.log(data));"
+  },
+  "queryselector": {
+    "meaning": "The document.querySelector() method selects the first element that matches a CSS selector.",
+    "usage": "Example: document.querySelector('.btn').style.color = 'red';"
+  },
+  "console": {
+    "meaning": "The console object provides access to the browser's debugging console.",
+    "usage": "Example: console.log('Debug message');"
+  },
+  "api": {
+    "meaning": "An API (Application Programming Interface) allows communication between software components.",
+    "usage": "Example: fetch('https://api.example.com/data')"
+  },
+  "database": {
+    "meaning": "A database is a structured collection of data stored and managed electronically.",
+    "usage": "Example: SELECT * FROM users;"
+  },
+  "server": {
+    "meaning": "A server provides data or services to clients over a network.",
+    "usage": "Example: Node.js can act as a web server using Express.js."
+  },
+  "framework": {
+    "meaning": "A framework provides pre-written code and structure to simplify software development.",
+    "usage": "Example: React, Angular, and Django are popular frameworks."
+  },
+  "library": {
+    "meaning": "A library is a collection of reusable code that developers can use to perform common tasks.",
+    "usage": "Example: jQuery, Lodash, and React are JavaScript libraries."
+  },
+  "nodejs": {
+    "meaning": "Node.js is a JavaScript runtime that allows running JavaScript on the server side.",
+    "usage": "Example: const http = require('http');"
+  },
+  "react": {
+    "meaning": "React is a JavaScript library for building user interfaces.",
+    "usage": "Example: function App() { return <h1>Hello, React!</h1>; }"
+  },
+  "frontend": {
+    "meaning": "Frontend refers to the part of a website users interact with directly.",
+    "usage": "Example: HTML, CSS, and JavaScript are frontend technologies."
+  },
+  "backend": {
+    "meaning": "Backend refers to the server-side part of an application that manages data and logic.",
+    "usage": "Example: Node.js and PHP are backend technologies."
+  },
+  "fullstack": {
+    "meaning": "A full stack developer works with both frontend and backend technologies.",
+    "usage": "Example: Someone using React and Node.js is a full-stack developer."
+  },
+  "json": {
+    "meaning": "JSON (JavaScript Object Notation) is a lightweight format for data exchange.",
+    "usage": "Example: { 'name': 'John', 'age': 25 }"
+  },
+  "apiendpoint": {
+    "meaning": "An API endpoint is a specific URL where an API receives requests.",
+    "usage": "Example: https://api.example.com/users"
+  },
+  "token": {
+    "meaning": "A token is used to verify a user's identity or session securely.",
+    "usage": "Example: Bearer eyJhbGciOiJIUzI1NiIsInR5..."
+  },
+  "encryption": {
+    "meaning": "Encryption converts data into a coded format to prevent unauthorized access.",
+    "usage": "Example: AES and RSA are common encryption methods."
+  },
+  "cloud": {
+    "meaning": "Cloud computing allows data and applications to be stored and accessed online.",
+    "usage": "Example: AWS, Google Cloud, and Azure offer cloud services."
+  },
+  
+  "color": {
+    "meaning": "The CSS color property sets the color of text, borders, and other elements.",
+    "usage": "Example: p { color: blue; }"
+  },
+  "backgroundcolor": {
+    "meaning": "The CSS background-color property sets the background color of an element.",
+    "usage": "Example: div { background-color: #f4f4f4; }"
+  },
+  "textalign": {
+    "meaning": "The CSS text-align property sets the horizontal alignment of text.",
+    "usage": "Example: h1 { text-align: center; }"
+  },
+  "fontsize": {
+    "meaning": "The CSS font-size property sets the size of the text.",
+    "usage": "Example: p { font-size: 16px; }"
+  },
+  "margin": {
+    "meaning": "The CSS margin property creates space around elements, outside of any borders.",
+    "usage": "Example: div { margin: 20px; }"
+  },
+  "padding": {
+    "meaning": "The CSS padding property creates space inside an element, between the content and border.",
+    "usage": "Example: div { padding: 10px; }"
+  },
+  "border": {
+    "meaning": "The CSS border property sets the width, style, and color of an element's border.",
+    "usage": "Example: div { border: 2px solid black; }"
+  },
+  "input": {
+    "meaning": "The HTML input element allows the user to enter data.",
+    "usage": "Example: <input type='text' placeholder='Enter name'>"
+  },
+  "placeholder": {
+    "meaning": "The placeholder attribute provides a hint to the user about what to enter in an input field.",
+    "usage": "Example: <input type='text' placeholder='Email'>"
+  },
+  "button": {
+    "meaning": "The HTML button element represents a clickable button.",
+    "usage": "Example: <button>Click me</button>"
+  },
+  "eventlistener": {
+    "meaning": "JavaScript EventListener listens for a specific event on an element and executes a function.",
+    "usage": "Example: button.addEventListener('click', function() { alert('Clicked!'); });"
+  },
+  "onclick": {
+    "meaning": "The onclick attribute or event triggers a JavaScript function when an element is clicked.",
+    "usage": "Example: <button onclick='sayHello()'>Click me</button>"
+  },
+  "else": {
+    "meaning": "In programming, else is used to execute a block of code when an if condition is false.",
+    "usage": "Example: if(age >= 18){ console.log('Adult'); } else { console.log('Minor'); }"
+  },
+  "elseif": {
+    "meaning": "Else if is used to check another condition after an if statement fails.",
+    "usage": "Example: if(score > 90){ console.log('A'); } else if(score > 80){ console.log('B'); } else { console.log('C'); }"
+  },
+  "average": {
+    "meaning": "Average is the sum of numbers divided by the count of numbers, often calculated in JS or other languages.",
+    "usage": "Example: let avg = (10 + 20 + 30)/3; console.log(avg);"
+  },
+  "innerhtml": {
+    "meaning": "The innerHTML property sets or returns the HTML content inside an element.",
+    "usage": "Example: document.getElementById('demo').innerHTML = 'Hello World';"
+  },
+  "value": {
+    "meaning": "The value property of an input element holds the current user input.",
+    "usage": "Example: let name = document.getElementById('name').value;"
+  },
+  "display": {
+    "meaning": "The CSS display property controls how an element is displayed on the page.",
+    "usage": "Example: div { display: flex; }"
+  },
+  "flex": {
+    "meaning": "Flex is a CSS layout mode that arranges elements in a flexible container.",
+    "usage": "Example: .container { display: flex; justify-content: center; }"
+  },
+  "grid": {
+    "meaning": "Grid is a CSS layout system that allows placing elements into rows and columns.",
+    "usage": "Example: .container { display: grid; grid-template-columns: 1fr 1fr; }"
+  },
+  "opacity": {
+    "meaning": "The CSS opacity property sets the transparency of an element.",
+    "usage": "Example: div { opacity: 0.5; }"
+  },
+  "zindex": {
+    "meaning": "The CSS z-index property controls the stack order of elements.",
+    "usage": "Example: div { position: absolute; z-index: 10; }"
+  },
+  "position": {
+    "meaning": "The CSS position property specifies how an element is positioned in the document.",
+    "usage": "Example: div { position: relative; top: 10px; }"
+  },
+    "relative": {
+        "meaning": "Relative positioning moves an element relative to its normal position.",
+        "usage": "Example: div { position: relative; left: 20px; }"
+    },
+  "h1": {
+    "meaning": "The <h1> tag defines the most important heading on a webpage.",
+    "usage": "Example: <h1>Welcome to Kyekyeku Tech</h1>"
+  },
+  "h2": {
+    "meaning": "The <h2> tag defines the second-level heading on a webpage.",
+    "usage": "Example: <h2>About Us</h2>"
+  },
+  "h3": {
+    "meaning": "The <h3> tag defines the third-level heading on a webpage.",
+    "usage": "Example: <h3>Our Services</h3>"
+  },
+  "p": {
+    "meaning": "The <p> tag defines a paragraph of text.",
+    "usage": "Example: <p>This is a paragraph explaining the topic.</p>"
+  },
+  "img": {
+    "meaning": "The <img> tag is used to display images on a webpage.",
+    "usage": "Example: <img src='logo.png' alt='Company Logo'>"
+  },
+  "src": {
+    "meaning": "The src attribute specifies the path to an image or media file.",
+    "usage": "Example: <img src='photo.jpg' alt='Sample Image'>"
+  },
+  "alt": {
+    "meaning": "The alt attribute provides alternative text for an image if it cannot be displayed.",
+    "usage": "Example: <img src='image.jpg' alt='A beautiful scenery'>"
+  },
+  "a": {
+    "meaning": "The <a> tag defines a hyperlink, allowing navigation to other pages or sites.",
+    "usage": "Example: <a href='https://kyekyeku.tech'>Visit Kyekyeku Tech</a>"
+  },
+  "href": {
+    "meaning": "The href attribute specifies the URL of a link.",
+    "usage": "Example: <a href='https://example.com'>Click Here</a>"
+  },
+  "ul": {
+    "meaning": "The <ul> tag defines an unordered (bulleted) list.",
+    "usage": "Example: <ul><li>Item 1</li><li>Item 2</li></ul>"
+  },
+  "ol": {
+    "meaning": "The <ol> tag defines an ordered (numbered) list.",
+    "usage": "Example: <ol><li>First step</li><li>Second step</li></ol>"
+  },
+  "li": {
+    "meaning": "The <li> tag defines a list item inside <ul> or <ol>.",
+    "usage": "Example: <ul><li>Apple</li><li>Banana</li></ul>"
+  },
+  "table": {
+    "meaning": "The <table> tag defines a table for organizing data.",
+    "usage": "Example: <table><tr><td>Row 1</td></tr></table>"
+  },
+  "tr": {
+    "meaning": "The <tr> tag defines a table row inside a <table>.",
+    "usage": "Example: <table><tr><td>Data 1</td></tr></table>"
+  },
+  "td": {
+    "meaning": "The <td> tag defines a cell in a table row.",
+    "usage": "Example: <tr><td>Cell content</td></tr>"
+  },
+  "th": {
+    "meaning": "The <th> tag defines a header cell in a table, usually bold and centered.",
+    "usage": "Example: <tr><th>Name</th><th>Age</th></tr>"
+  },
+  "form": {
+    "meaning": "The <form> tag is used to collect user input.",
+    "usage": "Example: <form><input type='text' placeholder='Enter name'></form>"
+  },
+  
+  "label": {
+    "meaning": "The <label> tag defines a label for an input element, improving accessibility.",
+    "usage": "Example: <label for='name'>Name:</label><input id='name' type='text'>"
+  },
+  "textarea": {
+    "meaning": "The <textarea> tag defines a multi-line input field for text.",
+    "usage": "Example: <textarea placeholder='Write your message'></textarea>"
+  },
+  "select": {
+    "meaning": "The <select> tag defines a drop-down list.",
+    "usage": "Example: <select><option>Option 1</option></select>"
+  },
+  "option": {
+    "meaning": "The <option> tag defines an option in a <select> dropdown.",
+    "usage": "Example: <select><option>Yes</option><option>No</option></select>"
+  },
+  "iframe": {
+    "meaning": "The <iframe> tag embeds another HTML page or content into the current page.",
+    "usage": "Example: <iframe src='https://example.com'></iframe>"
+  },
+  "python": {
+    "meaning": "Python is a high-level, interpreted programming language known for its readability and simplicity.",
+    "usage": "Example: print('Hello, World!')"
+  },
+  "java": {
+    "meaning": "Java is a high-level, class-based, object-oriented programming language used for building applications.",
+    "usage": "Example: System.out.println('Hello, Java');"
+  },
+  "javascript": {
+    "meaning": "JavaScript is a scripting language used to create dynamic and interactive content on web pages.",
+    "usage": "Example: document.getElementById('demo').innerHTML = 'Hello!';"
+  },
+  "mysql": {
+    "meaning": "MySQL is an open-source relational database management system used to store and manage data.",
+    "usage": "Example: SELECT * FROM users WHERE age > 18;"
+  },
+  "github": {
+    "meaning": "GitHub is a cloud-based platform for hosting, sharing, and collaborating on Git repositories.",
+    "usage": "Example: Push your code to GitHub using git push origin main"
+  },
+  "gitbash": {
+    "meaning": "Git Bash is a command-line interface for Git on Windows, providing Unix-style commands.",
+    "usage": "Example: git status"
+  },
+  "git": {
+    "meaning": "Git is a version control system for tracking changes in source code during software development.",
+    "usage": "Example: git commit -m 'Initial commit'"
+  },
+  "visualstudio": {
+    "meaning": "Visual Studio is an integrated development environment (IDE) from Microsoft for building apps in multiple languages.",
+    "usage": "Example: Use Visual Studio to create C# applications."
+  },
+  "visualstudiocode": {
+    "meaning": "Visual Studio Code (VS Code) is a lightweight, open-source code editor with support for extensions and debugging.",
+    "usage": "Example: Use VS Code to write HTML, CSS, and JavaScript."
+  },
+  "intellij": {
+    "meaning": "IntelliJ IDEA is an IDE for Java development and other languages, offering code suggestions and debugging.",
+    "usage": "Example: Use IntelliJ to create Java projects efficiently."
+  },
+  "pycharm": {
+    "meaning": "PyCharm is an IDE specifically designed for Python development.",
+    "usage": "Example: Write and debug Python code in PyCharm."
+  },
+  "terminal": {
+    "meaning": "A terminal (or command line) is an interface to interact with the computer using text commands.",
+    "usage": "Example: ls, cd, mkdir commands in terminal"
+  },
+    "cli": {
+        "meaning": "CLI (Command Line Interface) allows users to interact with software using text commands.",
+        "usage": "Example: git clone, 1. Open terminal, 2. Type: git clone and 3. Press Enter"
+  },
+
+  "repository": {
+    "meaning": "A repository (repo) is a storage location for your code, typically managed by Git.",
+    "usage": "Example: git clone https://github.com/user/repo.git"
+  },
+  "commit": {
+    "meaning": "A commit is a snapshot of changes made in a repository.",
+    "usage": "Example: git commit -m 'Add new feature'"
+  },
+  "branch": {
+    "meaning": "A branch is a parallel version of a repository where changes can be made separately.",
+    "usage": "Example: git checkout -b feature-branch"
+  },
+  "merge": {
+    "meaning": "Merge integrates changes from one branch into another.",
+    "usage": "Example: git merge feature-branch"
+  },
+  "push": {
+    "meaning": "Push sends your committed changes to a remote repository.",
+    "usage": "Example: git push origin main"
+  },
+  "pull": {
+    "meaning": "Pull fetches and integrates changes from a remote repository.",
+    "usage": "Example: git pull origin main"
+  },
+  "clone": {
+    "meaning": "Clone creates a local copy of a remote repository.",
+    "usage": "Example: git clone https://github.com/user/repo.git"
+  },
+  "debugging": {
+    "meaning": "Debugging is the process of finding and fixing errors in your code.",
+    "usage": "Example: Use breakpoints in VS Code to debug JavaScript."
+  },
+  "algorithm": {
+    "meaning": "An algorithm is a step-by-step procedure for solving a problem.",
+    "usage": "Example: Sorting numbers in ascending order using a for loop."
+  },
+  "data_structure": {
+    "meaning": "A data structure is a way of organizing and storing data for efficient access and modification.",
+    "usage": "Example: Arrays, linked lists, and hash tables."
+  },
+  "oop": {
+    "meaning": "OOP (Object-Oriented Programming) is a programming paradigm based on objects and classes.",
+    "usage": "Example: class Car { constructor(name) { this.name = name; } }"
+  }
+  
+}
