@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>End Of October — Winners</title>
+<style>
+:root {
+  --bg: #03040a;
+  --text: #eaf6ff;
+  --panel: rgba(255,255,255,0.05);
+  --border: rgb(69,2,252);
+  --muted: #9aa4b2;
+  --gold: #ffd166;
+  --cyan: #7cfffb;
+  --violet: #9d7cff;
+  --font: 'Inter', sans-serif;
+}
+
+.light {
+  --bg: #ffffff;
+  --text: #000000;
+  --panel: rgba(0,0,0,0.03);
+  --border: rgba(0,0,0,0.1);
+  --muted: #444;
+}
+
+* {box-sizing:border-box;}
+html, body {
+  margin:0; padding:0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  display:flex; justify-content:center; align-items:center;
+  min-height:100vh;
+  transition: background 0.5s, color 0.5s;
+}
+
+.container { width: 100%; max-width: 1000px; padding:20px; position:relative; }
+
+.header {
+  display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;
+}
+.header h1 { font-size:24px; margin:0; font-weight:800; letter-spacing:0.5px; }
+.header .total { font-size:14px; color:var(--muted); font-weight:600; }
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight:600;
+  transition: all 0.3s;
+}
+.theme-toggle:hover {
+  background: var(--panel);
+}
+
+.podium-area {
+  display:flex; justify-content:center; align-items:flex-end; gap:20px;
+  flex-wrap: wrap;
+  position:relative;
+}
+
+.card {
+  position: relative;
+  width:180px;
+  border-radius:16px;
+  background: var(--panel);
+  padding:20px;
+  text-align:center;
+  backdrop-filter: blur(10px);
+  border:1px solid var(--border);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover { transform: translateY(-8px); box-shadow:0 16px 40px rgba(0,0,0,0.1); }
+
+.neon-ring {
+  width:100px; height:100px; border-radius:50%;
+  display:flex; justify-content:center; align-items:center;
+  margin:0 auto 12px auto;
+  color:#000;
+}
+.neon-ring.gold { background: radial-gradient(circle at 30% 30%, #ffd166, #ffb700); }
+.neon-ring.cyan { background: linear-gradient(180deg,#7cfffb,#4edfff); }
+.neon-ring.violet { background: linear-gradient(180deg,#9d7cff,#7040ff); }
+
+.emoji { font-size:36px; }
+
+.name { font-weight:800; font-size:20px; margin:6px 0; }
+.votes { font-size:13px; color:var(--muted); }
+
+.rank-pill {
+  position:absolute; top:12px; right:12px;
+  padding:6px 12px;
+  border-radius:999px;
+  background: rgba(255,255,255,0.1);
+  color: var(--muted);
+  font-weight:700; font-size:12px;
+}
+
+.list {
+  margin-top:30px;
+  display:grid; grid-template-columns:1fr 1fr; gap:10px;
+}
+.list-item {
+  display:flex; justify-content:space-between; padding:10px 14px;
+  border-radius:12px; background: var(--panel);
+  border:1px solid var(--border);
+}
+.small-name { font-weight:700; }
+.small-votes { font-size:13px; color:var(--muted); }
+
+@media(max-width:700px){
+  .podium-area { flex-direction:column; align-items:center; }
+  .card { width:70%; margin-bottom:20px; }
+  .list { grid-template-columns:1fr; }
+}
+
+/* Confetti Canvas */
+canvas#confetti {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <canvas id="confetti"></canvas>
+  <div class="header">
+    <h1>KyekyekuTech — Top Sales</h1>
+    <button class="theme-toggle" id="themeBtn">🌙 Dark</button>
+  </div>
+
+  <div class="podium-area" id="podiumArea"></div>
+
+  <div class="list" id="allList"></div>
+</div>
+
+<script>
+const raw = `Alhaji 1,470
+Asheitu 4,077
+Bewise 316
+Aboakese 2,973
+Mordecia 443
+Ks shanka 685
+Shatirgh 7,236
+Samuel 293
+Kassim 1,395
+Kabo 1,437
+Adelaide 3,583
+Tetteh Doku 10,618
+Bossman 108`;
+
+function parseData(text){
+  const lines = text.split('\n').map(l=>l.trim()).filter(Boolean);
+  const arr = [];
+  for(const line of lines){
+    const m = line.match(/^(.+?)\s+([0-9,]+)$/);
+    if(m){ arr.push({name:m[1], value:Number(m[2].replace(/,/g,''))}); }
+  }
+  return arr;
+}
+const data = parseData(raw);
+const sorted = [...data].sort((a,b)=>b.value - a.value);
+const [first, second, third] = sorted;
+
+const podiumArea = document.getElementById('podiumArea');
+const allList = document.getElementById('allList');
+
+function makeCard(rank, person){
+  const card = document.createElement('div'); card.className='card';
+  const ring = document.createElement('div'); ring.className='neon-ring ' + (rank===1?'gold':rank===2?'cyan':'violet');
+  const emoji = document.createElement('div'); emoji.className='emoji';
+  emoji.textContent = rank===1?'🏆':rank===2?'🥈':'🥉';
+  ring.appendChild(emoji);
+
+  const name = document.createElement('div'); name.className='name'; name.textContent = person.name;
+  const votes = document.createElement('div'); votes.className='votes'; votes.textContent = person.value.toLocaleString() + ' sales';
+  const pill = document.createElement('div'); pill.className='rank-pill'; pill.textContent = rank===1?'Winner':rank===2?'2nd':'3rd';
+
+  card.appendChild(ring); card.appendChild(name); card.appendChild(votes); card.appendChild(pill);
+  return card;
+}
+
+podiumArea.appendChild(makeCard(2, second));
+podiumArea.appendChild(makeCard(1, first));
+podiumArea.appendChild(makeCard(3, third));
+
+for(const p of sorted){
+  const item = document.createElement('div'); item.className='list-item';
+  const left = document.createElement('div'); left.className='small-name'; left.textContent = p.name;
+  const right = document.createElement('div'); right.className='small-votes'; right.textContent = p.value.toLocaleString();
+  item.appendChild(left); item.appendChild(right);
+  allList.appendChild(item);
+}
+
+// THEME TOGGLE
+const btn = document.getElementById('themeBtn');
+btn.onclick = ()=>{
+  document.body.classList.toggle('light');
+  btn.textContent = document.body.classList.contains('light') ? '🌞 Light' : '🌙 Dark';
+};
+
+// CONFETTI CELEBRATION
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+let confettis = [];
+const colors = ["#ffd166","#7cfffb","#9d7cff","#ff7b9d","#4eff7d"];
+
+function resizeCanvas(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+function Confetti(){
+  this.x = Math.random()*canvas.width;
+  this.y = Math.random()*canvas.height - canvas.height;
+  this.size = Math.random()*6+4;
+  this.color = colors[Math.floor(Math.random()*colors.length)];
+  this.speed = Math.random()*3+2;
+  this.rotation = Math.random()*360;
+  this.rotationSpeed = Math.random()*10-5;
+}
+Confetti.prototype.update = function(){
+  this.y += this.speed;
+  this.rotation += this.rotationSpeed;
+  if(this.y > canvas.height) this.y = -10;
+}
+Confetti.prototype.draw = function(){
+  ctx.save();
+  ctx.translate(this.x,this.y);
+  ctx.rotate(this.rotation*Math.PI/180);
+  ctx.fillStyle=this.color;
+  ctx.fillRect(-this.size/2,-this.size/2,this.size,this.size);
+  ctx.restore();
+};
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let c of confettis){ c.update(); c.draw(); }
+  requestAnimationFrame(animate);
+}
+
+// Launch confetti for podium winners
+for(let i=0;i<200;i++) confettis.push(new Confetti());
+animate();
+</script>
+</body>
+</html>
