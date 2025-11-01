@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lucky Box — KyekyekuTech</title>
+<style>
+:root {
+  --bg: radial-gradient(circle at center, #01040a, #050a1c);
+  --panel: rgba(255,255,255,0.05);
+  --accent: #00d4ff;
+  --success: #00ffae;
+  --text: #ffffff;
+  --muted: #9aa4b2;
+  --font: "Inter", sans-serif;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  font-family: var(--font);
+  color: var(--text);
+  overflow: hidden;
+}
+
+h1 {
+  margin-bottom: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+p {
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 20px;
+  width: 90%;
+  max-width: 600px;
+}
+
+.box {
+  height: 100px;
+  border-radius: 14px;
+  background: var(--panel);
+  border: 2px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: var(--muted);
+  user-select: none;
+}
+.box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px var(--accent);
+  border-color: var(--accent);
+}
+
+.message {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  color: var(--success);
+  font-size: 22px;
+  font-weight: 700;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s;
+}
+.message.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.message small {
+  margin-top: 10px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+@keyframes confetti {
+  0% { transform: translateY(0) rotate(0); opacity: 1; }
+  100% { transform: translateY(300px) rotate(360deg); opacity: 0; }
+}
+.confetti {
+  position: absolute;
+  width: 10px; height: 10px;
+  background: var(--accent);
+  animation: confetti 2s linear forwards;
+  border-radius: 2px;
+}
+</style>
+</head>
+<body>
+  <h1>🎁 Lucky Box Challenge</h1>
+  <p>Click any box to reveal your fate...</p>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="message" id="message">
+    🎉 Hurry! You’re a winner of <span style="color:#ffd166;">GHC 200.00</span><br>
+    <small>Screenshot and send to admin to claim your money</small>
+  </div>
+
+<script>
+const grid = document.getElementById("grid");
+const message = document.getElementById("message");
+
+// Create 12 random boxes
+for (let i = 0; i < 12; i++) {
+  const box = document.createElement("div");
+  box.className = "box";
+  box.textContent = "🎲";
+  grid.appendChild(box);
+
+  box.addEventListener("click", () => {
+    revealWin();
+  });
+}
+
+function revealWin() {
+  message.classList.add("active");
+  document.querySelectorAll(".box").forEach(b => {
+    b.style.pointerEvents = "none";
+    b.style.opacity = "0.3";
+  });
+  makeConfetti();
+}
+
+// confetti burst
+function makeConfetti() {
+  for (let i = 0; i < 80; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * window.innerWidth + "px";
+    c.style.top = Math.random() * window.innerHeight / 2 + "px";
+    c.style.background = `hsl(${Math.random() * 360},100%,60%)`;
+    c.style.animationDelay = Math.random() * 1 + "s";
+    c.style.width = c.style.height = Math.random()*8+3 + "px";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(), 2500);
+  }
+}
+</script>
+</body>
+</html>
