@@ -1,240 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kyekyeku Tech Dictionary</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Look up word meanings, examples and synonyms, or check your writing with the Kyekyeku Tech Dictionary and Grammar Assistant.">
+  <title>Dictionary &amp; Grammar Assistant | Kyekyeku Tech</title>
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/logo-3-color.png">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle at top left, #faf8f8, #0a0235, #0a0000);
-      color: #e0e0e0;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    header {
-      text-align: center;
-      margin-top: 50px;
-    }
-
-    h2 {
-      color: #ff0202;
-      font-size: 2.2rem;
-      margin-bottom: 10px;
-      letter-spacing: 1px;
-      text-shadow:  0 4px #080000;
-    }
-
-    p {
-      color: #faf9f9;
-      margin-bottom: 30px;
-      text-shadow:  0 4px #080000;
-    }
-
-    .search-box {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    input[type="text"] {
-      padding: 14px;
-      width: 260px;
-      border-radius: 10px;
-      border: none;
-      outline: none;
-      font-size: 16px;
-      background: #141414;
-      color: #fff;
-      box-shadow: inset 0 0 5px #ff1e00;
-      transition: 0.3s;
-    }
-
-    input[type="text"]:focus {
-      box-shadow: 0 0 6px #f6f7f7;
-    }
-
-    button {
-      padding: 14px 20px;
-      border: none;
-      border-radius: 10px;
-      background: linear-gradient(45deg, #fd1f02, #0212f7);
-      color: #fcfafa;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      transform: scale(1.05);
-      background: linear-gradient(45deg, #fde402, #faf602);
-        color: #000;
-    }
-
-    .result {
-      margin-top: 40px;
-      background: #181818;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0, 255, 238, 0.295);
-      width: 80%;
-      max-width: 700px;
-      text-align: left;
-      animation: fadeIn 0.5s ease-in-out;
-    }
-
-    .word {
-      font-size: 1.8em;
-      color: #00fff0;
-      text-transform: capitalize;
-      margin-bottom: 10px;
-    }
-
-    .meaning, .usage {
-      margin-top: 15px;
-      line-height: 1.6em;
-    }
-
-    code {
-      background: #0c0c0c;
-      padding: 5px 8px;
-      border-radius: 6px;
-      color: #00ffcc;
-      display: inline-block;
-      margin-top: 5px;
-      white-space: pre-wrap;
-    }
-
-    footer {
-      margin-top: auto;
-      padding: 30px;
-      color: #7a7979;
-      font-size: 0.9em;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-  </style>
+  <link rel="stylesheet" href="./CSS/dictionary.css">
+  <script src="./assets/js/dictionary.js" defer></script>
 </head>
 <body>
-  <header>
-    <h2>KYEKYEKU TECH DICTIONARY</h2>
-    <p>Learn coding words — hear them, define them, understand them.</p>
-    <div class="search-box">
-      <input type="text" id="search" placeholder="Type a coding or English word..." />
-      <button id="searchBtn">Search</button>
-      <button id="speakBtn">🔊 Pronounce</button>
-    </div>
+  <header class="dictionary-header">
+    <a class="dictionary-brand" href="./index.html">
+      <img src="./assets/images/logo-3-color.png" alt="">
+      <span>Kyekyeku <strong>Tech</strong></span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="./index.html">Home</a>
+      <a href="./service.html">Services</a>
+    </nav>
   </header>
 
-  <div class="result" id="resultBox" style="display:none;">
-    <div class="word" id="word"></div>
-    <div class="meaning" id="meaning"></div>
-    <div class="usage" id="usage"></div>
-  </div>
-  <!-- Submit a Word Form -->
-<div class="submit-word" style="margin-top:50px; width: 80%; max-width: 700px; background:#1a1a1a; padding:30px; border-radius:15px; box-shadow:0 0 20px rgba(0,255,238,0.2);">
-  <h3 style="color:#00fff0; margin-bottom:15px;">Can't find your word? Submit it!</h3>
-  <form name="missing-word" method="POST" data-netlify="true">
-    <input type="hidden" name="form-name" value="missing-word">
-    
-    <label style="display:block; margin-bottom:10px; color:#fafafa;">Word:</label>
-    <input type="text" name="word" placeholder="Enter the word" required style="width:100%; padding:12px; margin-bottom:15px; border-radius:10px; border:none; background:#141414; color:#fff; box-shadow: inset 0 0 5px #ff1e00;">
-    
-    <label style="display:block; margin-bottom:10px; color:#fafafa;">Your Email (optional):</label>
-    <input type="email" name="email" placeholder="Enter your email" style="width:100%; padding:12px; margin-bottom:15px; border-radius:10px; border:none; background:#141414; color:#fff; box-shadow: inset 0 0 5px #ff1e00;">
-    
-    <label style="display:block; margin-bottom:10px; color:#fafafa;">Additional Info (optional):</label>
-    <textarea name="info" placeholder="Any extra context..." rows="3" style="width:100%; padding:12px; border-radius:10px; border:none; background:#141414; color:#fff; box-shadow: inset 0 0 5px #ff1e00; margin-bottom:15px;"></textarea>
-    
-    <button type="submit" style="padding:14px 20px; border:none; border-radius:10px; background:linear-gradient(45deg, #fd1f02, #0212f7); color:#fcfafa; font-weight:bold; cursor:pointer;">Submit Word</button>
-  </form>
-</div>
+  <main class="dictionary-main">
+    <section class="page-intro">
+      <p class="eyebrow">Kyekyeku Tech learning tools</p>
+      <h1>Words make ideas move.</h1>
+      <p>Understand new words, explore how they are used, and make your sentences clearer.</p>
+    </section>
 
+    <div class="tools-grid">
+      <section class="tool-card" aria-labelledby="lookup-title">
+        <div class="tool-heading">
+          <span class="tool-icon" aria-hidden="true">Aa</span>
+          <div>
+            <p class="eyebrow">Explore a word</p>
+            <h2 id="lookup-title">Dictionary</h2>
+          </div>
+        </div>
+        <p class="card-description">Search a word for definitions, examples, pronunciation and related words.</p>
+        <form id="lookup-form" class="lookup-form">
+          <label for="word-input">Word to look up</label>
+          <div class="input-row">
+            <input id="word-input" name="word" type="search" placeholder="For example, curious" autocomplete="off" required>
+            <button class="primary-button" type="submit">Search</button>
+          </div>
+        </form>
+        <p id="dictionary-status" class="status-message" role="status" aria-live="polite"></p>
+        <article id="word-result" class="word-result" hidden aria-live="polite">
+          <div class="word-title-row">
+            <div>
+              <h3 id="result-word"></h3>
+              <p id="result-phonetic" class="phonetic"></p>
+            </div>
+            <button id="pronounce-button" class="icon-button" type="button" aria-label="Pronounce this word" title="Pronounce this word">Listen</button>
+          </div>
+          <div id="result-definitions" class="definitions"></div>
+          <div id="result-related" class="related-words" hidden>
+            <h4>Related words</h4>
+            <div id="related-list" class="chip-list"></div>
+          </div>
+          <p id="result-source" class="result-source"></p>
+        </article>
+        <details class="suggest-word">
+          <summary>Can't find a word? Suggest it to us</summary>
+          <form name="missing-word" method="POST" data-netlify="true" class="suggest-form">
+            <input type="hidden" name="form-name" value="missing-word">
+            <label for="suggested-word">Word</label>
+            <input id="suggested-word" type="text" name="word" required>
+            <label for="suggestion-email">Email (optional)</label>
+            <input id="suggestion-email" type="email" name="email">
+            <label for="suggestion-context">Context (optional)</label>
+            <textarea id="suggestion-context" name="info" rows="3"></textarea>
+            <button class="secondary-button" type="submit">Send suggestion</button>
+          </form>
+        </details>
+      </section>
 
-  <footer>✨ Created by Kyekyeku Tech © 2025</footer>
+      <section class="tool-card grammar-card" aria-labelledby="grammar-title">
+        <div class="tool-heading">
+          <span class="tool-icon grammar-icon" aria-hidden="true">Aa✓</span>
+          <div>
+            <p class="eyebrow">Polish your writing</p>
+            <h2 id="grammar-title">Grammar assistant</h2>
+          </div>
+        </div>
+        <p class="card-description">Check a sentence or paragraph for spelling, grammar and punctuation suggestions.</p>
+        <form id="grammar-form" class="grammar-form">
+          <label for="grammar-input">Your text</label>
+          <textarea id="grammar-input" name="text" rows="7" maxlength="20000" placeholder="Type or paste a sentence here..." required></textarea>
+          <div class="grammar-controls">
+            <span id="character-count">0 / 20,000</span>
+            <button id="check-grammar" class="primary-button" type="submit">Check writing</button>
+          </div>
+        </form>
+        <p class="privacy-note">Your text is sent to LanguageTool to check it. Avoid entering passwords or private information.</p>
+        <p id="grammar-status" class="status-message" role="status" aria-live="polite"></p>
+        <section id="grammar-result" class="grammar-result" hidden aria-live="polite">
+          <div class="grammar-result-heading">
+            <h3 id="grammar-summary"></h3>
+            <button id="apply-fixes" class="secondary-button" type="button" hidden>Apply top suggestions</button>
+          </div>
+          <ol id="grammar-issues" class="issue-list"></ol>
+        </section>
+      </section>
+    </div>
 
-  <script>
-    let dictionary = {};
-
-    // Load local JSON dictionary
-    fetch('words.json')
-      .then(res => res.json())
-      .then(data => dictionary = data)
-      .catch(err => console.error('Local dictionary load error:', err));
-
-    // Attach button events
-    document.getElementById('searchBtn').addEventListener('click', searchWord);
-    document.getElementById('speakBtn').addEventListener('click', speakWord);
-
-    function speakWord() {
-      const text = document.getElementById('search').value.trim();
-      if (text) {
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = 0.9;
-        utterance.lang = 'en-US';
-        speechSynthesis.speak(utterance);
-      } else {
-        alert('Please enter a word to pronounce.');
-      }
-    }
-
-    // Escape < and > to show HTML safely
-    function escapeHTML(str) {
-      return str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    }
-
-    async function searchWord() {
-      const wordInput = document.getElementById('search').value.trim().toLowerCase();
-      const resultBox = document.getElementById('resultBox');
-      const wordDisplay = document.getElementById('word');
-      const meaningDisplay = document.getElementById('meaning');
-      const usageDisplay = document.getElementById('usage');
-
-      if (!wordInput) return alert("Please type a word.");
-
-      resultBox.style.display = "block";
-      wordDisplay.textContent = "Searching...";
-      meaningDisplay.textContent = "";
-      usageDisplay.textContent = "";
-
-      // 1️⃣ Check local dictionary first
-      if (dictionary[wordInput]) {
-        const entry = dictionary[wordInput];
-        wordDisplay.textContent = wordInput;
-        meaningDisplay.innerHTML = `<b>Meaning:</b> ${escapeHTML(entry.meaning)}`;
-        usageDisplay.innerHTML = `<b>Usage:</b> <code>${escapeHTML(entry.usage)}</code>`;
-        return;
-      }
-
-      // 2️⃣ Else fetch from global dictionary
-      try {
-        const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${wordInput}`);
-        if (!response.ok) throw new Error("Word not found globally");
-        const data = await response.json();
-        const meaning = data[0]?.meanings[0]?.definitions[0]?.definition || "No definition found.";
-        const example = data[0]?.meanings[0]?.definitions[0]?.example || "No example available.";
-        wordDisplay.textContent = wordInput;
-        meaningDisplay.innerHTML = `<b>Meaning:</b> ${escapeHTML(meaning)}`;
-        usageDisplay.innerHTML = `<b>Example:</b> <code>${escapeHTML(example)}</code>`;
-      } catch (error) {
-        wordDisplay.textContent = "Word not found.";
-        meaningDisplay.textContent = "Neither Kyekyeku Tech nor global definitions available.";
-        usageDisplay.textContent = "";
-      }
-    }
-  </script>
+    <p class="page-footer"><a href="./index.html">Kyekyeku Tech Solutions</a> <span aria-hidden="true">·</span> Tools to help you learn and communicate</p>
+  </main>
 </body>
 </html>

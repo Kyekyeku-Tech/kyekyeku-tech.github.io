@@ -56,18 +56,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-
-const menuToggle = document.querySelector('.menu-toggle');
-const menu = document.querySelector('.menu');
-
-menuToggle.addEventListener('click', () => {
-    menu.classList.toggle('open');
-});
-
-document.querySelector('.menu-toggle').addEventListener('click', function() {
-    this.classList.toggle('active');
-});
-
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 (function(){
 var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
@@ -77,4 +65,3 @@ s1.charset='UTF-8';
 s1.setAttribute('crossorigin','*');
 s0.parentNode.insertBefore(s1,s0);
 })();
-

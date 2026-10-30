@@ -3,63 +3,357 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Number Management</title>
+  <meta name="description" content="Manage number records, review account details and update number statuses.">
+  <title>Number Management | Kyekyeku Tech</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background: #f4f4f4;
+    :root {
+      color-scheme: light;
+      --ink: #172943;
+      --muted: #64748b;
+      --blue: #205eea;
+      --line: #e4eaf3;
+      --surface: #fff;
+      --page: #f5f7fb;
     }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 68px;
+      padding: 12px max(5vw, 22px);
+      border-bottom: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      font-weight: 750;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .brand img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    .brand strong { color: var(--blue); }
+
+    .back-link {
+      color: #4c5d75;
+      font-size: 13px;
+      font-weight: 650;
+      text-decoration: none;
+    }
+
+    .back-link:hover { color: var(--blue); }
+
+    main {
+      width: min(1240px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 38px 0 56px;
+    }
+
+    .page-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 38px);
+      letter-spacing: -.04em;
+    }
+
+    .intro {
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .record-count {
+      flex: 0 0 auto;
+      padding: 9px 12px;
+      border: 1px solid #dce6f8;
+      border-radius: 9px;
+      background: #edf3ff;
+      color: #31569a;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .summary-card {
+      padding: 17px 19px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--surface);
+      box-shadow: 0 8px 24px rgba(27, 47, 78, .04);
+    }
+
+    .summary-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .summary-card strong {
+      display: block;
+      margin-top: 7px;
+      font-size: 26px;
+      letter-spacing: -.03em;
+    }
+
+    .summary-card.active strong { color: #18804b; }
+    .summary-card.dormant strong { color: #a76b00; }
+    .summary-card.terminated strong { color: #b42318; }
+
+    .table-panel {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      box-shadow: 0 10px 30px rgba(27, 47, 78, .05);
+    }
+
+    .table-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .table-toolbar h2 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .filters {
+      display: flex;
+      flex: 1;
+      justify-content: flex-end;
+      gap: 9px;
+    }
+
+    .filters input,
+    .filters select,
+    .status-select {
+      min-height: 38px;
+      padding: 0 11px;
+      border: 1px solid #d6deea;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 12px;
+    }
+
+    .filters input {
+      width: min(260px, 100%);
+    }
+
+    .filters input:focus,
+    .filters select:focus,
+    .status-select:focus {
+      border-color: var(--blue);
+      outline: 3px solid rgba(32, 94, 234, .13);
+    }
+
+    .table-scroll { overflow-x: auto; }
+
     table {
       width: 100%;
+      min-width: 930px;
       border-collapse: collapse;
-      background: white;
+      text-align: left;
     }
+
     th, td {
-      border: 1px solid #ccc;
-      padding: 8px;
+      padding: 12px 14px;
+      border-bottom: 1px solid #edf0f5;
+      vertical-align: middle;
+    }
+
+    th {
+      background: #f8faff;
+      color: #607087;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    td {
+      color: #34445c;
+      font-size: 12px;
+    }
+
+    tbody tr:hover { background: #fafcff; }
+    tbody tr:last-child td { border-bottom: 0; }
+
+    .number-cell {
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .status-cell {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      flex: 0 0 8px;
+      border-radius: 50%;
+    }
+
+    .status-indicator.active { background: #18a66a; }
+    .status-indicator.dormant { background: #e4a126; }
+    .status-indicator.terminated { background: #d64545; }
+
+    .empty-state {
+      padding: 28px;
+      color: var(--muted);
+      font-size: 13px;
       text-align: center;
     }
-    th {
-      background-color: #222;
-      color: white;
-    }
-    .status-select {
-      padding: 4px;
-    }
-    .active {
-      color: green;
-      font-weight: bold;
-    }
-    .dormant {
-      color: goldenrod;
-      font-weight: bold;
-    }
-    .terminated {
-      color: red;
-      font-weight: bold;
+
+    @media (max-width: 680px) {
+      .topbar { padding: 10px 16px; }
+      .brand { font-size: 15px; }
+      .brand img { width: 32px; height: 32px; }
+      main {
+        width: min(100% - 28px, 560px);
+        padding-top: 28px;
+      }
+      .page-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .summary-grid { gap: 8px; }
+      .summary-card { padding: 13px 10px; }
+      .summary-card span { font-size: 10px; }
+      .summary-card strong { font-size: 21px; }
+      .table-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+      .filters {
+        justify-content: stretch;
+        flex-direction: column;
+      }
+      .filters input,
+      .filters select { width: 100%; }
     }
   </style>
 </head>
 <body>
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="Kyekyeku Tech home">
+      <img src="assets/images/logo-3-color.png" alt="">
+      <span>Kyekyeku <strong>Tech</strong></span>
+    </a>
+    <a class="back-link" href="index.html">&larr; Back to home</a>
+  </header>
 
-  <h2>My Numbers Overview</h2>
-  <table id="numbersTable">
-    <thead>
-      <tr>
-        <th>Number</th>
-        <th>Type</th>
-        <th>Mobile Money</th>
-        <th>Payment ID</th>
-        <th>Biometric Captured</th>
-        <th>Document</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Content will be injected here by JavaScript -->
-    </tbody>
-  </table>
+  <main>
+    <section class="page-heading" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Account administration</p>
+        <h1 id="page-title">Number management</h1>
+        <p class="intro">Review your number records and update their current status.</p>
+      </div>
+      <span class="record-count" id="recordCount">0 records</span>
+    </section>
+
+    <section class="summary-grid" aria-label="Number status summary">
+      <div class="summary-card active">
+        <span>Active</span>
+        <strong id="activeCount">0</strong>
+      </div>
+      <div class="summary-card dormant">
+        <span>Dormant</span>
+        <strong id="dormantCount">0</strong>
+      </div>
+      <div class="summary-card terminated">
+        <span>Terminated</span>
+        <strong id="terminatedCount">0</strong>
+      </div>
+    </section>
+
+    <section class="table-panel" aria-labelledby="records-title">
+      <div class="table-toolbar">
+        <h2 id="records-title">Number records</h2>
+        <div class="filters">
+          <input id="numberSearch" type="search" placeholder="Search number or record..." aria-label="Search number records">
+          <select id="statusFilter" aria-label="Filter by status">
+            <option value="All">All statuses</option>
+            <option value="Active">Active</option>
+            <option value="Dormant">Dormant</option>
+            <option value="Terminated">Terminated</option>
+          </select>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table id="numbersTable">
+          <thead>
+            <tr>
+              <th scope="col">Number</th>
+              <th scope="col">Type</th>
+              <th scope="col">Mobile Money</th>
+              <th scope="col">Payment ID</th>
+              <th scope="col">Biometric Captured</th>
+              <th scope="col">Document</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div id="emptyState" class="empty-state" hidden>No matching number records found.</div>
+      </div>
+    </section>
+  </main>
 
   <script>
     const data = [
@@ -84,16 +378,21 @@
       ["595377574", "-", "Momo", "-", "B CAP YES", ""],
       ["241527012", "Agent", "Momo", "-", "B CAP YES", "WESTERN SOUTH MOMO AGENT"],
       ["539745010", "Agent", "Momo", "-", "B CAP YES", "KYEKYEKU TECH SOLUTIONS"],
-      ["0551905730", "D", "No", "", "", "Link"],
+      ["0541522807", "Merchant", "Momo", "-", "Coperate", "KYEKYEKU TECH SOLUTIONS"],
       ["0537396688", "-", "Momo", "-", "B CAP YES", "GHANA CARD"],
-      ["0539995390", "Data Sim", "Momo", "-", "B CAP YES", "GHANA CARD"],
-    ];
+      ["0539995390", "Data", "Momo", "-", "B CAP YES", "GHANA CARD"],
+      ["0550044115", "Agent", "Momo", "-", "Coperate", "Kyekyeku Tech Solutions"],
+      ["0318020037", "Data", "Momo", "-", "Coperate", "Kyekyeku Tech Solutions"],]
+
 
     const statusColors = {
       Active: "active",
       Dormant: "dormant",
       Terminated: "terminated"
     };
+
+    const searchInput = document.getElementById("numberSearch");
+    const statusFilter = document.getElementById("statusFilter");
 
     function loadStatuses() {
       return JSON.parse(localStorage.getItem("numberStatuses") || "{}");
@@ -105,41 +404,72 @@
 
     function renderTable() {
       const tbody = document.querySelector("#numbersTable tbody");
-      tbody.innerHTML = "";
+      tbody.replaceChildren();
       const statuses = loadStatuses();
+      const query = searchInput.value.trim().toLowerCase();
+      const selectedStatus = statusFilter.value;
+      const statusCounts = { Active: 0, Dormant: 0, Terminated: 0 };
 
       data.forEach(([number, evd, momo, pid, bio, doc]) => {
+        const status = statusColors[statuses[number]] ? statuses[number] : "Active";
+        statusCounts[status] += 1;
+      });
+
+      document.getElementById("activeCount").textContent = statusCounts.Active;
+      document.getElementById("dormantCount").textContent = statusCounts.Dormant;
+      document.getElementById("terminatedCount").textContent = statusCounts.Terminated;
+      document.getElementById("recordCount").textContent = `${data.length} ${data.length === 1 ? "record" : "records"}`;
+
+      const filteredData = data.filter(([number, evd, momo, pid, bio, doc]) => {
+        const status = statusColors[statuses[number]] ? statuses[number] : "Active";
+        const searchableText = [number, evd, momo, pid, bio, doc].join(" ").toLowerCase();
+        return searchableText.includes(query) && (selectedStatus === "All" || status === selectedStatus);
+      });
+
+      filteredData.forEach(([number, evd, momo, pid, bio, doc]) => {
         const row = document.createElement("tr");
+        const status = statusColors[statuses[number]] ? statuses[number] : "Active";
+        [number, evd, momo, pid, bio, doc].forEach((value, index) => {
+          const cell = document.createElement("td");
+          cell.textContent = value || "—";
+          if (index === 0) cell.className = "number-cell";
+          row.appendChild(cell);
+        });
 
-        const status = statuses[number] || "Active";
+        const statusCell = document.createElement("td");
+        const statusContent = document.createElement("div");
+        statusContent.className = "status-cell";
+        const indicator = document.createElement("span");
+        indicator.className = `status-indicator ${statusColors[status]}`;
+        indicator.setAttribute("aria-hidden", "true");
+        const select = document.createElement("select");
+        select.className = "status-select";
+        select.setAttribute("aria-label", `Status for ${number}`);
+        ["Active", "Dormant", "Terminated"].forEach((optionValue) => {
+          const option = document.createElement("option");
+          option.value = optionValue;
+          option.textContent = optionValue;
+          option.selected = status === optionValue;
+          select.appendChild(option);
+        });
+        statusContent.append(indicator, select);
+        statusCell.appendChild(statusContent);
+        row.appendChild(statusCell);
 
-        row.innerHTML = `
-          <td class="${statusColors[status]}">${number}</td>
-          <td>${evd}</td>
-          <td>${momo}</td>
-          <td>${pid}</td>
-          <td>${bio}</td>
-          <td>${doc}</td>
-          <td>
-            <select class="status-select">
-              <option value="Active" ${status === "Active" ? "selected" : ""}>Active</option>
-              <option value="Dormant" ${status === "Dormant" ? "selected" : ""}>Dormant</option>
-              <option value="Terminated" ${status === "Terminated" ? "selected" : ""}>Terminated</option>
-            </select>
-          </td>
-        `;
-
-        const select = row.querySelector("select");
         select.addEventListener("change", () => {
           statuses[number] = select.value;
           saveStatuses(statuses);
-          renderTable(); // Re-render to apply new color
+          renderTable();
         });
 
         tbody.appendChild(row);
       });
+
+      document.getElementById("emptyState").hidden = filteredData.length > 0;
     }
 
+    searchInput.addEventListener("input", renderTable);
+    statusFilter.addEventListener("change", renderTable);
     renderTable();
   </script>
 </body>

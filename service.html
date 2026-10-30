@@ -3,320 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>kyekyeku Tech Solutions</title>
-    <!-- Add Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Our Services | Kyekyeku Tech Solutions</title>
+    <meta name="description" content="Explore Kyekyeku Tech's digital platform development and online services for airtime, data bundles, email signatures, and ECG payments.">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/logo-3-color.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="CSS/kye.css">
+    <link rel="stylesheet" href="CSS/modern-home.css">
 </head>
 <body>
-    <button class="menu-toggle" aria-label="Menu Toggle">
-        <span class="text">MENU</span>
-        <span class="icon"><i class="fas fa-bars"></i></span>
-    </button>
-        
-        <!-- Menu -->
-        <nav class="menu">
-            <ul>
-                <li><a href="index.html" class="home"><span class="icon"><i class="fas fa-home"></i></span><span class="text">Home</span></a></li>
-                <li><a href="about.html" class="about"><span class="icon"><i class="fas fa-info-circle"></i></span><span class="text">About</span></a></li>
-                <li><a href="service.html" class="service"><span class="icon"><i class="fas fa-cogs"></i></span><span class="text">Service</span></a></li>
-                <li><a href="mailto:safooppong121@gmail.com" class="contact"><span class="icon"><i class="fas fa-envelope"></i></span><span class="text">Contact</span></a></li>
-            </ul>
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Kyekyeku Tech home">
+            <img src="./assets/images/logo-3-color.png" alt="">
+            <span>Kyekyeku <strong>Tech</strong></span>
+        </a>
+        <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="site-navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="site-nav" id="site-navigation" aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="service.html" aria-current="page">Services</a>
+            <a href="about.html">About</a>
+            <a href="index.html#free-tools">Free Digital Tools</a>
+            <a class="nav-contact" href="mailto:info@kyekyeku.tech">Contact us</a>
         </nav>
+    </header>
 
-    <section>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="bg-image"></div>
-        <div class="hero-content">
-        <h2 style="color: rgb(102, 255, 0);">Your One-Stop Digital Hub 🌐</h2><br>
-         <i class="fas fa-bolt"></i> <i class="fas fa-wifi"></i> <i class="fas fa-code"></i> <i class="fas fa-mobile-alt"></i> <i class="fas fa-signal"></i> <i class="fas fa-laptop-code"></i> <i class="fas fa-book"></i> <i class="fas fa-paint-brush"></i> <i class="fas fa-calculator"></i><br>
-           <p> We offer seamless ECG postpaid bill payments, affordable internet bundles, web & Android app development, and Wi-Fi device sales. Enjoy our free HTML playground, digital dictionary, instant bundle flyer generator, and GHS balance calculator all designed to enhance your digital experience.</p>
-            <a href="#services" class="btn">Get Started</a>
+    <main>
+        <section class="hero-section service-hero">
+            <div class="hero-copy">
+                <p class="hero-eyebrow">What we do</p>
+                <h1>Digital platforms and <span>everyday services.</span></h1>
+                <p>We build useful digital platforms and bring everyday online services together through our business platform.</p>
+                <div class="hero-actions">
+                    <a class="hero-primary" href="https://www.kyekyekutech.site">Visit our business platform</a>
+                    <a class="hero-secondary" href="#services">Explore our services</a>
+                </div>
+            </div>
+            <div class="service-hero-panel" aria-label="Services available on our business platform">
+                <p class="section-kicker">One business platform</p>
+                <div class="service-hero-list">
+                    <span><i class="fas fa-bolt" aria-hidden="true"></i> Airtime</span>
+                    <span><i class="fas fa-wifi" aria-hidden="true"></i> Data bundles</span>
+                    <span><i class="fas fa-signature" aria-hidden="true"></i> Email signatures</span>
+                    <span><i class="fas fa-lightbulb" aria-hidden="true"></i> ECG payments</span>
+                </div>
+                <p>Prepaid and postpaid services, available online.</p>
+            </div>
+        </section>
+
+        <section class="platform-overview service-overview" id="services" aria-labelledby="services-title">
+            <p class="section-kicker">Our business platform</p>
+            <h2 id="services-title">Everyday services, all in one place.</h2>
+            <p class="platform-intro">Visit <a href="https://www.kyekyekutech.site">kyekyekutech.site</a> to access the following services.</p>
+            <div class="platform-grid">
+                <a class="platform-card" href="https://www.kyekyekutech.site">
+                    <span class="platform-card-icon"><i class="fas fa-bolt" aria-hidden="true"></i></span>
+                    <h3>Airtime</h3>
+                    <p>Buy airtime through our business platform.</p>
+                    <span class="platform-card-link">Visit platform <b aria-hidden="true">&rarr;</b></span>
+                </a>
+                <a class="platform-card" href="https://www.kyekyekutech.site">
+                    <span class="platform-card-icon"><i class="fas fa-wifi" aria-hidden="true"></i></span>
+                    <h3>Data bundles</h3>
+                    <p>Find data bundles on our business platform.</p>
+                    <span class="platform-card-link">Visit platform <b aria-hidden="true">&rarr;</b></span>
+                </a>
+                <a class="platform-card" href="https://www.kyekyekutech.site">
+                    <span class="platform-card-icon"><i class="fas fa-signature" aria-hidden="true"></i></span>
+                    <h3>Email signatures</h3>
+                    <p>Explore email signature services on our platform.</p>
+                    <span class="platform-card-link">Visit platform <b aria-hidden="true">&rarr;</b></span>
+                </a>
+                <a class="platform-card" href="https://www.kyekyekutech.site">
+                    <span class="platform-card-icon"><i class="fas fa-lightbulb" aria-hidden="true"></i></span>
+                    <h3>ECG prepaid &amp; postpaid</h3>
+                    <p>Access both ECG prepaid and postpaid payment services online.</p>
+                    <span class="platform-card-link">Visit platform <b aria-hidden="true">&rarr;</b></span>
+                </a>
+            </div>
+        </section>
+
+        <section class="service-build-section" aria-labelledby="platform-building-title">
+            <div class="service-build-icon" aria-hidden="true"><i class="fas fa-laptop-code"></i></div>
+            <div>
+                <p class="section-kicker">Platform development</p>
+                <h2 id="platform-building-title">We build practical digital platforms.</h2>
+                <p>Have an idea or a platform project in mind? Get in touch to discuss how we can help.</p>
+            </div>
+            <a class="hero-primary" href="mailto:info@kyekyeku.tech?subject=Platform%20development%20enquiry">Talk to our team</a>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-main">
+            <section class="footer-team" aria-labelledby="footer-team-title">
+                <p class="footer-kicker">People behind the platform</p>
+                <h2 id="footer-team-title">Our Team</h2>
+                <p>The people building useful digital platforms and services for our community.</p>
+                <a class="footer-link-button" href="team.html">Meet the team <span aria-hidden="true">&rarr;</span></a>
+            </section>
+
+            <nav class="footer-platform" aria-labelledby="footer-platform-title">
+                <p class="footer-kicker">Everyday services</p>
+                <h2 id="footer-platform-title">Our Business Platform</h2>
+                <a href="https://www.kyekyekutech.site"><i class="fas fa-bolt" aria-hidden="true"></i> Airtime &amp; data bundles</a>
+                <a href="https://www.kyekyekutech.site"><i class="fas fa-signature" aria-hidden="true"></i> Email signatures</a>
+                <a href="https://www.kyekyekutech.site"><i class="fas fa-lightbulb" aria-hidden="true"></i> ECG prepaid &amp; postpaid</a>
+                <a class="footer-link-button" href="https://www.kyekyekutech.site">Visit business platform <span aria-hidden="true">&rarr;</span></a>
+            </nav>
+
+            <section class="footer-newsletter" aria-labelledby="newsletter-title">
+                <p class="footer-kicker">Stay in the loop</p>
+                <h2 id="newsletter-title">Get updates from Kyekyeku Tech.</h2>
+                <p>Stay updated with our latest news, platform updates, and offers.</p>
+                <a class="newsletter-button" href="mailto:info@kyekyeku.tech?subject=Newsletter%20subscription">
+                    <i class="fas fa-envelope" aria-hidden="true"></i> Subscribe by email
+                </a>
+            </section>
         </div>
-    </section>
 
-    <!-- Services Section -->
-    <section id="services">
-        <h2 style="color: rgb(252, 6, 6);">Our Services</h2>
-        <div class="services-container">
-            <div class="service-card">
-                <i class="fas fa-laptop-code"></i>
-                <h3>Web Development</h3>
-                <p>We build sleek, responsive, and dynamic websites.</p>
-                <a href="develop.html" class="btn">Learn More</a>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-calculator"></i>
-                <h3>GHS Calculator</h3>
-                <p>Quickly calculate and track your GHS balance for better financial planning</p>
-                <a href="cal.html" class="btn">Explore</a>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-bolt"></i>
-                <h3>ECG postpaid Service</h3>
-                <p>Conveniently pay your ECG postpaid bills online with ease..</p>
-                <a href="ecg.html" class="btn">Pay Your Light Bill</a>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-signal"></i>
-                <h3>Selling of Data Bundle</h3>
-                <p>Get affordable internet bundles for MTN, Telecel, and AirtelTigo.</p>
-                <a href="https://kyekyekutech.site" class="btn">Explore</a>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-wifi"></i>
-                <h3>Wi-Fi Device Selling 📡</h3>
-                <p>Get high-speed Wi-Fi devices for seamless connectivity.</p>
-                <a href="shop.html" class="btn">Buy Now</a>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-book"></i>
-                <h3>Free Digital Dictionary</h3>
-                <p>Instantly look up words and definitions with our online dictionary.</p>
-                <a href="dictionary.html" class="btn">Get Started</a>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-paint-brush"></i>
-                <h3>Free Instant Bundle Flyer Generator</h3>
-                <p>Create eye-catching bundle flyers instantly for promotions.</p>
-                <a href="flyer.html" class="btn">Get Started</a>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-signature"></i>
-                <h3>Email Signature</h3>
-                <p>Create eye-catching Email Signature with Us.</p>
-                <a href="emailsignature.html" class="btn">View More</a>
-            </div>
+        <div class="footer-bottom">
+            <p class="copyright">
+                &copy; <span id="copyright-year">2026</span> Kyekyeku Tech Solutions. All rights reserved.
+                <a href="about.html">Kyekyeku-Tech</a>
+            </p>
+            <a class="footer-terms" href="T&amp;Cs.html">Terms and Conditions</a>
+            <nav class="footer-socials" aria-label="Social media">
+                <a href="https://facebook.com/oppong.safo.35" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                <a href="https://twitter.com/safo_oppong" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                <a href="https://github.com/Kyekyeku-Tech" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+                <a href="https://wa.me/+233545454000" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+                <a href="https://instagram.com/kyekyekutek" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+            </nav>
         </div>
-    </section>
-    <!-- Contact Section -->
-    <section id="contact" netlify>
-        <h2 style="color: #64FFDA;">Contact Us</h2>
-        <form>
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Kyekyeku-Tech. All rights reserved.</p>
     </footer>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background: #0A192F;
-            color: white;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-            background: #112240;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-        }
-
-        nav ul li {
-            margin: 0 15px;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 100px 20px;
-            background-color: #0a192f86;
-        }
-
-        .btn {
-            background: #64FFDA;
-            padding: 10px 20px;
-            color: #0A192F;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 10px;
-            border-radius: 5px;
-        }
-
-        .services-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 50px;
-        }
-
-        .service-card {
-            background: #112240;
-            padding: 20px;
-            text-align: center;
-            border-radius: 10px;
-            width: 250px;
-        }
-
-        .service-card i {
-            font-size: 40px;
-            color: #64FFDA;
-        }
-
-        /* Portfolio */
-        .portfolio-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 50px;
-        }
-
-        .portfolio-item {
-            background: #112240;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            width: 300px;
-        }
-
-        .portfolio-item img {
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        .portfolio-item h3 {
-            margin: 10px 0;
-        }
-
-        .portfolio-item a {
-            display: block;
-            margin-top: 5px;
-            color: #64FFDA;
-            text-decoration: none;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            max-width: 400px;
-            margin: auto;
-        }
-
-        form input, form textarea, form button {
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        form button {
-            background: #64FFDA;
-            cursor: pointer;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #112240;
-            margin-top: 50px;
-        }
-        .services-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            padding: 30px;
-        }
-        .service-card {
-            background: #112240;
-            padding: 15px;
-            border-radius: 10px;
-            width: 100%;
-            max-width: 300px;
-        }
-        .portfolio-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            padding: 30px;
-        }
-        .portfolio-item {
-            background: #112240;
-            padding: 15px;
-            border-radius: 10px;
-            width: 100%;
-            max-width: 300px;
-        }
-    </style>
-<script>
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6558e086d600b968d314926f/1hfhiq4er';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-     const images = [
-            "https://images.pexels.com/photos/572056/pexels-photo-572056.jpeg",
-            "https://i.pinimg.com/736x/65/7d/94/657d941aca5faf7ca0a905e66b1bbdcd.jpg",
-            "https://i.pinimg.com/736x/00/bd/11/00bd118fbf827f3e7f33efd9e205eeda.jpg",
-            "https://i.pinimg.com/736x/93/bf/31/93bf31f952569c2c5be27431360f0115.jpg",
-            "https://i.pinimg.com/736x/f8/ff/2b/f8ff2b262e4bb46bdfbad821613841cd.jpg",
-            "https://i.pinimg.com/736x/5b/a2/97/5ba2978e296477744242b28c710acefb.jpg",
-            "https://i.pinimg.com/736x/bd/c6/24/bdc6247d1c8ebafd95db73f665adabd4.jpg",
-            "https://i.pinimg.com/736x/55/0b/40/550b40dfbf228fefbe162d5192893730.jpg"
-        ];
-
-        let currentIndex = 0;
-        const bgImageDiv = document.querySelector(".bg-image");
-
-        function changeBackground() {
-            bgImageDiv.style.opacity = 0;
-            setTimeout(() => {
-                bgImageDiv.style.backgroundImage = `url('${images[currentIndex]}')`;
-                bgImageDiv.style.opacity = 1;
-                currentIndex = (currentIndex + 1) % images.length;
-            }, 1000);
-        }
-
-        bgImageDiv.style.backgroundImage = `url('${images[0]}')`;
-        setInterval(changeBackground, 5000);
-    const menuToggle = document.querySelector('.menu-toggle');
-        const menu = document.querySelector('.menu');
-
-        menuToggle.addEventListener('click', () => {
-            menu.classList.toggle('open');
-        });
-
-        document.querySelector('.menu-toggle').addEventListener('click', function() {
-            this.classList.toggle('active');
-        });
-        
-</script>
+    <script src="SCRIPT/site-nav.js"></script>
 </body>
 </html>

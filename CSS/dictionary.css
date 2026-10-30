@@ -1,0 +1,557 @@
+:root {
+  color-scheme: light;
+  --ink: #172943;
+  --muted: #64748b;
+  --blue: #205eea;
+  --line: #e4eaf3;
+  --soft-blue: #f3f7ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: #f7f9fc;
+  color: var(--ink);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.dictionary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 70px;
+  padding: 12px max(5vw, 22px);
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+
+.dictionary-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.dictionary-brand img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.dictionary-brand strong {
+  color: var(--blue);
+}
+
+.dictionary-header nav {
+  display: flex;
+  gap: 24px;
+  color: #4c5d75;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.dictionary-header nav a:hover,
+.page-footer a:hover {
+  color: var(--blue);
+}
+
+.dictionary-main {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 54px 0 32px;
+}
+
+.page-intro {
+  max-width: 700px;
+  margin: 0 auto 34px;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.page-intro h1 {
+  margin: 0;
+  font-size: clamp(32px, 5vw, 48px);
+  letter-spacing: -0.045em;
+  line-height: 1.12;
+}
+
+.page-intro > p:last-child {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 22px;
+}
+
+.tool-card {
+  min-width: 0;
+  padding: 27px;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  background: #fff;
+  box-shadow: 0 12px 35px rgba(27, 47, 78, 0.05);
+}
+
+.tool-heading {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.tool-icon {
+  display: grid;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: 13px;
+  background: #eaf1ff;
+  color: var(--blue);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.grammar-icon {
+  font-size: 14px;
+}
+
+.tool-heading .eyebrow {
+  margin-bottom: 3px;
+}
+
+.tool-heading h2 {
+  margin: 0;
+  font-size: 23px;
+  letter-spacing: -0.03em;
+}
+
+.card-description {
+  margin: 18px 0 21px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.lookup-form label,
+.grammar-form label,
+.suggest-form label {
+  display: block;
+  margin-bottom: 8px;
+  color: #33445e;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.input-row {
+  display: flex;
+  gap: 9px;
+}
+
+.input-row input,
+.grammar-form textarea,
+.suggest-form input,
+.suggest-form textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #d6deea;
+  border-radius: 9px;
+  background: #fff;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.input-row input,
+.suggest-form input {
+  min-height: 46px;
+  padding: 0 12px;
+}
+
+.grammar-form textarea,
+.suggest-form textarea {
+  padding: 12px;
+  resize: vertical;
+  line-height: 1.55;
+}
+
+.input-row input:focus,
+.grammar-form textarea:focus,
+.suggest-form input:focus,
+.suggest-form textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(32, 94, 234, 0.12);
+}
+
+.primary-button,
+.secondary-button,
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.primary-button {
+  flex: 0 0 auto;
+  color: #fff;
+  background: var(--blue);
+}
+
+.primary-button:hover:not(:disabled) {
+  background: #174dc2;
+  transform: translateY(-1px);
+}
+
+.primary-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.secondary-button,
+.icon-button {
+  border-color: #d7e2f5;
+  color: var(--blue);
+  background: #fff;
+}
+
+.secondary-button:hover,
+.icon-button:hover {
+  background: var(--soft-blue);
+}
+
+.icon-button {
+  min-height: 36px;
+  padding: 0 12px;
+}
+
+.status-message {
+  min-height: 20px;
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.status-message[data-state="error"] {
+  color: #b42318;
+}
+
+.status-message[data-state="success"] {
+  color: #18804b;
+}
+
+.word-result,
+.grammar-result {
+  margin-top: 15px;
+  padding-top: 17px;
+  border-top: 1px solid var(--line);
+}
+
+.word-title-row,
+.grammar-result-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.word-title-row h3,
+.grammar-result-heading h3 {
+  margin: 0;
+  font-size: 23px;
+  text-transform: capitalize;
+}
+
+.phonetic {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.definition-group {
+  margin-top: 17px;
+}
+
+.definition-group h4,
+.related-words h4 {
+  margin: 0 0 8px;
+  color: #475a76;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.definition-list {
+  margin: 0;
+  padding-left: 21px;
+}
+
+.definition-list li {
+  padding-left: 3px;
+  color: #34445c;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.definition-list li + li {
+  margin-top: 12px;
+}
+
+.example {
+  display: block;
+  margin-top: 4px;
+  color: #718198;
+  font-size: 13px;
+  font-style: italic;
+}
+
+.related-words {
+  margin-top: 18px;
+}
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.word-chip {
+  padding: 5px 9px;
+  border-radius: 20px;
+  background: var(--soft-blue);
+  color: #31569a;
+  font-size: 12px;
+}
+
+.result-source {
+  margin: 17px 0 0;
+  color: #8290a4;
+  font-size: 11px;
+}
+
+.suggest-word {
+  margin-top: 21px;
+  padding-top: 15px;
+  border-top: 1px solid var(--line);
+}
+
+.suggest-word summary {
+  color: #435570;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.suggest-form {
+  display: grid;
+  gap: 9px;
+  margin-top: 14px;
+}
+
+.suggest-form label {
+  margin: 2px 0 -4px;
+}
+
+.suggest-form .secondary-button {
+  justify-self: start;
+  margin-top: 4px;
+}
+
+.grammar-form textarea {
+  display: block;
+  min-height: 165px;
+}
+
+.grammar-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 11px;
+}
+
+.grammar-controls span {
+  color: #8290a4;
+  font-size: 11px;
+}
+
+.privacy-note {
+  margin: 13px 0 0;
+  color: #78869a;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.grammar-result-heading {
+  align-items: center;
+}
+
+.grammar-result-heading h3 {
+  font-size: 16px;
+}
+
+.grammar-result-heading .secondary-button {
+  min-height: 36px;
+  padding: 0 10px;
+  font-size: 11px;
+}
+
+.issue-list {
+  display: grid;
+  gap: 10px;
+  margin: 15px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.issue-card {
+  padding: 12px;
+  border: 1px solid #e8edf4;
+  border-radius: 10px;
+  background: #fbfcfe;
+}
+
+.issue-message {
+  margin: 0;
+  color: #43536b;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.issue-context {
+  margin: 7px 0 0;
+  color: #74839a;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.issue-fixes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 9px;
+}
+
+.fix-button {
+  padding: 5px 9px;
+  border: 1px solid #d7e2f5;
+  border-radius: 7px;
+  background: #fff;
+  color: var(--blue);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.fix-button:hover {
+  background: var(--soft-blue);
+}
+
+.page-footer {
+  margin: 27px 0 0;
+  color: #8995a8;
+  font-size: 12px;
+  text-align: center;
+}
+
+.page-footer a {
+  display: inline;
+  color: #5b6b82;
+  font-weight: 700;
+}
+
+@media (max-width: 780px) {
+  .dictionary-main {
+    padding-top: 40px;
+  }
+
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .dictionary-header {
+    min-height: 62px;
+    padding: 10px 16px;
+  }
+
+  .dictionary-brand {
+    font-size: 15px;
+  }
+
+  .dictionary-brand img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .dictionary-header nav {
+    gap: 13px;
+    font-size: 12px;
+  }
+
+  .dictionary-main {
+    width: min(100% - 28px, 560px);
+    padding-top: 34px;
+  }
+
+  .tool-card {
+    padding: 21px 17px;
+  }
+
+  .input-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

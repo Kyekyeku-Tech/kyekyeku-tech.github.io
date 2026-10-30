@@ -3,176 +3,299 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Our Futuristic Team</title>
+  <meta name="description" content="Meet the Kyekyeku Tech team and read what customers say about our digital services.">
+  <title>Meet the Kyekyeku Tech Team</title>
   <style>
-      * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body, html {
-  min-height: 100%;
-  font-family: 'Orbitron', sans-serif;
-  background: #0d0d0d;
-  color: #fff;
-}
+    :root {
+      color-scheme: light;
+      --ink: #172943;
+      --muted: #64748b;
+      --blue: #205eea;
+      --line: #e4eaf3;
+    }
 
-canvas#bgCanvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
-.container {
-  position: relative;
-  z-index: 10;
-  padding: 4rem;
-  text-align: center;
-}
-.title {
-  font-size: 3rem;
-  color: #0ff;
-  margin-bottom: 2rem;
-  text-shadow: 0 0 10px #0ff;
-}
-.card-grid {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-.team-card {
-  background: rgba(0, 0, 0, 0.7);
-  border: 2px solid #0ff;
-  padding: 2rem;
-  width: 220px;
-  border-radius: 15px;
-  perspective: 1000px;
-  box-shadow: 0 0 20px #0ff, 0 0 30px #00f;
-  transition: transform 0.2s;
-  cursor: pointer;
-  transform-style: preserve-3d;
-}
-.team-card:hover {
-  animation: pulse 1s infinite alternate;
-}
-.team-card img {
-  width: 100px;
-  border-radius: 50%;
-  border: 3px solid #0ff;
-  margin-bottom: 1rem;
-}
-.team-card h2 {
-  font-size: 1.2rem;
-  margin: 0.5rem 0;
-}
-.team-card p {
-  color: #aaa;
-  font-size: 0.9rem;
-}
-@keyframes pulse {
-  from {
-    box-shadow: 0 0 10px #0ff;
-  }
-  to {
-    box-shadow: 0 0 20px #0ff, 0 0 30px #0f0;
-  }
-}
-   .testimonials {
-            padding: 50px 20px;
-            margin-top: 40px;
-            background: rgba(15, 0, 0, 0.945);
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-            
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        .testimonials h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: #f7f9fc;
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+    }
 
-        .testimonial-slider {
-            display: flex;
-            overflow: hidden;
-            position: relative;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        .testimonial-slide {
-            min-width: 100%;
-            animation: slide 10s infinite;
-        }
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 72px;
+      padding: 12px max(5vw, 22px);
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
 
-        .testimonial-slide img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin-bottom: 15px;
-            border: 2px solid #0b07ff;
-        }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 750;
+    }
 
-        .testimonial-slide blockquote {
-            font-size: 1.2rem;
-            font-style: italic;
-        }
+    .brand img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+    }
 
-        .testimonial-slide p {
-            font-weight: bold;
-            color: rgb(236, 5, 5);
-        }
+    .brand strong {
+      color: var(--blue);
+    }
 
-        @keyframes slide {
-  0% { transform: translateX(0); }
-  33% { transform: translateX(-100%); }
-  66% { transform: translateX(-200%); }
-  100% { transform: translateX(0); }
-}
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: #4c5d75;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .site-nav a:hover {
+      color: var(--blue);
+    }
+
+    .page-main {
+      width: min(1050px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 62px 0 48px;
+    }
+
+    .page-intro {
+      max-width: 650px;
+      margin: 0 auto 34px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 48px);
+      letter-spacing: -0.045em;
+    }
+
+    .intro-copy {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 280px));
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .team-card {
+      padding: 27px 22px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 12px 35px rgba(27, 47, 78, 0.06);
+      text-align: center;
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 42px rgba(27, 47, 78, 0.11);
+    }
+
+    .team-card img {
+      width: 104px;
+      height: 104px;
+      margin: 0 auto 16px;
+      border: 4px solid #eaf1ff;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .team-card h2 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .team-card p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .team-card .team-company {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .testimonials {
+      margin-top: 56px;
+      padding: 34px clamp(20px, 5vw, 56px);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 12px 35px rgba(27, 47, 78, 0.05);
+      text-align: center;
+    }
+
+    .testimonials h2 {
+      margin: 0 0 22px;
+      font-size: 25px;
+      letter-spacing: -0.03em;
+    }
 
     .testimonial-slide {
-    opacity: 1;
-    transition: opacity 1s ease;
-}
+      max-width: 660px;
+      min-height: 174px;
+      margin: 0 auto;
+      opacity: 1;
+      transition: opacity 350ms ease;
+    }
 
-.testimonial-slide.fade-out {
-    opacity: 0;
-}
-                                   
-            
+    .testimonial-slide.fade-out {
+      opacity: 0;
+    }
+
+    .testimonial-slide img {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 14px;
+      border: 3px solid #eaf1ff;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .testimonial-slide blockquote {
+      margin: 0;
+      color: #34445c;
+      font-size: clamp(16px, 2.5vw, 20px);
+      line-height: 1.6;
+    }
+
+    .testimonial-slide p {
+      margin: 13px 0 0;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 560px) {
+      .site-header {
+        min-height: 64px;
+        padding: 10px 16px;
+      }
+
+      .brand {
+        font-size: 15px;
+      }
+
+      .brand img {
+        width: 32px;
+        height: 32px;
+      }
+
+      .site-nav {
+        gap: 14px;
+        font-size: 12px;
+      }
+
+      .page-main {
+        width: min(100% - 28px, 460px);
+        padding-top: 42px;
+      }
+
+      .card-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .team-card {
+        max-width: 360px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .testimonials {
+        margin-top: 36px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 <body>
-  <canvas id="bgCanvas"></canvas>
-  <div class="container">
-    <h1 class="title">Meet Our Team</h1>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Kyekyeku Tech home">
+      <img src="assets/images/logo-3-color.png" alt="">
+      <span>Kyekyeku <strong>Tech</strong></span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="service.html">Services</a>
+      <a href="mailto:info@kyekyeku.tech">Contact</a>
+    </nav>
+  </header>
+  <main class="page-main">
+    <section class="page-intro">
+      <p class="eyebrow">The people behind the platform</p>
+      <h1 class="title">Meet Our Team</h1>
+      <p class="intro-copy">A focused team building useful digital platforms and services for our community.</p>
+    </section>
     <div class="card-grid">
-      <div class="team-card" data-name="Luna">
-        <img src="assets/images/my-avatar.png" alt="Luna" />
+      <article class="team-card">
+        <img src="assets/images/my-avatar.png" alt="Safo Oppong" />
         <h2>Safo</h2>
         <p>Chief Executive Officer</p>
-      </div>
-      <div class="team-card" data-name="Kai">
-        <img src="finance.jpg" alt="Kai" />
+      </article>
+      <article class="team-card">
+        <img src="finance.jpg" alt="Ohene Nana Yamoah" />
         <h2>Ohene</h2>
-        <p>~Manager~</p>
-            <p>Kyekyekutech.site</p>
-      </div>
-      <div class="team-card" data-name="Nova">
-        <img src="support1.png" alt="Nova" />
-        <h2>Andy</h2>
-       <p>~Manager~</p>
-            <p>KyekyekuData Hub</p>
-      </div>
+        <p>Manager</p>
+        <p class="team-company">Kyekyekutech.site</p>
+      </article>
     </div>
-  </div>
-  <section class="testimonials">
-    <h3>Testimonials</h3>
-    <div class="testimonial-slide" id="testimonial">
+    <section class="testimonials" aria-labelledby="testimonials-title">
+      <h2 id="testimonials-title">What our customers say</h2>
+      <div class="testimonial-slide" id="testimonial" aria-live="polite">
         <img src="" alt="Person">
         <blockquote></blockquote>
         <p></p>
-    </div>
-</section>
+      </div>
+    </section>
+  </main>
 
   <script>
     const testimonialData = [
@@ -237,11 +360,6 @@ canvas#bgCanvas {
         name: "- User001"
     },
     {
-        img: "support1.png",
-        quote: "Kyekyeku-Tech has made my online experience so much better. Highly recommend!",
-        name: "- Andy Nimoh"
-    },
-    {
         img: "https://i.pravatar.cc/",
         quote: "The customer support is always ready to help. I feel valued as a customer!",
         name: "- User003"
@@ -302,94 +420,20 @@ function showRandomTestimonial() {
     setTimeout(() => {
         // Change content after fade out
         imgEl.src = random.img;
-        quoteEl.textContent = random.quote;
-        nameEl.textContent = random.name;
+            imgEl.alt = random.name.replace(/^- /, "");
+            quoteEl.textContent = random.quote;
+            nameEl.textContent = random.name;
 
         // Fade back in
         testimonialEl.classList.remove('fade-out');
-    }, 1000); // matches CSS transition time
+    }, 350);
 }
 
 // Initial load
 showRandomTestimonial();
 
-// Change every 10 seconds
-setInterval(showRandomTestimonial, 6000);
-
-      const cards = document.querySelectorAll('.team-card');
-
-// 3D Tilt effect
-cards.forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = (y - centerY) / 10;
-    const rotateY = (centerX - x) / 10;
-    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = `rotateX(0deg) rotateY(0deg)`;
-  });
-});
-
-// Particles background
-const canvas = document.getElementById("bgCanvas");
-const ctx = canvas.getContext("2d");
-let particlesArray;
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-window.addEventListener('resize', function(){
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  init();
-});
-
-function Particle(){
-  this.x = Math.random() * canvas.width;
-  this.y = Math.random() * canvas.height;
-  this.size = Math.random() * 2 + 0.5;
-  this.speedX = Math.random() * 1 - 0.5;
-  this.speedY = Math.random() * 1 - 0.5;
-  this.color = '#0ff';
-
-  this.update = function(){
-    this.x += this.speedX;
-    this.y += this.speedY;
-    if(this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-    if(this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-  }
-
-  this.draw = function(){
-    ctx.fillStyle = this.color;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-  }
-}
-
-function init(){
-  particlesArray = [];
-  for(let i = 0; i < 100; i++){
-    particlesArray.push(new Particle());
-  }
-}
-
-function animate(){
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for(let i = 0; i < particlesArray.length; i++){
-    particlesArray[i].update();
-    particlesArray[i].draw();
-  }
-  requestAnimationFrame(animate);
-}
-
-init();
-animate();
+// Change testimonials periodically without moving the page layout.
+setInterval(showRandomTestimonial, 8000);
             
   </script>
 </body>

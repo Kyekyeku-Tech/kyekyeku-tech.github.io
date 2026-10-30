@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kyekyeku-Tech Cal</title>
+    <meta name="description" content="Count Ghana cedi notes and coins, add e-cash, and save cash-counting records with the Kyekyeku Tech GHS calculator.">
+    <title>GHS Calculator | Kyekyeku Tech</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/logo-3-color.png">
+    <link rel="stylesheet" href="CSS/calculator.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -135,94 +138,118 @@ a[href^="go:"]:hover {
     </style>
 </head>
 <body>
+    <header class="calculator-header">
+        <a class="calculator-brand" href="index.html" aria-label="Kyekyeku Tech home">
+            <img src="assets/images/logo-3-color.png" alt="">
+            <span>Kyekyeku <strong>Tech</strong></span>
+        </a>
+        <a class="calculator-back" href="index.html">&larr; Back to home</a>
+    </header>
 
-    <!-- Cash Form -->
+    <main class="calculator-page">
+        <section class="calculator-intro">
+            <p class="calculator-eyebrow">Free digital tool</p>
+            <h1>GHS Cash Calculator</h1>
+            <p>Count your Ghana cedi notes and coins, add e-cash, and save records in this browser.</p>
+        </section>
+
     <div id="cashFormContainer">
-        <form id="cashForm" action="https:KYEKYEKU-TECH.STORE" method="post">
-
+        <form id="cashForm" onsubmit="return false;">
+            <div class="calculator-layout">
+                <section class="denomination-panel" aria-labelledby="denomination-title">
+                    <h2 class="panel-heading" id="denomination-title">Cash denominations</h2>
+                    <p class="panel-description">Enter the quantity of each note or coin to calculate its value.</p>
+                    <div class="denomination-scroll">
         <table>
+            <thead>
             <tr>
-                <th>Cash Denomination</th>
-                <th>Quantity</th>
-                <th>Total</th>
+                <th scope="col">Denomination</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total (GHS)</th>
             </tr>
+            </thead>
+            <tbody>
             <tr>
                 <td>GHC 200.00</td>
-                <td><input type="number" name="quantity_GHC200" oninput="calculateTotal('GHC200')"></td>
+                <td><input type="number" min="0" step="1" inputmode="numeric" aria-label="Quantity of GHS 200 notes" name="quantity_GHC200" oninput="calculateTotal('GHC200')"></td>
                 <td id="total_GHC200">0</td>
             </tr>
             <tr>
                 <td>GHC 100.00</td>
-                <td><input type="number" name="quantity_GHC100" oninput="calculateTotal('GHC100')"></td>
+                <td><input type="number" min="0" step="1" inputmode="numeric" aria-label="Quantity of GHS 100 notes" name="quantity_GHC100" oninput="calculateTotal('GHC100')"></td>
                 <td id="total_GHC100">0</td>
             </tr>
             <tr>
                 <td>GHC 50.00</td>
-                <td><input type="number" name="quantity_GHC50" oninput="calculateTotal('GHC50')"></td>
+                <td><input type="number" min="0" step="1" inputmode="numeric" aria-label="Quantity of GHS 50 notes" name="quantity_GHC50" oninput="calculateTotal('GHC50')"></td>
                 <td id="total_GHC50">0</td>
             </tr>
             <tr>
                 <td>GHC 20.00</td>
-                <td><input type="number" name="quantity_GHC20" oninput="calculateTotal('GHC20')"></td>
+                <td><input type="number" min="0" step="1" inputmode="numeric" aria-label="Quantity of GHS 20 notes" name="quantity_GHC20" oninput="calculateTotal('GHC20')"></td>
                 <td id="total_GHC20">0</td>
             </tr>
             <tr>
                 <td>GHC 10.00</td>
-                <td><input type="number" name="quantity_GHC10" oninput="calculateTotal('GHC10')"></td>
+                <td><input type="number" min="0" step="1" inputmode="numeric" aria-label="Quantity of GHS 10 notes" name="quantity_GHC10" oninput="calculateTotal('GHC10')"></td>
                 <td id="total_GHC10">0</td>
             </tr>
             <tr>
                 <td>GHC 5.00</td>
-                <td><input type="number" name="quantity_GHC5" oninput="calculateTotal('GHC5')"></td>
+                <td><input type="number" min="0" step="1" inputmode="numeric" aria-label="Quantity of GHS 5 notes" name="quantity_GHC5" oninput="calculateTotal('GHC5')"></td>
                 <td id="total_GHC5">0</td>
             </tr>
             <tr>
                 <td>GHC 2.00</td>
-                <td><input type="number" name="quantity_GHC2" oninput="calculateTotal('GHC2')"></td>
+                <td><input type="number" min="0" step="1" inputmode="numeric" aria-label="Quantity of GHS 2 coins" name="quantity_GHC2" oninput="calculateTotal('GHC2')"></td>
                 <td id="total_GHC2">0</td>
             </tr>
             <tr>
                 <td>GHC 1.00</td>
-                <td><input type="number" name="quantity_GHC1" oninput="calculateTotal('GHC1')"></td>
+                <td><input type="number" min="0" step="1" inputmode="numeric" aria-label="Quantity of GHS 1 coins" name="quantity_GHC1" oninput="calculateTotal('GHC1')"></td>
                 <td id="total_GHC1">0</td>
             </tr>
             <tr>
                 <td>GHC 0.50</td>
-                <td><input type="number" name="quantity_GHC0.5" oninput="calculateTotal('GHC0.5')"></td>
+                <td><input type="number" min="0" step="1" inputmode="numeric" aria-label="Quantity of 50 pesewa coins" name="quantity_GHC0.5" oninput="calculateTotal('GHC0.5')"></td>
                 <td id="total_GHC0.5">0</td>
             </tr>
             <tr>
                 <td>GHC 0.20</td>
-                <td><input type="number" name="quantity_GHC0.2" oninput="calculateTotal('GHC0.2')"></td>
+                <td><input type="number" min="0" step="1" inputmode="numeric" aria-label="Quantity of 20 pesewa coins" name="quantity_GHC0.2" oninput="calculateTotal('GHC0.2')"></td>
                 <td id="total_GHC0.2">0</td>
             </tr>
             <tr>
                 <td>GHC 0.10</td>
-                <td><input type="number" name="quantity_GHC0.1" oninput="calculateTotal('GHC0.1')"></td>
+                <td><input type="number" min="0" step="1" inputmode="numeric" aria-label="Quantity of 10 pesewa coins" name="quantity_GHC0.1" oninput="calculateTotal('GHC0.1')"></td>
                 <td id="total_GHC0.1">0</td>
             </tr>
-        </table><br>
-            <label for="E-cash"><strong>TOTAL E-CASH :</strong></label>
-            <input type="number" id="E-cash" name="E-CASH" oninput="calculateGrandTotal()">
-            <label for="FinalTotal"><strong>GRANDTOTAL:</strong></label> 
-            <input type="text" id="FinalTotal" name="GRAND TOTAL" readonly><br><br>
-            <label for="FinalTotal"><strong>IN WORDS:</strong></label>
-            <div id="grandTotalWords"></div><br>
-            
+            </tbody>
+        </table>
+                    </div>
+                </section>
+                <aside class="totals-panel" aria-label="Cash count totals">
+                    <label for="E-cash">E-cash amount (GHS)</label>
+                    <input type="number" min="0" step="0.01" inputmode="decimal" id="E-cash" name="E-CASH" placeholder="0.00" oninput="calculateGrandTotal()">
+                    <label for="FinalTotal">Grand total</label>
+                    <input type="text" id="FinalTotal" name="GRAND TOTAL" readonly aria-live="polite">
+                    <span class="words-label">Total in words</span>
+                    <div id="grandTotalWords" aria-live="polite"></div>
+                    <div class="record-actions">
+                        <button type="button" onclick="saveData()">Save record</button>
+                        <button type="button" onclick="loadData()">Load record</button>
+                        <button type="button" onclick="viewAllRecords()">View saved records</button>
+                    </div>
+                </aside>
+            </div>
         </form>
-        <div style="margin-top: 20px;">
-            <button type="button" onclick="saveData()" style="margin-right: 10px;">💾 Save Record</button>
-            <button type="button" onclick="loadData()" style="margin-right: 10px;">📂 Load Record</button>
-            <button type="button" onclick="viewAllRecords()">📋 View All Records</button>
-        </div>
     </div>
-    <div id="recordsList" style="margin-top: 20px; padding: 10px; border: 1px solid #ddd; display: none;">
-        <h3>📋 Saved Records</h3>
+    <section id="recordsList" class="records-panel" style="display: none;" aria-labelledby="saved-records-title">
+        <h2 id="saved-records-title">Saved records</h2>
         <ul id="recordsUl"></ul>
-        <button onclick="backToCalculator()">⬅ Back to Calculator</button>
-        
-    </div>
-        
+        <button class="record-button" type="button" onclick="backToCalculator()">Back to calculator</button>
+    </section>
+    </main>
 
     <script>
     function calculateTotal(item) {
@@ -289,7 +316,7 @@ a[href^="go:"]:hover {
         return result.trim();
     }
 
-    const formattedAmount = convertAmount(Math.floor(amount));
+    const formattedAmount = convertAmount(Math.floor(amount)) || 'zero';
     const decimalPart = Math.round((amount - Math.floor(amount)) * 100);
     const formattedDecimal = decimalPart > 0 ? ` and ${convertAmount(decimalPart)} pesewas` : '';
 
@@ -336,6 +363,8 @@ a[href^="go:"]:hover {
         };
         return unitPrices[item];
     }
+
+    calculateGrandTotal();
     </script>
 
 
@@ -404,7 +433,7 @@ a[href^="go:"]:hover {
         const cashFormContainer = document.getElementById("cashFormContainer");
         const recordsList = document.getElementById("recordsList");
         const recordsUl = document.getElementById("recordsUl");
-        recordsUl.innerHTML = ""; // Clear old list
+        recordsUl.replaceChildren();
 
         let found = false;
 
@@ -416,22 +445,36 @@ a[href^="go:"]:hover {
                 const data = JSON.parse(localStorage.getItem(key));
 
                 const li = document.createElement("li");
-                li.style.marginBottom = "10px";
-
-                li.innerHTML = `
-                    <strong>${key.replace("EmbaCalc_", "")}</strong> 
-                    → Total: ${data.grandTotal} <br>
-                    <small>${data.inWords}</small><br>
-                    <button onclick="loadSpecificRecord('${key}')">Load</button>
-                    <button onclick="deleteRecord('${key}')">Delete</button>
-                `;
+                const title = document.createElement("strong");
+                title.className = "saved-record-title";
+                title.textContent = key.replace("EmbaCalc_", "");
+                const total = document.createElement("span");
+                total.textContent = `Total: ${data.grandTotal || "GHS 0.00"}`;
+                const words = document.createElement("small");
+                words.textContent = data.inWords || "";
+                const actions = document.createElement("div");
+                actions.className = "saved-record-actions";
+                const loadButton = document.createElement("button");
+                loadButton.className = "record-button";
+                loadButton.type = "button";
+                loadButton.textContent = "Load";
+                loadButton.addEventListener("click", () => loadSpecificRecord(key));
+                const deleteButton = document.createElement("button");
+                deleteButton.className = "record-button";
+                deleteButton.type = "button";
+                deleteButton.textContent = "Delete";
+                deleteButton.addEventListener("click", () => deleteRecord(key));
+                actions.append(loadButton, deleteButton);
+                li.append(title, total, document.createElement("br"), words, actions);
 
                 recordsUl.appendChild(li);
             }
         }
 
         if (!found) {
-            recordsUl.innerHTML = "<li>No saved records found.</li>";
+            const emptyRecord = document.createElement("li");
+            emptyRecord.textContent = "No saved records found.";
+            recordsUl.appendChild(emptyRecord);
         }
 
         // Hide form and show records
