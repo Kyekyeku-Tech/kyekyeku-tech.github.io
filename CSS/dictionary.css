@@ -126,6 +126,10 @@ a {
   box-shadow: 0 12px 35px rgba(27, 47, 78, 0.05);
 }
 
+.grammar-toggle {
+  display: none;
+}
+
 .tool-heading {
   display: flex;
   align-items: center;
@@ -509,6 +513,79 @@ a {
 
   .tools-grid {
     grid-template-columns: 1fr;
+  }
+
+  .grammar-toggle {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    align-items: center;
+    gap: 13px;
+    padding: 15px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: #fff;
+    color: var(--ink);
+    box-shadow: 0 8px 24px rgba(27, 47, 78, 0.045);
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .grammar-toggle-icon {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    place-items: center;
+    border-radius: 12px;
+    background: #eaf1ff;
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .grammar-toggle-copy {
+    display: grid;
+    min-width: 0;
+    gap: 3px;
+  }
+
+  .grammar-toggle-copy strong {
+    font-size: 14px;
+  }
+
+  .grammar-toggle-copy > span {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  .grammar-toggle-action {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: auto;
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .grammar-toggle-chevron {
+    font-size: 18px;
+    transition: transform 150ms ease;
+  }
+
+  .grammar-toggle[aria-pressed="true"] .grammar-toggle-chevron {
+    transform: rotate(180deg);
+  }
+
+  .dictionary-card.is-hidden {
+    display: none;
+  }
+
+  .grammar-card:not(.is-open) {
+    display: none;
   }
 }
 

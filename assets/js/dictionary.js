@@ -5,6 +5,12 @@ const wordInput = document.getElementById("word-input");
 const dictionaryStatus = document.getElementById("dictionary-status");
 const wordResult = document.getElementById("word-result");
 const grammarForm = document.getElementById("grammar-form");
+const dictionaryCard = document.getElementById("dictionary-card");
+const grammarCard = document.getElementById("grammar-card");
+const grammarToggle = document.getElementById("grammar-toggle");
+const grammarToggleTitle = grammarToggle.querySelector("[data-toggle-title]");
+const grammarToggleDescription = grammarToggle.querySelector("[data-toggle-description]");
+const grammarToggleAction = grammarToggle.querySelector("[data-toggle-action]");
 const grammarInput = document.getElementById("grammar-input");
 const grammarStatus = document.getElementById("grammar-status");
 const grammarResult = document.getElementById("grammar-result");
@@ -16,6 +22,35 @@ let localDictionary = {};
 let localDictionaryError = false;
 let checkedText = "";
 let currentMatches = [];
+
+function updateGrammarVisibility() {
+  const isMobile = window.matchMedia("(max-width: 780px)").matches;
+  if (!isMobile) dictionaryCard.classList.remove("is-hidden");
+
+  const grammarIsActive = isMobile && grammarCard.classList.contains("is-open");
+  dictionaryCard.classList.toggle("is-hidden", grammarIsActive);
+  grammarCard.classList.toggle("is-open", grammarIsActive);
+  dictionaryCard.setAttribute("aria-hidden", String(grammarIsActive));
+  grammarCard.setAttribute("aria-hidden", String(isMobile && !grammarIsActive));
+  grammarToggle.setAttribute("aria-pressed", String(grammarIsActive));
+  grammarToggle.setAttribute(
+    "aria-label",
+    grammarIsActive ? "Switch to Dictionary" : "Open Grammar Assistant"
+  );
+  grammarToggleTitle.textContent = grammarIsActive ? "Dictionary" : "Grammar assistant";
+  grammarToggleDescription.textContent = grammarIsActive
+    ? "Look up words, meanings, and pronunciation"
+    : "Check spelling and polish your writing";
+  grammarToggleAction.textContent = grammarIsActive ? "Back" : "Open";
+}
+
+grammarToggle.addEventListener("click", () => {
+  grammarCard.classList.toggle("is-open", !grammarCard.classList.contains("is-open"));
+  updateGrammarVisibility();
+});
+
+window.matchMedia("(max-width: 780px)").addEventListener("change", updateGrammarVisibility);
+updateGrammarVisibility();
 
 fetch("./words.json")
   .then((response) => {

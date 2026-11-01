@@ -29,7 +29,7 @@
     </section>
 
     <div class="tools-grid">
-      <section class="tool-card" aria-labelledby="lookup-title">
+      <section id="dictionary-card" class="tool-card dictionary-card" aria-labelledby="lookup-title" aria-hidden="false">
         <div class="tool-heading">
           <span class="tool-icon" aria-hidden="true">Aa</span>
           <div>
@@ -76,7 +76,16 @@
         </details>
       </section>
 
-      <section class="tool-card grammar-card" aria-labelledby="grammar-title">
+      <button id="grammar-toggle" class="grammar-toggle" type="button" aria-controls="dictionary-card grammar-card" aria-pressed="false" aria-label="Open Grammar Assistant">
+        <span class="grammar-toggle-icon" aria-hidden="true">Aa✓</span>
+        <span class="grammar-toggle-copy">
+          <strong data-toggle-title>Grammar assistant</strong>
+          <span data-toggle-description>Check spelling and polish your writing</span>
+        </span>
+        <span class="grammar-toggle-action" aria-hidden="true"><span data-toggle-action>Open</span> <span class="grammar-toggle-chevron">→</span></span>
+      </button>
+
+      <section id="grammar-card" class="tool-card grammar-card" aria-labelledby="grammar-title" aria-hidden="false">
         <div class="tool-heading">
           <span class="tool-icon grammar-icon" aria-hidden="true">Aa✓</span>
           <div>
@@ -93,7 +102,6 @@
             <button id="check-grammar" class="primary-button" type="submit">Check writing</button>
           </div>
         </form>
-        <p class="privacy-note">Your text is sent to LanguageTool to check it. Avoid entering passwords or private information.</p>
         <p id="grammar-status" class="status-message" role="status" aria-live="polite"></p>
         <section id="grammar-result" class="grammar-result" hidden aria-live="polite">
           <div class="grammar-result-heading">
