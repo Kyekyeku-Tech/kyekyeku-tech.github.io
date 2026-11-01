@@ -199,6 +199,13 @@ body {
   outline: 3px solid rgba(32, 94, 234, .13);
 }
 
+#cashForm input#E-cash {
+  width: 100%;
+  min-height: 43px;
+  margin: 0 0 16px;
+  padding: 0 11px;
+}
+
 .totals-panel {
   position: sticky;
   top: 20px;
