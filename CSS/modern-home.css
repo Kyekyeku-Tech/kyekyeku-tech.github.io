@@ -188,8 +188,8 @@ body {
     overflow: hidden;
     border: 8px solid #fff;
     border-radius: 24px;
-    background: #dce8f8;
-    box-shadow: 0 24px 70px rgba(25, 59, 108, 0.18);
+    background: linear-gradient(135deg, #eaf1ff, #fff 55%, #fff2df);
+    box-shadow: 0 0 0 1px #dce5f2, 0 24px 70px rgba(25, 59, 108, 0.18);
 }
 
 .hero-section .bg-image {
