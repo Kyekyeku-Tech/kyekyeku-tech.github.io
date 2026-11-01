@@ -11,6 +11,10 @@
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+}
+
 body {
     min-height: 100%;
     height: auto;
@@ -189,11 +193,13 @@ body {
 }
 
 .hero-section .bg-image {
+    z-index: 0;
     background-size: cover;
     background-position: center;
 }
 
 .hero-section .text-overlay {
+    z-index: 1;
     top: auto;
     right: 18px;
     bottom: 18px;

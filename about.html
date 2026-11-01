@@ -16,6 +16,7 @@
     - custom css link
   -->
   <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./CSS/about-page.css">
 
   <!--
     - google font link
@@ -25,7 +26,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class="about-page">
 
   <!--
     - #MAIN
@@ -124,9 +125,9 @@
             
           
             <div>
-                <button id="theme-toggle" class="modern-theme-btn">
-                    <img src="https://th.bing.com/th/id/R.c0c31958cbffd57076b5368cc035322c?rik=MQrTR6MBNvVCqA&pid=ImgRaw&r=0" alt="Sun" class="icon" id="sun-icon">
-                    <img src="https://th.bing.com/th/id/OIP.aGGFesr5h9HumhhYbvBosAHaHa?rs=1&pid=ImgDetMain" alt="Moon" class="icon" id="moon-icon">
+                <button id="theme-toggle" class="modern-theme-btn" type="button" aria-label="Toggle color theme">
+                    <span class="icon" id="sun-icon" aria-hidden="true">☼</span>
+                    <span class="icon hidden" id="moon-icon" aria-hidden="true">☾</span>
                 </button>
             </div>
           </li>
@@ -185,6 +186,10 @@
         <ul class="navbar-list">
 
           <li class="navbar-item">
+            <a class="navbar-link navbar-home-link" href="./index.html">Home</a>
+          </li>
+
+          <li class="navbar-item">
             <button class="navbar-link  active" data-nav-link>About</button>
           </li>
 
@@ -219,7 +224,10 @@
       <article class="about  active" data-page="about">
 
         <header>
+          <p class="about-kicker">ABOUT THE FOUNDER</p>
           <h2 class="h2 article-title">About me</h2>
+          <p class="about-lead">I’m Safo Oppong — a developer and digital problem-solver creating useful experiences for people and businesses.</p>
+          <a class="about-cta" href="mailto:info@kyekyeku.tech">Let’s work together <span aria-hidden="true">→</span></a>
         </header>
 
         <section class="about-text">

@@ -14,8 +14,6 @@ const characterCount = document.getElementById("character-count");
 
 let localDictionary = {};
 let localDictionaryError = false;
-let currentPronunciation = "";
-let currentAudio = "";
 let checkedText = "";
 let currentMatches = [];
 
@@ -42,26 +40,28 @@ dictionaryForm.addEventListener("submit", (event) => {
   lookupWord();
 });
 
-document.getElementById("pronounce-button").addEventListener("click", () => {
-  if (currentAudio) {
-    const pronunciation = new Audio(currentAudio);
-    pronunciation.play().catch(() => {
-      setStatus(dictionaryStatus, "Audio pronunciation could not be played. Try the browser's voice instead.", "error");
-    });
+document.getElementById("pronounce-button").addEventListener("click", speak);
+
+function speak() {
+  const text = wordInput.value.trim();
+  if (!text) {
+    setStatus(dictionaryStatus, "Enter a word before playing its pronunciation.", "error");
     return;
   }
 
-  const phrase = currentPronunciation || document.getElementById("result-word").textContent;
-  if ("speechSynthesis" in window && phrase) {
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(phrase);
-    utterance.rate = 0.9;
-    utterance.lang = "en-US";
-    window.speechSynthesis.speak(utterance);
-  } else {
-    setStatus(dictionaryStatus, "Pronunciation is not available in this browser.", "error");
+  if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) {
+    setStatus(dictionaryStatus, "Speech pronunciation is not available in this browser.", "error");
+    return;
   }
-});
+
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.rate = 0.9;
+  utterance.onerror = () => {
+    setStatus(dictionaryStatus, "The browser could not play this pronunciation.", "error");
+  };
+  window.speechSynthesis.speak(utterance);
+}
 
 grammarForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -110,7 +110,6 @@ async function lookupWord() {
   dictionaryStatus.textContent = "";
   delete dictionaryStatus.dataset.state;
   wordResult.hidden = true;
-  currentPronunciation = "";
 
   const localEntry = localDictionary[query.toLowerCase()];
   if (localEntry) {
@@ -149,7 +148,6 @@ function showLocalEntry(word, entry) {
   document.getElementById("result-definitions").replaceChildren();
   document.getElementById("result-related").hidden = true;
   document.getElementById("result-source").textContent = "Kyekyeku Tech word collection";
-  currentAudio = "";
 
   const group = createElement("section", "definition-group");
   const heading = createElement("h4", "", "Meaning");
@@ -163,7 +161,6 @@ function showLocalEntry(word, entry) {
   }
 
   document.getElementById("result-definitions").append(group);
-  currentPronunciation = word;
   wordResult.hidden = false;
   setStatus(dictionaryStatus, "Definition found in the Kyekyeku Tech word collection.", "success");
 }
@@ -174,10 +171,6 @@ function showRemoteEntry(entry) {
   document.getElementById("result-phonetic").textContent = phonetic;
   document.getElementById("result-definitions").replaceChildren();
   document.getElementById("result-source").textContent = "Definitions provided by the Free Dictionary API.";
-
-  const audio = (entry.phonetics || []).find((item) => item.audio)?.audio;
-  currentAudio = audio && audio.startsWith("https://") ? audio : "";
-  currentPronunciation = entry.word || wordInput.value.trim();
 
   const definitions = document.getElementById("result-definitions");
   const related = new Set();
